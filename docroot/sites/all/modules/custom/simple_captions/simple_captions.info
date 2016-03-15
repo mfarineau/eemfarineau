@@ -1,1 +1,5 @@
 name = Simple Captions
+description = This project aims to allow Drupal site editors to add simple captions to images uploaded through a WYSIWYG such as CKEDITOR.
+core = 7.x
+package = ckeditor
+dependencies[] = ckeditor
