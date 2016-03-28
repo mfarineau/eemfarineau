@@ -735,5 +735,5 @@ if (isset($_SERVER['DEVDESKTOP_DRUPAL_SETTINGS_DIR']) && file_exists($_SERVER['D
 }
 // </DDSETTINGS>
 if (file_exists('/var/www/site-php')) {
-  require '/var/www/site-php/eemfarineau/bertsbeerblog-settings.inc';
+  require '/var/www/site-php/eemfarineau/mfarineau-settings.inc';
 }
