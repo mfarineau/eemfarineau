@@ -53,7 +53,7 @@
  * @see \Drupal\Core\DrupalKernel::getSitePath()
  * @see https://www.drupal.org/documentation/install/multi-site
  */
-<<<<<<< HEAD
+
 $sites['mfarineau.com'] = 'mfarineau';
 $sites['bertsbeerblog.com'] = 'bertsbeerblog';
 $sites['pamandmatt.com'] = 'pamandmatt';
@@ -64,4 +64,4 @@ $sites = array(
  'mfarineau.com' => 'mfarineau',
  'bertsbeerblog.com' => 'bertsbeerblog'
 );
->>>>>>> 643745349344242e4e50d6badf54e0c6deb6cb32
+
