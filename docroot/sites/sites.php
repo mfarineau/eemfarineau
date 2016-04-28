@@ -56,5 +56,5 @@
 $sites['mfarineau.com'] = 'mfarineau';
 $sites['bertsbeerblog.com'] = 'bertsbeerblog';
 $sites['pamandmatt.com'] = 'pamandmatt';
-
+$sites['thlcalendar.com'] = 'thlcalendar';
 
