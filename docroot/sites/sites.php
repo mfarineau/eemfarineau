@@ -58,10 +58,3 @@ $sites['mfarineau.com'] = 'mfarineau';
 $sites['bertsbeerblog.com'] = 'bertsbeerblog';
 $sites['pamandmatt.com'] = 'pamandmatt';
 $sites['thlcalendar.com'] = 'thlcalendar';
-
-$sites = array(
- 'mfarineau.com' => 'mfarineau',
- 'bertsbeerblog.com' => 'bertsbeerblog'
- 'thlcalendar.com' => 'thlcalendar'
-);
-
