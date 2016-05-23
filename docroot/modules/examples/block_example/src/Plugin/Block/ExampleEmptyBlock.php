@@ -1,13 +1,14 @@
 <?php
- 
+
 /**
  * @file
  * Contains \Drupal\block_example\Plugin\Block\ExampleEmptyBlock.
  */
- 
+
 namespace Drupal\block_example\Plugin\Block;
+
 use Drupal\Core\Block\BlockBase;
- 
+
 /**
  * Provides a 'Example: empty block' block.
  *
@@ -17,15 +18,14 @@ use Drupal\Core\Block\BlockBase;
  * )
  */
 class ExampleEmptyBlock extends BlockBase {
-  
+
   /**
    * {@inheritdoc}
    */
   public function build() {
-    return [
-      '#type' => 'markup',
-      '#markup' => '',
-    ];
+    // We return an empty array on purpose. The block will thus not be rendered
+    // on the site. See BlockExampleTest::testBlockExampleBasic().
+    return array();
   }
- 
+
 }
