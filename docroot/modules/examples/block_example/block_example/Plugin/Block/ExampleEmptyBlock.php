@@ -18,9 +18,9 @@ use Drupal\Core\Block\BlockBase;
  */
 class ExampleEmptyBlock extends BlockBase {
   
-  /**
-   * {@inheritdoc}
-   */
+ 
+ {@inheritdoc}
+  
   public function build() {
     return [
       '#type' => 'markup',
