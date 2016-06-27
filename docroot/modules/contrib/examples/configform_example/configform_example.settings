@@ -1,0 +1,12 @@
+email_address: mfarineau@gmail.com
+address:
+  line_1: 123 fake st
+  city: Boston
+  state: MA
+  zip: 55555
+
+public function submitForm(array &$form, FormStateInterface $form_state) {     
+  $config = $this->config('configform_example.settings');
+  $config->set('email_address', $form_state->getValue('email'));
+  $config->save();
+  return parent::submitForm($form, $form_state);
