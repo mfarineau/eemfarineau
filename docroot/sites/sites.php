@@ -55,6 +55,15 @@
  */
 
 $sites['mfarineau.com'] = 'mfarineau';
+$sites['dev.mfarineau.com'] = 'mfarineau';
+$sites['stage.mfarineau.com'] = 'mfarineau';
+
+$sites['concentricbrewing.com'] = 'concentric';
+$sites['www.concentricbrewing.com'] = 'concentric';
+$sites['dev.concentricbrewing.com'] = 'concentric';
+$sites['stage.concentricbrewing.com'] = 'concentric';
+
+
 $sites['bertsbeerblog.com'] = 'bertsbeerblog';
 $sites['pamandmatt.com'] = 'pamandmatt';
 $sites['thlcalendar.com'] = 'thlcalendar';
