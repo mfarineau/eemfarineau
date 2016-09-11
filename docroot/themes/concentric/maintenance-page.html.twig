@@ -11,12 +11,14 @@
  * @ingroup themeable
  */
 #}
+
+<style>
+	html {
+	 background:#000;
+	}
+</style>
+
 <header role="banner">
- /** {% if logo %}
-  *  <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">
-  *    <img src="{{ logo }}" alt="{{ 'Home'|t }}"/>
-  *  </a>
-  */ {% endif %}
 
   {% if site_name or site_slogan %}
     {% if site_name %}
@@ -34,7 +36,7 @@
 
 <main role="main">
   {% if title %}
-    <h1>{{ title }}</h1>
+    <h1 style="color:#fff;">{ title }}</h1>
   {% endif %}
 
   {{ page.highlighted }}
