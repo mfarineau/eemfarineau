@@ -65,3 +65,4 @@ $sites['bertsbeerblog.com'] = 'bertsbeerblog';
 $sites['pamandmatt.com'] = 'pamandmatt';
 $sites['thlcalendar.com'] = 'thlcalendar';
 $sites['d8.pamandmatt.com'] = 'pamandmatt';
+$sites['d8.mfarineau.com'] = 'd8headless';
