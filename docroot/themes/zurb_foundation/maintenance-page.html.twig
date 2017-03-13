@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a single Drupal page while offline.
+ *
+ * All available variables are mirrored in page.html.twig.
+ * Some may be blank but they are provided for consistency.
+ *
+ * @see template_preprocess_maintenance_page()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<style>
+	html {
+	 background:#000;
+	}
+</style>
+
+<header role="banner">
+
+  {% if site_name or site_slogan %}
+    {% if site_name %}
+<img src="sites/concentric/files/2016-09/maintenance.jpg" alt="concentric" height="600" width="800">
+<h1> 
+<!-- <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a> -->
+      </h1>
+    {% endif %}
+
+    {% if site_slogan %}
+      <div>{{ site_slogan }}</div>
+    {% endif %}
+  {% endif %}
+</header>
+
+<main role="main">
+  {% if title %}
+   <!-- <h1 style="color:#fff;">{{ title }}</h1> -->
+  {% endif %}
+
+  {{ page.highlighted }}
+
+  {{ page.content }}
+<p style="color:#363636;"><br />Find us on:</p>
+<p style="color:#363636;"><img src="sites/concentric/files/2016-09/Facebook_logo_36x36.svg_.png" alt="facebook icon" height="15" width="15"><a href="https://www.facebook.com/ConcentricBrewing/" style="color:#363636"> Facebook </a><img src="sites/concentric/files/2016-09/twitter-icon-png-36x36.png" alt="twitter icon" height="15" width="15"><a href="https://twitter.com/concentricbrew" style="color:#363636"> Twitter </a><img src="sites/concentric/files/2016-09/instagram-icon.png" alt="instagram icon" height="15" width="15"><a href="https://www.instagram.com/concentricbrewing/" style="color:#363636"> Instagram</a></p>
+</main>
+
+{% if page.sidebar_first %}
+  <aside role="complementary">
+    {{ page.sidebar_first }}
+  </aside>
+{% endif %}
+
+{% if page.sidebar_second %}
+  <aside role="complementary">
+    {{ page.sidebar_second }}
+  </aside>
+{% endif %}
+
+{% if page.footer %}
+  <footer role="contentinfo">
+    {{ page.footer }}
+  </footer>
+{% endif %}
