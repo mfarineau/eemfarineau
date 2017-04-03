@@ -43,8 +43,8 @@ libraries-extend:
   quickedit/quickedit:
     - MACHINENAME/quickedit
 
-# Information added by Drupal.org packaging script on 2017-03-02
-version: '8.x-1.0'
+# Information added by Drupal.org packaging script on 2017-03-19
+version: '8.x-1.1'
 core: '8.x'
 project: 'at_tools'
-datestamp: 1488496090
+datestamp: 1489908497
