@@ -13,3 +13,11 @@ a.site-branding__logo-link img{
 .l-pr.attribution {
 	display:none;
 }
+
+/*Maintenance Mode override*/
+
+body.maintenance-page {
+	text-align: center;
+	background:#000;
+	color:#363636;
+}
