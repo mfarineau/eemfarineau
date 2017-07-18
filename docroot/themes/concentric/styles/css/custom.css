@@ -4,6 +4,12 @@
  * component stylesheets.
  ============================================================================ */
 
+/* Make the logo a reasonable size */
+a.site-branding__logo-link img{
+	max-width:300px;
+}
 
-
-
+/* Kill adaptivetheme attribution */
+.l-pr.attribution {
+	display:none;
+}
