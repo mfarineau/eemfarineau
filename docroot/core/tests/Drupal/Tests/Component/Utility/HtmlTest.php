@@ -2,8 +2,6 @@
 
 namespace Drupal\Tests\Component\Utility;
 
-use Drupal\Component\Render\MarkupInterface;
-use Drupal\Component\Render\MarkupTrait;
 use Drupal\Component\Utility\Html;
 use Drupal\Tests\UnitTestCase;
 
@@ -89,12 +87,7 @@ class HtmlTest extends UnitTestCase {
    */
   public function testHtmlClass() {
     // Verify Drupal coding standards are enforced.
-    $this->assertSame('class-name--ü', Html::getClass('CLASS NAME_[Ü]'), 'Enforce Drupal coding standards.');
-
-    // Test Html::getClass() handles Drupal\Component\Render\MarkupInterface
-    // input.
-    $markup = HtmlTestMarkup::create('CLASS_FROM_OBJECT');
-    $this->assertSame('class-from-object', Html::getClass($markup), 'Markup object is converted to CSS class.');
+    $this->assertSame(Html::getClass('CLASS NAME_[Ü]'), 'class-name--ü', 'Enforce Drupal coding standards.');
   }
 
   /**
@@ -395,13 +388,5 @@ class HtmlTest extends UnitTestCase {
       'scheme, host and path' => ['http://example.com/llama'],
     ];
   }
-
-}
-
-/**
- * Marks an object's __toString() method as returning markup.
- */
-class HtmlTestMarkup implements MarkupInterface {
-  use MarkupTrait;
 
 }

@@ -830,7 +830,6 @@ abstract class ContentEntityBase extends Entity implements \IteratorAggregate, C
     $translation->translationInitialize = FALSE;
     $translation->typedData = NULL;
     $translation->loadedRevisionId = &$this->loadedRevisionId;
-    $translation->isDefaultRevision = &$this->isDefaultRevision;
 
     return $translation;
   }
@@ -1096,7 +1095,7 @@ abstract class ContentEntityBase extends Entity implements \IteratorAggregate, C
     // Ensure that the following properties are actually cloned by
     // overwriting the original references with ones pointing to copies of
     // them: enforceIsNew, newRevision, loadedRevisionId, fields, entityKeys,
-    // translatableEntityKeys, values and isDefaultRevision.
+    // translatableEntityKeys and values.
     $enforce_is_new = $this->enforceIsNew;
     $this->enforceIsNew = &$enforce_is_new;
 
@@ -1117,9 +1116,6 @@ abstract class ContentEntityBase extends Entity implements \IteratorAggregate, C
 
     $values = $this->values;
     $this->values = &$values;
-
-    $default_revision = $this->isDefaultRevision;
-    $this->isDefaultRevision = &$default_revision;
 
     foreach ($this->fields as $name => $fields_by_langcode) {
       $this->fields[$name] = [];
