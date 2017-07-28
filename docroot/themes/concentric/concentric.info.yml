@@ -1,44 +1,46 @@
 name: Concentric
+description: "Subtheme for Concentricbrewing"
+core: 8.x
 type: theme
-'base theme': at_core
-'base theme original': rc2
-'subtheme type': adaptive_subtheme
-layout: site-builder
-description: 'Sub theme for concentricbrewing.<br />Base theme: at_core <br />Machine-name: concentric <br />Generated: Sat 10th, Sep, 2016 - 23:46'
-'alt text': 'Screenshot for Concentric'
-tags: sub-theme
+base theme: zurb_foundation
+
+# Image appears on admin/appearance
+# screenshot: images/screenshot.jpg
+
+# Uncomment these lines and change "STARTER" to your theme name if you
+# need to add custom CSS or JS
+libraries:
+ - STARTER/global
+
+# Regions are output in the page.html.twig
+
 regions:
-  leaderboard: Leaderboard
-  header_first: 'Header first'
-  header_second: 'Header second'
-  navbar: Navbar
-  highlighted: Highlighted
-  features_first: 'Features first'
-  features_second: 'Features second'
-  features_third: 'Features third'
-  content_prefix: 'Content prefix'
-  content: 'Main content'
-  sidebar_first: 'Sidebar first'
-  sidebar_second: 'Sidebar second'
-  content_suffix: 'Content suffix'
-  subfeatures_first: 'Sub-features first'
-  subfeatures_second: 'Sub-features second'
-  subfeatures_third: 'Sub-features third'
-  subfeatures_fourth: 'Sub-features fourth'
-  footer: Footer
+  meta_header: 'Meta Header'
+  header: Header
+  help: Help
   page_top: 'Page top'
   page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  content: Content
+  sidebar_first: 'Left Sidebar'
+  sidebar_second: 'Right Sidebar'
+  footer_first: 'Footer first column'
+  footer_middle: 'Footer middle column'
+  footer_last: 'Footer last column'
+  left_off_canvas: 'Left off canvas'
+  right_off_canvas: 'Right off canvas'
+regions_hidden:
+  page_top: 'Page Top'
+  page_bottom: 'Page bottom'
+
+# Hidden regions
+# regions_hidden[]: Page top
+# regions_hidden[]: Page bottom
+
 features:
   - logo
+  - name
+  - slogan
   - favicon
-  - node_user_picture
   - comment_user_picture
-  - comment_user_verification
-stylesheets-remove:
-  - '@stable/css/node/node.preview.css'
-  - '@stable/css/system/components/tablesort.module.css'
-libraries-extend:
-  quickedit/quickedit:
-    - concentric/quickedit
-version: 8.x-1.0
-core: 8.x
+  - node_user_picture
