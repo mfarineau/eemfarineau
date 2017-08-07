@@ -1,0 +1,4 @@
+#insert test style to shade in background of footer
+.bottom-bar.panel {
+	background:#000;
+}
