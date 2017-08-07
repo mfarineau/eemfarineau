@@ -10,7 +10,7 @@ screenshot: images/screenshot.jpg
 # Uncomment these lines and change "STARTER" to your theme name if you
 # need to add custom CSS or JS
 libraries:
- - STARTER/global
+ - concentric/concentric.css
 
 # Regions are output in the page.html.twig
 
