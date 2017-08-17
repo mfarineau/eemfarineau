@@ -1,0 +1,11 @@
+global:
+  version: VERSION
+  css:
+    base:
+      css/concentric.css: {}
+  js:
+    js/concentric.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/modernizr

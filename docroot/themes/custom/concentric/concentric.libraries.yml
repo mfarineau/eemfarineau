@@ -1,11 +1,4 @@
-global:
-  version: VERSION
+global-styling:
   css:
-    base:
-      css/concentric.css: {}
-  js:
-    js/concentric.js: {}
-  dependencies:
-    - core/drupal
-    - core/jquery
-    - core/modernizr
+    theme:
+      css/style.css: {}

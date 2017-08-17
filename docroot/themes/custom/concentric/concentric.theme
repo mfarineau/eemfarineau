@@ -1,44 +1,7 @@
 <?php
-
-// Add your custom theme override functions here.
-
 /**
- * Implements hook_preprocess_block()
- */
-function concentric_preprocess_block(&$variables) {
-}
-
-/**
- * Implements template_preprocess_field().
- */
-function concentric_preprocess_field(&$variables) {
-}
-
-/**
- * Implements template_preprocess_html().
+ * @file
+ * Bootstrap sub-theme.
  *
- * Adds additional classes
+ * Place your custom PHP code in this file.
  */
-function concentric_preprocess_html(&$variables) {
-}
-
-/**
- * Implements template_preprocess_node
- *
- * Add template suggestions and classes
- */
-function concentric_preprocess_node(&$variables) {
-}
-
-/**
- * Implements template_preprocess_page
- *
- * Add convenience variables and template suggestions
- */
-function concentric_preprocess_page(&$variables) {
-}
-
-/**
- * Implements template_preprocess_views_view().
- */
-function concentric_preprocess_views_view(&$variables) {}
