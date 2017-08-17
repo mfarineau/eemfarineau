@@ -6,7 +6,7 @@ name: 'Concentric Brewing Theme'
 description: 'Uses the jsDelivr CDN for all CSS and JavaScript. No source files or compiling is necessary and is recommended for simple sites or beginners.'
 package: 'Bootstrap'
 # Image appears on admin/appearance
-screenshot: images/screenshot.jpg
+screenshot: images/screenshot.png
 
 regions:
   navigation: 'Navigation'
