@@ -4,19 +4,19 @@
 
 
 /* Responsive grid */
-.view-responsive-grid {
+.view-test-grid {
   margin-top: 1em;
 }
-.view-responsive-grid img{
+.view-test-grid img{
   width: 100%;
   border: 3px solid #eee;
   padding: 3px;
   border-radius: 5px;
 }
-.view-responsive-grid img:hover{
+.view-test-grid img:hover{
   border-color: #ddd;
 }
-.view-responsive-grid p{
+.view-test-grid p{
   position: relative;
   bottom: 60px;
   left: 6px;
@@ -25,6 +25,6 @@
   background: rgba(17, 17, 17, .5);
   display: inline;
 }
-.view-responsive-grid p a{
+.view-test-grid p a{
   text-decoration: none;
 }
