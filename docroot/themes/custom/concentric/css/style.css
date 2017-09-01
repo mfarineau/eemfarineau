@@ -4,88 +4,42 @@
 
 
 /* Responsive grid */
-
+.view-test-grid {
+  margin-top: 1em;
+}
+.view-test-grid img{
+  width: 100%;
+  border: 3px solid #eee;
+  padding: 3px;
+  border-radius: 5px;
+}
+.view-test-grid img:hover{
+  border-color: #ddd;
+}
+.view-test-grid p{
+  position: relative;
+  bottom: 60px;
+  left: 6px;
+  color: #fff;
+  padding: 0.5em 0.7em;
+  background: rgba(17, 17, 17, .5);
+  display: inline;
+}
+.view-test-grid p a{
+  text-decoration: none;
+}
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
-  .view-test-grid {
-    margin-top: 1em;
-  }
-  .view-test-grid img{
-    width: 100%;
-    border: 3px solid #eee;
-    padding: 3px;
-    border-radius: 5px;
-  }
-  .view-test-grid img:hover{
-    border-color: #ddd;
-  }
-  .view-test-grid p{
-    position: relative;
-    bottom: 60px;
-    left: 6px;
-    color: #fff;
-    padding: 0.5em 0.7em;
-    background: rgba(17, 17, 17, .5);
-    display: inline;
-  }
-  .view-test-grid p a{
-    text-decoration: none;
-  }
+
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) {
-  .view-test-grid {
-    margin-top: 1em;
-  }
-  .view-test-grid img{
-    width: 100%;
-    border: 3px solid #eee;
-    padding: 3px;
-    border-radius: 5px;
-  }
-  .view-test-grid img:hover{
-    border-color: #ddd;
-  }
-  .view-test-grid p{
-    position: relative;
-    bottom: 60px;
-    left: 6px;
-    color: #fff;
-    padding: 0.5em 0.7em;
-    background: rgba(17, 17, 17, .5);
-    display: inline;
-  }
-  .view-test-grid p a{
-    text-decoration: none;
-  }
+
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
-  .view-test-grid {
-    margin-top: 1em;
-  }
-  .view-test-grid img{
-    width: 100%;
-    border: 3px solid #eee;
-    padding: 3px;
-    border-radius: 5px;
-  }
-  .view-test-grid img:hover{
-    border-color: #ddd;
-  }
-  .view-test-grid p{
-    position: relative;
-    bottom: 60px;
-    left: 6px;
-    color: #fff;
-    padding: 0.5em 0.7em;
-    background: rgba(17, 17, 17, .5);
-    display: inline;
-  }
-  .view-test-grid p a{
-    text-decoration: none;
-  }
+
 }
