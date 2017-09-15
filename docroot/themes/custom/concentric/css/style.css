@@ -38,10 +38,14 @@
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) {
-
+.navbar-nav > li {
+  float:none;
+ }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
-
+  .navbar-nav > li {
+    float:none;
+   }
 }
