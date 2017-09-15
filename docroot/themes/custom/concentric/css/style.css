@@ -18,11 +18,14 @@ nav#block-concentric-main-menu h2 {
     text-align: center;
 }
 nav#block-concentric-main-menu .navbar-nav {
-    width: 75%;
+    width: 100%;
     text-align: center;
 }
  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
      float: none !important;
+ }
+ #block-concentric-main-menu ul.menu.nav.navbar-nav li a:hover{
+    background-color: rgba(255, 255, 255, 0.5);
  }
 /*style main content area*/
  .region.region-content {
