@@ -2,9 +2,17 @@
  * Place your custom styles here.
  */
 
- border-radius: 50%;
- display: inline-block;
- margin-right: 20px;
+ nav#block-concentric-main-menu {
+   border-radius: 50%;
+   display: inline-block;
+   margin-right: 20px;
+   width: 200px;
+   height: 200px;
+   background: grey;
+}
+ #block-concentric-main-menu ul.menu.nav.navbar-nav li {
+     float: none !important;
+ }
 
 /* Responsive grid */
 .view-test-grid {
@@ -34,37 +42,15 @@
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
- body {
-   background: black;
- }
+
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) {
-  nav#block-concentric-main-menu {
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 20px;
-    width: 200px;
-    height: 200px;
-    background: grey;
-}
-  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
-      float: none !important;
-  }
+
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
-  nav#block-concentric-main-menu {
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 20px;
-    width: 200px;
-    height: 200px;
-    background: grey;
-}
-  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
-      float: none !important;
-  }
+
 }
