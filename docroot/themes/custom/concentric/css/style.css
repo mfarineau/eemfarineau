@@ -14,9 +14,21 @@
 .navbar-nav li a {
   color:#000;
 }
+nav#block-concentric-main-menu h2 {
+    text-align: center;
+}
+nav#block-concentric-main-menu .navbar-nav {
+    width: 75%;
+    text-align: center;
+}
  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
      float: none !important;
  }
+/*style main content area*/
+ .region.region-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
 
 /* Beer grids */
 .view-test-grid {
