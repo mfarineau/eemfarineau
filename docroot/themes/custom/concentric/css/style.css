@@ -41,6 +41,14 @@
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) {
+  nav#block-concentric-main-menu {
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 20px;
+    width: 200px;
+    height: 200px;
+    background: grey;
+}
   #block-concentric-main-menu ul.menu.nav.navbar-nav li {
       float: none !important;
   }
@@ -48,6 +56,14 @@
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
+  nav#block-concentric-main-menu {
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 20px;
+    width: 200px;
+    height: 200px;
+    background: grey;
+}
   #block-concentric-main-menu ul.menu.nav.navbar-nav li {
       float: none !important;
   }
