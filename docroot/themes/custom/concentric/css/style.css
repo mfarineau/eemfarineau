@@ -2,6 +2,9 @@
  * Place your custom styles here.
  */
 
+ border-radius: 50%;
+ display: inline-block;
+ margin-right: 20px;
 
 /* Responsive grid */
 .view-test-grid {
@@ -38,14 +41,14 @@
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) {
-.navbar-nav > li {
-  float:none;
+.navbar-nav .li {
+  float:none !important;
  }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
-  .navbar-nav > li {
-    float:none;
+  .navbar-nav .li {
+    float:none !important;
    }
 }
