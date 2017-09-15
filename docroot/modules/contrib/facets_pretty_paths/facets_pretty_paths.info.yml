@@ -1,0 +1,11 @@
+name: 'Facets Pretty Paths'
+type: module
+description: 'Pretty paths for Facets.'
+# core: 8.x
+package: Search
+
+# Information added by Drupal.org packaging script on 2017-06-12
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'facets_pretty_paths'
+datestamp: 1497301457
