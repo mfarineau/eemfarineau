@@ -41,14 +41,14 @@
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: @screen-md-min) {
-  .navbar-nav > li {
+  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
       float: none !important;
   }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: @screen-lg-min) {
-  .navbar-nav > li {
+  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
       float: none !important;
   }
 }
