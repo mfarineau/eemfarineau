@@ -2,19 +2,23 @@
  * Place your custom styles here.
  */
 
+/*Main menu*/
  nav#block-concentric-main-menu {
    border-radius: 50%;
    display: inline-block;
    margin-right: 20px;
-   width: 200px;
-   height: 200px;
+   width: 400px;
+   height: 400px;
    background: grey;
+}
+.navbar-nav li a {
+  color:#000;
 }
  #block-concentric-main-menu ul.menu.nav.navbar-nav li {
      float: none !important;
  }
 
-/* Responsive grid */
+/* Beer grids */
 .view-test-grid {
   margin-top: 1em;
 }
