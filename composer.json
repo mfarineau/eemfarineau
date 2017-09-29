@@ -18,7 +18,8 @@
 	"drupal/panels": "^4.0",
 	"drupal/foundation_layouts": "^6.0",
 	"drupal/bootstrap": "^3.6",
-        "drupal/bg_image_formatter": "^1.0@beta"
+        "drupal/bg_image_formatter": "^1.0@beta",
+        "drupal/acquia_purge": "^1.0@beta"
     },
     "require-dev": {
         "drupal/devel": "^1.0",
