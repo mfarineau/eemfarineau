@@ -17,7 +17,8 @@
         "drupal/acquia_connector": "^1.12",
 	"drupal/panels": "^4.0",
 	"drupal/foundation_layouts": "^6.0",
-	"drupal/bootstrap": "^3.6"
+	"drupal/bootstrap": "^3.6",
+        "drupal/bg_image_formatter": "^1.0@beta"
     },
     "require-dev": {
         "drupal/devel": "^1.0",
