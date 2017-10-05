@@ -19,7 +19,8 @@
 	"drupal/foundation_layouts": "^6.0",
 	"drupal/bootstrap": "^3.6",
         "drupal/bg_image_formatter": "^1.0@beta",
-        "drupal/acquia_purge": "^1.0@beta"
+        "drupal/acquia_purge": "^1.0@beta",
+        "drupal/age_verification": "^1.0"
     },
     "require-dev": {
         "drupal/devel": "^1.0",
