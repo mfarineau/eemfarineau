@@ -20,6 +20,16 @@ body {
   padding-right:1%;
 }
 
+.group-right {
+  color:#000;
+  background-color: #ccc;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.group-right .field__items {
+    padding-left: 15px;
+}
 
 /*Main menu*/
  nav#block-concentric-main-menu {
