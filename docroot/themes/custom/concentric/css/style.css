@@ -10,6 +10,17 @@ body {
   background-color:#000;
 }
 
+/*Content columbs*/
+
+.group-left {
+  padding-right:1%;
+}
+
+.group-middle {
+  padding-right:1%;
+}
+
+
 /*Main menu*/
  nav#block-concentric-main-menu {
    border-radius: 50%;
