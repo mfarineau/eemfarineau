@@ -22,7 +22,8 @@
         "drupal/acquia_purge": "^1.0@beta",
         "drupal/age_verification": "^1.0",
         "drupal/ds": "^3.1",
-        "drupal/field_collection": "^1.0@alpha"
+        "drupal/field_collection": "^1.0@alpha",
+        "drupal/views_slideshow": "^4.5"
     },
     "require-dev": {
         "drupal/devel": "^1.0",
