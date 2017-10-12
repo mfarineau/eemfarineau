@@ -15,7 +15,7 @@
               "version": "3.0.3",
               "type": "drupal-library",
               "dist": {
-                "url": "https://github.com/malsup/cycle/blob/master/jquery.cycle.all.js",
+                "url": "https://malsup.github.io/jquery.cycle.all.js",
                 "type": "file"
               }
             }
@@ -27,7 +27,7 @@
               "version": "1.9.0",
               "type": "drupal-library",
               "dist": {
-                "url": "https://github.com/briancherne/jquery-hoverIntent/blob/master/jquery.hoverIntent.js",
+                "url": "https://briancherne.github.io/jquery-hoverIntent/jquery.hoverIntent.js",
                 "type": "file"
               }
             }

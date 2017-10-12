@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "24fd3c6195bf4a1cd8feed49c2729e24",
+    "content-hash": "ab253e8a255f175dba0110984c445aaf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2179,7 +2179,7 @@
             "version": "3.0.3",
             "dist": {
                 "type": "file",
-                "url": "https://github.com/malsup/cycle/blob/master/jquery.cycle.all.js",
+                "url": "https://malsup.github.io/jquery.cycle.all.js",
                 "reference": null,
                 "shasum": null
             },
@@ -2190,7 +2190,7 @@
             "version": "1.9.0",
             "dist": {
                 "type": "file",
-                "url": "https://github.com/briancherne/jquery-hoverIntent/blob/master/jquery.hoverIntent.js",
+                "url": "https://briancherne.github.io/jquery-hoverIntent/jquery.hoverIntent.js",
                 "reference": null,
                 "shasum": null
             },
