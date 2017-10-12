@@ -7,7 +7,31 @@
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        }
+       },
+	"jquery.cycle": {
+            "type": "package",
+            "package": {
+              "name": "jquery/jquery.cycle",
+              "version": "3.0.3",
+              "type": "drupal-library",
+              "dist": {
+                "url": "https://github.com/malsup/cycle/blob/master/jquery.cycle.all.js",
+                "type": "file"
+              }
+            }
+          },
+	"jquery.hoverIntent": {
+            "type": "package",
+            "package": {
+              "name": "jquery/jquery.hoverIntent",
+              "version": "1.9.0",
+              "type": "drupal-library",
+              "dist": {
+                "url": "https://github.com/briancherne/jquery-hoverIntent/blob/master/jquery.hoverIntent.js",
+                "type": "file"
+              }
+            }
+          }
     },
     "require": {
         "drupal-composer/drupal-scaffold": "^2.0.0",
@@ -23,7 +47,9 @@
         "drupal/age_verification": "^1.0",
         "drupal/ds": "^3.1",
         "drupal/field_collection": "^1.0@alpha",
-        "drupal/views_slideshow": "^4.5"
+        "drupal/views_slideshow": "^4.5",
+	"jquery/jquery.cycle": "3.0.3",
+        "jquery/jquery.hoverIntent": "1.9.0"
     },
     "require-dev": {
         "drupal/devel": "^1.0",
