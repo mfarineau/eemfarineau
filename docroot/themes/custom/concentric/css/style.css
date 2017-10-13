@@ -41,7 +41,7 @@ body {
    background-image: url("../images/vintage-concrete.png");
 }
 .navbar-nav li a {
-  color:#000;
+  color:#ccc;
 }
 nav#block-concentric-main-menu h2 {
     text-align: center;
