@@ -38,7 +38,7 @@ body {
    margin-right: 20px;
    width: 400px;
    height: 400px;
-   background: grey;
+   background-image: url("../images/vintage-concrete.png");
 }
 .navbar-nav li a {
   color:#000;
