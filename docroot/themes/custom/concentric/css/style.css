@@ -48,6 +48,9 @@ body {
 .navbar-nav li a {
   color:#ccc;
 }
+ul.menu.nav.navbar-nav {
+  clear: both;
+}
 nav#block-concentric-main-menu h2 {
     text-align: center;
     margin-top:20%;
