@@ -40,9 +40,6 @@ body {
    height: 400px;
    background-image: url("../images/vintage-concrete.png");
 }
-.navbar-default {
-   background-image: url("../images/concentric-transparent.png");
-}
 .navbar-nav li a {
   color:#ccc;
 }
