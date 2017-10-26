@@ -126,6 +126,10 @@ nav#block-concentric-main-menu .navbar-nav {
     opacity: 0.95;
 }
 
+.field.field--name-field-beer-image.field--type-image.field--label-hidden.field--item img {
+    border-radius: 20px;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
 
