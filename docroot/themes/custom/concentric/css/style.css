@@ -14,6 +14,14 @@ body {
     margin-right: auto;
 }
 
+/*container*/
+
+.container-fluid {
+    padding-right: 15%;
+    padding-left: 15%;
+    margin-left: auto;
+}
+
 /*Content columbs*/
 
 .group-left {
@@ -49,6 +57,9 @@ body {
 }
 ul.menu.nav.navbar-nav {
   clear: both;
+}
+.navbar {
+  border-radius:none !important;
 }
 nav#block-concentric-main-menu h2 {
     text-align: center;
