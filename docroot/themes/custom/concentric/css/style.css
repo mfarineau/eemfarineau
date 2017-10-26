@@ -92,7 +92,7 @@ nav#block-concentric-main-menu .navbar-nav {
   margin-top: 1em;
 }
 .view-test-grid img{
-  width: 100%;
+  /*width: 100%;*/
   border: 3px solid #eee;
   padding: 3px;
   border-radius: 5px;
