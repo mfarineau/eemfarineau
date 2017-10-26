@@ -9,6 +9,12 @@ body {
   background-size:100%;
 }
 
+/*logo block*/
+.views-field.views-field-field-logo img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /*Content columbs*/
 
 .group-left {
