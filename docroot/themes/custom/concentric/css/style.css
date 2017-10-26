@@ -113,6 +113,15 @@ nav#block-concentric-main-menu .navbar-nav {
   text-decoration: none;
 }
 
+/*beer page*/
+
+.node.node--type-beer {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    opacity: 0.95;
+}
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
 
