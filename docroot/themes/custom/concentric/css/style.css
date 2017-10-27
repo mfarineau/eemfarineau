@@ -81,6 +81,11 @@ ul.menu.nav.navbar-nav li a:hover, ul.menu.nav.navbar-nav li a:focus, ul.menu.na
 }
 /*end sink*/
 
+.navbar {
+  margin-bottom: 0;
+  z-index:100;
+}
+
  nav#block-concentric-main-menu {
    border-radius: 50%;
    display: inline-block;
