@@ -113,7 +113,7 @@ nav#block-concentric-main-menu .navbar-nav {
 .view-test-grid img:hover{
   border-color: #ddd;
 }
-.view-test-grid p{
+/*.view-test-grid p{
   position: relative;
   bottom: 60px;
   left: 6px;
@@ -121,9 +121,24 @@ nav#block-concentric-main-menu .navbar-nav {
   padding: 0.5em 0.7em;
   background: rgba(17, 17, 17, .5);
   display: inline;
+}*/
+
+.view-test-grid p {
+    position: relative;
+    bottom: 60px;
+    color: #fff;
+    background: rgba(17, 17, 17, .5);
+    text-align: center;
 }
+
 .view-test-grid p a{
   text-decoration: none;
+  color:#fff;
+  font-weight:bold;
+}
+
+#block-views-block-test-grid-block-3 .form-group {
+    text-align: center;
 }
 
 /*beer page*/
