@@ -22,7 +22,7 @@ class AnimateAnyForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Fetch animate.css from library.
-    $animate_css = DRUPAL_ROOT . '/libraries/animate.css/animate.css';
+    $animate_css = libraries_get_path('animate') . '/animate.css';
     // Check animate.css file exists.
     if (!file_exists($animate_css)) {
       drupal_set_message($this->t('animate.css library is missing.'), 'warning');

@@ -22,12 +22,10 @@ INSTALLATION
 https://drupal.org/docs/8/extending-drupal-8/installing-modules
 for further information.
 * Here we are using animate.css library to provide animation for Drupal.
-* You need to download animate.css library from
+* You need to download animate.css library from 
 https://github.com/daneden/animate.css
-and extract the files to "/animate_any/css/" directory
-(e.g:/animate_any/css/animate.css). Or you can directly run a below git command:
-"git clone -b master https://github.com/daneden/animate.css" in
-"/animate_any/css/".
+and extract the files to "/sites/all/libraries/" 
+directory(e.g:/sites/all/libraries/animate).
 
 CONFIGURATION
 -------------

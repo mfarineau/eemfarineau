@@ -34,6 +34,7 @@
           }
     },
     "require": {
+        "cweagans/composer-patches": "~1.0",
         "drupal-composer/drupal-scaffold": "^2.0.0",
         "drupal/core": "^8.3",
         "drupal/admin_toolbar": "^1.0",
@@ -53,6 +54,9 @@
         "drupal/flexslider": "^2.0@beta",
         "drupal/animate_any": "^1.1"
     },
+    "config": {
+        "preferred-install": "source"
+    },
     "require-dev": {
         "drupal/devel": "^1.0",
         "drupal/stage_file_proxy": "^1.0"
@@ -63,12 +67,18 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
+	"enable-patching": true,
         "installer-paths": {
             "docroot/core": ["type:drupal-core"],
             "docroot/modules/contrib/{$name}": ["type:drupal-module"],
             "docroot/profiles/contrib/{$name}": ["type:drupal-profile"],
             "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
             "docroot/libraries/{$name}": ["type:drupal-library"]
+        },
+        "patches": {
+            "drupal/animate_any": {
+                "Drupal Animate Any resolve library naming": "https://www.drupal.org/files/issues/resolved_animate_library_issue-2905067-2.patch"     
+            }
         }
     }
 }

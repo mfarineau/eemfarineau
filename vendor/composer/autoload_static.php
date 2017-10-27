@@ -16,6 +16,10 @@ class ComposerStaticInit8aa559e94ac132213a4ae986e8af6bb2
     );
 
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'cweagans\\Composer\\' => 18,
+        ),
         'Z' => 
         array (
             'Zend\\Stdlib\\' => 12,
@@ -85,6 +89,10 @@ class ComposerStaticInit8aa559e94ac132213a4ae986e8af6bb2
     );
 
     public static $prefixDirsPsr4 = array (
+        'cweagans\\Composer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/cweagans/composer-patches/src',
+        ),
         'Zend\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-stdlib/src',
