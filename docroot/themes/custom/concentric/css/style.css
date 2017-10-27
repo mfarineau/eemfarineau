@@ -212,12 +212,12 @@ nav#block-concentric-main-menu .navbar-nav {
 
 /*beer page*/
 
-.node.node--type-beer {
+/*.node.node--type-beer {
     background-color: #fff;
     padding: 20px;
     border-radius: 20px;
     opacity: 0.95;
-}
+}*/
 
 .field.field--name-field-beer-image.field--type-image.field--label-hidden.field--item img {
     border-radius: 20px;
