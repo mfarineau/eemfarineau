@@ -113,6 +113,7 @@ nav#block-concentric-main-menu .navbar-nav {
   content: '';
   position: absolute;
   border: #e1e1e1 solid 4px;
+  border-radius:50%;
   top: 0;
   right: 0;
   bottom: 0;
