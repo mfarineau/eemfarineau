@@ -107,13 +107,12 @@ nav#block-concentric-main-menu .navbar-nav {
 .view-test-grid img{
   /*width: 100%;*/
   border: 3px solid #eee;
-  padding: 3px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 50%;
 }
 .view-test-grid img:hover{
-  border-color: #ddd;
+  border-color: #000;
 }
 /*.view-test-grid p{
   position: relative;
