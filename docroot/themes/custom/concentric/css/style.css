@@ -129,7 +129,8 @@ nav#block-concentric-main-menu .navbar-nav {
     position: relative;
     bottom: 60px;
     color: #fff;
-    background: rgba(17, 17, 17, .5);
+    /*background: rgba(17, 17, 17, .5);*/
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 1);
     text-align: center;
 }
 
