@@ -112,42 +112,10 @@ nav#block-concentric-main-menu .navbar-nav {
   margin-right: auto;
   border-radius: 50%;
 }
-/*.view-test-grid img:hover{
+.view-test-grid img:hover{
   padding: 5px;
   border-color: #ccc;
-}*/
-
-/*from https://github.com/IanLunn/Hover/blob/master/css/hover.css*/
-
-.view-test-grid img {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px transparent;
-  position: relative;
 }
-.view-test-grid img:before {
-  content: '';
-  position: absolute;
-  border: #e1e1e1 solid 4px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: top, right, bottom, left;
-  transition-property: top, right, bottom, left;
-}
-.view-test-grid img:hover:before, .view-test-grid img:focus:before, .view-test-grid img:active:before {
-  top: -8px;
-  right: -8px;
-  bottom: -8px;
-  left: -8px;
-}
-
-
 
 /*.view-test-grid p{
   position: relative;
