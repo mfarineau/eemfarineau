@@ -101,7 +101,7 @@ nav#block-concentric-main-menu .navbar-nav {
 }
 
 /* Outline Out */
-.hvr-outline-out {
+.hvr-outline-out a{
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
@@ -109,7 +109,7 @@ nav#block-concentric-main-menu .navbar-nav {
   box-shadow: 0 0 1px transparent;
   position: relative;
 }
-.hvr-outline-out:before {
+.hvr-outline-out a:before {
   content: '';
   position: absolute;
   border: #e1e1e1 solid 4px;
@@ -123,7 +123,7 @@ nav#block-concentric-main-menu .navbar-nav {
   -webkit-transition-property: top, right, bottom, left;
   transition-property: top, right, bottom, left;
 }
-.hvr-outline-out:hover:before, .hvr-outline-out:focus:before, .hvr-outline-out:active:before {
+.hvr-outline-out:hover a:before, .hvr-outline-out a:focus:before, .hvr-outline-out a:active:before {
   top: -8px;
   right: -8px;
   bottom: -8px;
