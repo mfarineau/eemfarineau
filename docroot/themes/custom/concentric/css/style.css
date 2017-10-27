@@ -33,6 +33,7 @@ body {
     z-index: -1;
     top: 0;
     left: 0;
+    border: none;
 }
 /*end flexslider stuff*/
 
