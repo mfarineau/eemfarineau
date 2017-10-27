@@ -100,6 +100,7 @@ ul.menu.nav.navbar-nav {
 }
 .navbar-default {
   background-color:#fff;
+  border-radius: 0;
 }
 header#navbar {
     box-shadow: 0px 4px 8px -2px rgba(0,0,0,0.75);
