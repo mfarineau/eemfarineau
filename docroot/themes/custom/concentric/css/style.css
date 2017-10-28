@@ -216,6 +216,12 @@ nav#block-concentric-main-menu .navbar-nav {
     text-align: center;
 }
 
+/*Footer stuff*/
+.views-field.views-field-field-hours {
+    float: left;
+    margin-right: 30%;
+}
+
 /*beer page*/
 
 /*.node.node--type-beer {
