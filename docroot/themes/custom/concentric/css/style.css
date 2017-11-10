@@ -232,9 +232,13 @@ nav#block-concentric-main-menu .navbar-nav {
 }
 
 /*Footer stuff*/
-.views-field.views-field-field-hours {
+.views-field-field-hours {
     float: left;
-    margin-right: 30%;
+    margin-left:5%;
+}
+.views-field-field-map {
+    float: right;
+    margin-right:5%;
 }
 
 /*beer page*/
