@@ -116,7 +116,8 @@ header#navbar {
     margin-top:-1px;
 }
 .navbar-nav a, .active > a:hover, a:focus {
-    border-radius: 50%;
+    background-image: url("../images/hop.png");
+    z-index:1;
     margin-bottom: 2px;
   }
 nav#block-concentric-main-menu h2 {
