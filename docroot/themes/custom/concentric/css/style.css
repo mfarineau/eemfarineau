@@ -2,10 +2,14 @@
  * Place your custom styles here.
  */
 
+ html body.path-node {
+     background-color: #ccc;
+ }
+
 /*body*/
 body {
-  line-height:1.8;
-  background-size:100%;
+    line-height:1.8;
+    background-size:100%;
 }
 
 /*logo block*/
