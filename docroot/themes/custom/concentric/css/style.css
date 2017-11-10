@@ -115,12 +115,11 @@ header#navbar {
     color:#fff;
     margin-top:-1px;
 }
-.navbar-nav  a:hover, a:focus {
+.navbar-nav li{
     background-image: url("../images/hop.png");
-    margin-bottom: 2px;
-    background-color:none;
-    background-size: contain;
+    background-color: none;
     background-repeat: no-repeat;
+    background-position: center;
   }
 nav#block-concentric-main-menu h2 {
     text-align: center;
