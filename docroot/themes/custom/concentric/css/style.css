@@ -119,6 +119,8 @@ header#navbar {
     background-image: url("../images/hop.png");
     z-index:99;
     margin-bottom: 2px;
+    background-size: contain;
+    background-repeat: no-repeat;
   }
 nav#block-concentric-main-menu h2 {
     text-align: center;
