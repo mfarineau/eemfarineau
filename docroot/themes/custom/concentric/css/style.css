@@ -115,10 +115,10 @@ header#navbar {
     color:#fff;
     margin-top:-1px;
 }
-.navbar-nav a .active > a:hover, a:focus {
+.navbar-nav  a:hover, a:focus {
     background-image: url("../images/hop.png");
-    z-index:99;
     margin-bottom: 2px;
+    background-color:none;
     background-size: contain;
     background-repeat: no-repeat;
   }
