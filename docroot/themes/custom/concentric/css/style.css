@@ -1,12 +1,13 @@
 /**
  * Place your custom styles here.
  */
-
+html {
+  background:#ccc;
+}
 /*body*/
 body {
   line-height:1.8;
   background-size:100%;
-  background:#ccc;
 }
 
 /*logo block*/
