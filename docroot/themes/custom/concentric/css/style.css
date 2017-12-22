@@ -12,6 +12,12 @@ body {
     background-size:100%;
 }
 
+/*tap-list*/
+.well {
+    background-image: url("../images/chalkboard.jpg");
+
+}
+
 /*logo block*/
 .views-field.views-field-field-logo img {
     margin-left: auto;
