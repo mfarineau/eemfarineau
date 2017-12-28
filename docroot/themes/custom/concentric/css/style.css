@@ -69,6 +69,7 @@ body {
     top: 0;
     left: 0;
     border: none;
+    background-size: cover;
 }
 /*end flexslider stuff*/
 
