@@ -69,7 +69,9 @@ body {
     top: 0;
     left: 0;
     border: none;
-    height: 100%;
+}
+.flexslider img{
+    heigh: 100vh !important;
 }
 /*end flexslider stuff*/
 
