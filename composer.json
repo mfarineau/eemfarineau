@@ -54,7 +54,8 @@
         "drupal/flexslider": "^2.0@beta",
         "drupal/animate_any": "^1.1",
         "drupal/simple_gmap": "^1.4",
-        "drupal/token": "^1.1"
+        "drupal/token": "^1.1",
+        "drupal/fontyourface": "^3.1"
     },
     "config": {
         "preferred-install": "source"
