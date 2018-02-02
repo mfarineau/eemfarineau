@@ -12,6 +12,10 @@ body {
     background-size:100%;
 }
 
+.content img {
+  margin: 0px 10px 5px 0px;
+}
+
 /*tap-list*/
 .well a {
       font-size: 24px;
