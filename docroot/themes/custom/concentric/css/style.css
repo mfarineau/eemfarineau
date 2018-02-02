@@ -293,6 +293,35 @@ nav#block-concentric-main-menu .navbar-nav {
     box-shadow: 0px 4px 8px -2px rgba(0,0,0,0.75);
 }
 
+.beer-list {
+  float: left;
+  clear: right;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  position: relative;
+}
+
+.beer-image img {
+      background: white;
+      display: inline;
+      /* float: left; */
+      margin-bottom: 5px;
+      /* margin: 0 15px 30px; */
+      padding: 10px 10px 25px;
+      text-align: center;
+      text-decoration: none;
+      -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+      -moz-box-shadow: 0 4px 6px rgba(0,0,0,.3);
+      box-shadow: 0 4px 6px rgba(0,0,0,.3);
+      -webkit-transition: all .15s linear;
+      -moz-transition: all .15s linear;
+      transition: all .15s linear;
+      /* min-height: 100px; */
+      z-index: 0;
+      position: relative;
+  }
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
 
