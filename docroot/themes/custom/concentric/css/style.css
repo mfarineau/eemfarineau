@@ -254,6 +254,27 @@ nav#block-concentric-main-menu .navbar-nav {
   display: inline;
 }*/
 
+.taxonomy-list img {
+  background: white;
+    display: inline;
+    float: left;
+    margin-bottom: 5px;
+    /* margin: 0 15px 30px; */
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+    -moz-box-shadow: 0 4px 6px rgba(0,0,0,.3);
+    box-shadow: 0 4px 6px rgba(0,0,0,.3);
+    -webkit-transition: all .15s linear;
+    -moz-transition: all .15s linear;
+    transition: all .15s linear;
+    /* min-height: 100px; */
+    z-index: 0;
+    position: relative;
+}
+
 .view-test-grid p {
     position: relative;
     bottom: 60px;
