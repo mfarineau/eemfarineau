@@ -253,13 +253,15 @@ nav#block-concentric-main-menu .navbar-nav {
   background: rgba(17, 17, 17, .5);
   display: inline;
 }*/
-
+.taxonomy-list {
+    clear: both;
+}
 .taxonomy-list img {
-  background: white;
+    background: white;
     display: inline;
     float: left;
     margin-bottom: 5px;
-    /* margin: 0 15px 30px; */
+    margin: 0 15px 30px;
     border-radius: 20px;
     padding: 5px;
     text-align: center;
@@ -270,7 +272,7 @@ nav#block-concentric-main-menu .navbar-nav {
     -webkit-transition: all .15s linear;
     -moz-transition: all .15s linear;
     transition: all .15s linear;
-    /* min-height: 100px; */
+    min-height: 100px;
     z-index: 0;
     position: relative;
 }
