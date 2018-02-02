@@ -296,7 +296,7 @@ nav#block-concentric-main-menu .navbar-nav {
 .beer-list {
   float: left;
   clear: right;
-  width: 200px;
+  width: 175px;
   height: 200px;
   text-align: center;
   position: relative;
@@ -308,7 +308,8 @@ nav#block-concentric-main-menu .navbar-nav {
       /* float: left; */
       margin-bottom: 5px;
       /* margin: 0 15px 30px; */
-      padding: 10px 10px 25px;
+      border-radius:20px;
+      padding: 5px;
       text-align: center;
       text-decoration: none;
       -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
