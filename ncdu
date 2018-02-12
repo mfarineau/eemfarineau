@@ -1,0 +1,14 @@
+
+
+[37;41m                                   [39;49m
+[37;41m  [InvalidArgumentException]       [39;49m
+[37;41m  Command "files" is not defined.  [39;49m
+[37;41m  Did you mean one of these?       [39;49m
+[37;41m      files:check-permissions      [39;49m
+[37;41m      files:usage                  [39;49m
+[37;41m      files:rsync                  [39;49m
+[37;41m      files:ncdu                   [39;49m
+[37;41m      files:find                   [39;49m
+[37;41m                                   [39;49m
+
+

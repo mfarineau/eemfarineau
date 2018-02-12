@@ -255,6 +255,7 @@ nav#block-concentric-main-menu .navbar-nav {
 }*/
 .taxonomy-list {
     clear: both;
+    margin-bottom: 10px;
 }
 .taxonomy-list img {
     background: white;

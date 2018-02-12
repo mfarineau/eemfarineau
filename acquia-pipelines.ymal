@@ -4,10 +4,10 @@ services:
 events:
   build:
     steps:
-        - setup-project:
-            type: script
-            script:
-              - composer install
+      - build:
+          type: script
+          script:
+            - composer install
       # Deploy the build artifact to a Cloud on-demand environment.
         - deploy:
             script:
