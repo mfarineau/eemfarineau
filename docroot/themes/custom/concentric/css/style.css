@@ -10,7 +10,10 @@
 body {
     line-height:1.8;
     background-size:100%;
-    background-image: url(/sites/concentric/files/2018-02/Alesmith-Barrel-Room.jpg);
+    background-image: url("../../../../sites/concentric/files/2018-02/Alesmith-Barrel-Room.jpg") !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-position: left top !important;
 }
 
 .content img {
@@ -354,7 +357,7 @@ nav#block-concentric-main-menu .navbar-nav {
       -webkit-transition: all .15s linear;
       -moz-transition: all .15s linear;
       transition: all .15s linear;
-      height: 100px;
+      height: 100px !important;
       z-index: 0;
       position: relative;
   }
