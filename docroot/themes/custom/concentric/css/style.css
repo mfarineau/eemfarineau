@@ -43,8 +43,9 @@ body {
 .well h2 {
   margin-top:0px;
 }
-.tap-list .views-field-title {
-
+.views-field-title {
+  font-weight: bold;
+  font-size: 2em;
 }
 
 /*logo block*/
@@ -276,6 +277,7 @@ nav#block-concentric-main-menu .navbar-nav {
     min-height: 100px;
     z-index: 0;
     position: relative;
+    margin:15px;
 }
 
 .view-test-grid p {
