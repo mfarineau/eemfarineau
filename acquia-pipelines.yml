@@ -7,4 +7,4 @@ events:
       - build:
           type: script
           script:
-            - composer install
+            - composer update
