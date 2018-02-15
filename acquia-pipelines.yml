@@ -1,4 +1,12 @@
 version: 1.0.0
+
+variables:
+  global:
+    SLACK_HOSTNAME: "acquia.slack.com"
+    SLACK_TOKEN:
+      secure: xoxp-2188077891-231903754871-315829519027-0d81ff6c8d299c53566c8fb814853e70
+    SLACK_CHANNEL: "#pipelines-farineau"
+
 services:
   - mysql
 events:
@@ -8,3 +16,8 @@ events:
           type: script
           script:
             - composer update
+
+      - notify:
+          type: script
+          script:
+            - curl -X POST --data "payload={"channel": "${SLACK_CHANNEL}", "username": "${SLACK_USERNAME}", "text": "success"}" https://${SLACK_HOSTNAME}/services/hooks/incoming-webhook?token=${SLACK_TOKEN}
