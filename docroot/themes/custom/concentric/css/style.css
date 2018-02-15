@@ -43,7 +43,7 @@ body {
 .well h2 {
   margin-top:0px;
 }
-.views-field-title {
+.taxonomy-list .views-field-title {
   font-weight: bold;
   font-size: 2em;
 }
