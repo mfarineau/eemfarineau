@@ -20,4 +20,4 @@ events:
       - notify:
           type: script
           script:
-            - curl -X POST --data "payload={"channel": "${SLACK_CHANNEL}", "username": "${SLACK_USERNAME}", "text": "success"}" https://${SLACK_HOSTNAME}/services/hooks/incoming-webhook?token=${SLACK_TOKEN}
+            - curl -X POST --data "payload={"channel": "${SLACK_CHANNEL}", {"text": "success"}" https://${SLACK_HOSTNAME}/services/hooks/incoming-webhook?token=${SLACK_TOKEN}
