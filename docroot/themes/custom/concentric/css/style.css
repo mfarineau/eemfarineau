@@ -49,8 +49,8 @@ body {
 }
 
 .beer-list .views-field-title {
-  font-weight: bold;
-  font-size: 2em;
+    font-weight: bold;
+    font-size: 1.5em;
 }
 
 /*logo block*/
@@ -353,7 +353,7 @@ nav#block-concentric-main-menu .navbar-nav {
       -webkit-transition: all .15s linear;
       -moz-transition: all .15s linear;
       transition: all .15s linear;
-      min-height: 100px;
+      height: 100px;
       z-index: 0;
       position: relative;
   }
