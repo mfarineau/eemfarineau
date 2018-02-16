@@ -10,10 +10,10 @@
 body {
     line-height:1.8;
     background-size:100%;
-    background-image: url("../../../../sites/concentric/files/2018-02/Alesmith-Barrel-Room.jpg") !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-    background-position: left top !important;
+    background-image: url("../../../../sites/concentric/files/2018-02/Alesmith-Barrel-Room.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: left top;
 }
 
 .content img {
