@@ -48,6 +48,11 @@ body {
 .well h2 {
   margin-top:0px;
 }
+
+.taxonomy-list .views-field.views-field-field-beer-image img {
+    width: 100px;
+}
+
 .taxonomy-list .views-field-title {
   font-weight: bold;
   font-size: 2em;
