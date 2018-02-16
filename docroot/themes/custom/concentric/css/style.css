@@ -323,6 +323,18 @@ nav#block-concentric-main-menu .navbar-nav {
     float: right;
     margin-right:5%;
 }
+section#block-languageswitcher {
+    float: right;
+}
+section#block-languageswitcher ul {
+    list-style: none;
+}
+section#block-languageswitcher ul a.language-link.is-active {
+  color:#777;
+}
+section#block-languageswitcher ul a.language-link {
+  color:#ccc;
+}
 
 /*beer page*/
 
