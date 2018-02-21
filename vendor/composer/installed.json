@@ -1150,18 +1150,18 @@
     },
     {
         "name": "drupal/bootstrap",
-        "version": "3.9.0",
-        "version_normalized": "3.9.0.0",
+        "version": "3.10.0",
+        "version_normalized": "3.10.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/bootstrap",
-            "reference": "8.x-3.9"
+            "reference": "8.x-3.10"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.9.zip",
-            "reference": "8.x-3.9",
-            "shasum": "2095ebf22b147a096d34ebbc428dfb62ea01f89b"
+            "url": "https://ftp.drupal.org/files/projects/bootstrap-8.x-3.10.zip",
+            "reference": "8.x-3.10",
+            "shasum": "1e7c45906fa3fe990868da53a336e702113cd66a"
         },
         "require": {
             "drupal/core": "~8.0"
@@ -1172,8 +1172,8 @@
                 "dev-3.x": "3.x-dev"
             },
             "drupal": {
-                "version": "8.x-3.9",
-                "datestamp": "1516430285",
+                "version": "8.x-3.10",
+                "datestamp": "1519144980",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -1217,17 +1217,17 @@
     },
     {
         "name": "drupal/core",
-        "version": "8.4.4",
-        "version_normalized": "8.4.4.0",
+        "version": "8.4.5",
+        "version_normalized": "8.4.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/drupal/core.git",
-            "reference": "c6585ffaea5df4ed529e2bdf4371850f8fc3b88c"
+            "reference": "44a857df6f7ffd063cffed9a41767cdc50dd7474"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/drupal/core/zipball/c6585ffaea5df4ed529e2bdf4371850f8fc3b88c",
-            "reference": "c6585ffaea5df4ed529e2bdf4371850f8fc3b88c",
+            "url": "https://api.github.com/repos/drupal/core/zipball/44a857df6f7ffd063cffed9a41767cdc50dd7474",
+            "reference": "44a857df6f7ffd063cffed9a41767cdc50dd7474",
             "shasum": ""
         },
         "require": {
@@ -1380,7 +1380,7 @@
             "symfony/css-selector": "~3.2.8",
             "symfony/phpunit-bridge": "~3.2.8"
         },
-        "time": "2018-01-03T19:27:53+00:00",
+        "time": "2018-02-20T21:35:13+00:00",
         "type": "drupal-core",
         "installation-source": "dist",
         "autoload": {
