@@ -421,6 +421,9 @@ section#block-languageswitcher ul a.language-link {
       margin-bottom: 2px;
       background-color: #ddd;
     }
+    aside.col-sm-3 {
+      clear:both;
+    }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
