@@ -424,6 +424,16 @@ section#block-languageswitcher ul a.language-link {
     aside.col-sm-3 {
       clear:both;
     }
+    .ds-3col-stacked > .group-right {
+      width: 25%;
+      float: none;
+      clear: both;
+      width: 100%;
+    }
+    .ds-3col-stacked > .group-middle {
+      width: 100%;
+      float: none;
+  }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
