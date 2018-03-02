@@ -55,7 +55,8 @@
         "drupal/animate_any": "^1.1",
         "drupal/simple_gmap": "^1.4",
         "drupal/token": "^1.1",
-        "drupal/fontyourface": "^3.1"
+        "drupal/fontyourface": "^3.1",
+        "drupal/shield": "^1.2"
     },
     "config": {
         "preferred-install": "source"
