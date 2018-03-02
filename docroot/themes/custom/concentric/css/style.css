@@ -413,6 +413,13 @@ section#block-languageswitcher ul a.language-link {
     div#navbar-collapse {
       margin: 5%;
     }
+    .navbar-toggle {
+      margin-right: 25px;
+    }
+    ul.menu.nav.navbar-nav li a {
+      width:100%;
+      margin-bottom: 2px;
+    }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
