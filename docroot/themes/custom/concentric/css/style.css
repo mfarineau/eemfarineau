@@ -394,6 +394,13 @@ section#block-languageswitcher ul a.language-link {
     .views-field-field-map iframe {
       width:100%;
     }
+    .container-fluid {
+      padding-left:0%;
+      padding-right:0%;
+    }
+    body {
+      background-image:none !important;
+    }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
