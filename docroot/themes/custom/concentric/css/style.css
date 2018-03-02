@@ -438,6 +438,20 @@ section#block-languageswitcher ul a.language-link {
     .ds-3col-stacked > .group-left {
       margin-right: 10px;
   }
+    .beer-list {
+      float: left;
+      clear: right;
+      width: 45%;
+      height: 200px;
+      text-align: center;
+      position: relative;
+      margin: 5px;
+  }
+    .form-item.js-form-item.form-type-select.js-form-type-select.form-item-field-style-target-id.js-form-item-field-style-target-id.form-group {
+      float: left;
+      margin-right: 10px;
+      margin-bottom: 20px;
+  }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
