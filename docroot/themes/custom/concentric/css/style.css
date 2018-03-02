@@ -452,6 +452,9 @@ section#block-languageswitcher ul a.language-link {
       margin-right: 10px;
       margin-bottom: 20px;
   }
+    .row {
+      margin:0px;
+    }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
