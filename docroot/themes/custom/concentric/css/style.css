@@ -383,7 +383,10 @@ section#block-languageswitcher ul a.language-link {
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
-
+  .navbar-default {
+      background-color: #000;
+      border-radius: 0;
+  }
 }
 
 /* Medium devices (desktops, 992px and up) */
