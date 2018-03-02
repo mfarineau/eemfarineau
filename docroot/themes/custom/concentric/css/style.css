@@ -455,6 +455,9 @@ section#block-languageswitcher ul a.language-link {
     .row {
       margin:0px;
     }
+    .flexslider {
+      display: none;
+  }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
