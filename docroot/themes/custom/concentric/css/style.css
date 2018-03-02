@@ -382,7 +382,7 @@ section#block-languageswitcher ul a.language-link {
   }
 
 /*Small devices 767px and lower*/
-@media (max:width: screen-xs-max) {
+@media (max:width: @screen-xs-max) {
     .views-field-field-hours {
         float: none;
         margin: 0px;
