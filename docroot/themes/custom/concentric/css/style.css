@@ -458,6 +458,9 @@ section#block-languageswitcher ul a.language-link {
     .flexslider {
       display: none;
   }
+  .main-container .row {
+    background-color: #f5f5f5;
+  }
 }
 /* Small devices (tablets, 768px and up) */
 @media (min-width: @screen-sm-min) {
