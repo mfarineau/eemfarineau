@@ -429,10 +429,14 @@ section#block-languageswitcher ul a.language-link {
       float: none;
       clear: both;
       width: 100%;
+      margin-top: 5%;
     }
     .ds-3col-stacked > .group-middle {
       width: 100%;
       float: none;
+  }
+    .ds-3col-stacked > .group-left {
+      margin-right: 10px;
   }
 }
 /* Small devices (tablets, 768px and up) */
