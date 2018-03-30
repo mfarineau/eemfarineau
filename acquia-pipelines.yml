@@ -3,8 +3,4 @@ services:
   - mysql
 events:
   build:
-    steps:
-      - build:
-          type: script
-          script:
-            - composer update
+
