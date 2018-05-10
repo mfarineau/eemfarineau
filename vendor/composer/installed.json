@@ -1898,18 +1898,18 @@
     },
     {
         "name": "drupal/jsonapi",
-        "version": "1.16.0",
-        "version_normalized": "1.16.0.0",
+        "version": "1.17.0",
+        "version_normalized": "1.17.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupal.org/project/jsonapi",
-            "reference": "8.x-1.16"
+            "reference": "8.x-1.17"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/jsonapi-8.x-1.16.zip",
-            "reference": "8.x-1.16",
-            "shasum": "2750ba9c137ef87da10089bc100d6f88d8ac4342"
+            "url": "https://ftp.drupal.org/files/projects/jsonapi-8.x-1.17.zip",
+            "reference": "8.x-1.17",
+            "shasum": "fbe3f36bfbbb804c2d7b0314136d30338002b1a0"
         },
         "require": {
             "drupal/core": "^8.4.3"
@@ -1925,8 +1925,8 @@
                 "dev-1.x": "1.x-dev"
             },
             "drupal": {
-                "version": "8.x-1.16",
-                "datestamp": "1524692053",
+                "version": "8.x-1.17",
+                "datestamp": "1525889880",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -3529,17 +3529,17 @@
     },
     {
         "name": "symfony/debug",
-        "version": "v3.4.8",
-        "version_normalized": "3.4.8.0",
+        "version": "v3.4.9",
+        "version_normalized": "3.4.9.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/debug.git",
-            "reference": "9cf7c2271cfb89ef9727db1b740ca77be57bf9d7"
+            "reference": "1b95888cfd996484527cb41e8952d9a5eaf7454f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/debug/zipball/9cf7c2271cfb89ef9727db1b740ca77be57bf9d7",
-            "reference": "9cf7c2271cfb89ef9727db1b740ca77be57bf9d7",
+            "url": "https://api.github.com/repos/symfony/debug/zipball/1b95888cfd996484527cb41e8952d9a5eaf7454f",
+            "reference": "1b95888cfd996484527cb41e8952d9a5eaf7454f",
             "shasum": ""
         },
         "require": {
@@ -3552,7 +3552,7 @@
         "require-dev": {
             "symfony/http-kernel": "~2.8|~3.0|~4.0"
         },
-        "time": "2018-04-03T05:22:50+00:00",
+        "time": "2018-04-30T16:53:52+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -3854,17 +3854,17 @@
     },
     {
         "name": "symfony/polyfill-iconv",
-        "version": "v1.7.0",
-        "version_normalized": "1.7.0.0",
+        "version": "v1.8.0",
+        "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-iconv.git",
-            "reference": "bd515d8f392730c833bc1ba993a4f598da64fa5b"
+            "reference": "7cb8436a814d5b0fcf292810ee26f8b0cb47584d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/bd515d8f392730c833bc1ba993a4f598da64fa5b",
-            "reference": "bd515d8f392730c833bc1ba993a4f598da64fa5b",
+            "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/7cb8436a814d5b0fcf292810ee26f8b0cb47584d",
+            "reference": "7cb8436a814d5b0fcf292810ee26f8b0cb47584d",
             "shasum": ""
         },
         "require": {
@@ -3873,11 +3873,11 @@
         "suggest": {
             "ext-iconv": "For best performance"
         },
-        "time": "2018-01-30T19:27:44+00:00",
+        "time": "2018-04-26T10:06:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.7-dev"
+                "dev-master": "1.8-dev"
             }
         },
         "installation-source": "source",
@@ -3915,17 +3915,17 @@
     },
     {
         "name": "symfony/polyfill-mbstring",
-        "version": "v1.7.0",
-        "version_normalized": "1.7.0.0",
+        "version": "v1.8.0",
+        "version_normalized": "1.8.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b"
+            "reference": "3296adf6a6454a050679cde90f95350ad604b171"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
-            "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/3296adf6a6454a050679cde90f95350ad604b171",
+            "reference": "3296adf6a6454a050679cde90f95350ad604b171",
             "shasum": ""
         },
         "require": {
@@ -3934,11 +3934,11 @@
         "suggest": {
             "ext-mbstring": "For best performance"
         },
-        "time": "2018-01-30T19:27:44+00:00",
+        "time": "2018-04-26T10:06:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.7-dev"
+                "dev-master": "1.8-dev"
             }
         },
         "installation-source": "source",
@@ -4675,33 +4675,33 @@
     },
     {
         "name": "zendframework/zend-stdlib",
-        "version": "3.1.1",
-        "version_normalized": "3.1.1.0",
+        "version": "3.2.0",
+        "version_normalized": "3.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/zendframework/zend-stdlib.git",
-            "reference": "10ef03144902d1955f935fff5346ed52f7d99bcc"
+            "reference": "cd164b4a18b5d1aeb69be2c26db035b5ed6925ae"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/10ef03144902d1955f935fff5346ed52f7d99bcc",
-            "reference": "10ef03144902d1955f935fff5346ed52f7d99bcc",
+            "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/cd164b4a18b5d1aeb69be2c26db035b5ed6925ae",
+            "reference": "cd164b4a18b5d1aeb69be2c26db035b5ed6925ae",
             "shasum": ""
         },
         "require": {
             "php": "^5.6 || ^7.0"
         },
         "require-dev": {
-            "athletic/athletic": "~0.1",
-            "phpunit/phpunit": "~4.0",
+            "phpbench/phpbench": "^0.13",
+            "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
             "zendframework/zend-coding-standard": "~1.0.0"
         },
-        "time": "2018-04-12T16:05:42+00:00",
+        "time": "2018-04-30T13:50:40+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "3.1-dev",
-                "dev-develop": "3.2-dev"
+                "dev-master": "3.2.x-dev",
+                "dev-develop": "3.3.x-dev"
             }
         },
         "installation-source": "dist",
@@ -4714,10 +4714,11 @@
         "license": [
             "BSD-3-Clause"
         ],
-        "homepage": "https://github.com/zendframework/zend-stdlib",
+        "description": "SPL extensions, array utilities, error handlers, and more",
         "keywords": [
+            "ZendFramework",
             "stdlib",
-            "zf2"
+            "zf"
         ]
     }
 ]
