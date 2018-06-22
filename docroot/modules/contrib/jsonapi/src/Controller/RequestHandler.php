@@ -172,6 +172,10 @@ class RequestHandler {
    *   Thrown if the request body cannot be denormalized.
    */
   protected function deserialize(Request $request, ResourceType $resource_type) {
+    if ($request->isMethodSafe(FALSE)) {
+      return NULL;
+    }
+
     // Deserialize incoming data if available.
     $received = $request->getContent();
     $unserialized = NULL;
@@ -207,7 +211,6 @@ class RequestHandler {
     elseif ($request->isMethod('POST') || $request->isMethod('PATCH')) {
       throw new BadRequestHttpException('Empty request body.');
     }
-
 
     return $unserialized;
   }

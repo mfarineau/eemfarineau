@@ -68,7 +68,7 @@ class FilterNormalizerTest extends KernelTestBase {
       'extreme shorthand' => [
         ['uid' => 1],
         [['path' => 'uid', 'value' => 1, 'operator' => '=']],
-      ]
+      ],
     ];
   }
 
@@ -147,7 +147,7 @@ class FilterNormalizerTest extends KernelTestBase {
    */
   protected function getFieldResolver($entity_type_id, $bundle) {
     $field_resolver = $this->prophesize(FieldResolver::class);
-    $field_resolver->resolveInternal('foo', 'bar', Argument::any())->willReturnArgument(2);
+    $field_resolver->resolveInternalEntityQueryPath('foo', 'bar', Argument::any())->willReturnArgument(2);
     return $field_resolver->reveal();
   }
 

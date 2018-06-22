@@ -31,6 +31,13 @@ class Routes implements ContainerInjectionInterface {
   const FRONT_CONTROLLER = 'jsonapi.request_handler:handle';
 
   /**
+   * A key with which to flag a route as belonging to the JSON API module.
+   *
+   * @var string
+   */
+  const JSON_API_ROUTE_FLAG_KEY = '_is_jsonapi';
+
+  /**
    * The route default key for the route's resource type information.
    *
    * @var string
@@ -93,7 +100,7 @@ class Routes implements ContainerInjectionInterface {
     $routes->addOptions(['_auth' => $this->providerIds]);
 
     // Flag every route as belonging to the JSON API module.
-    $routes->addOptions(['_is_jsonapi' => TRUE]);
+    $routes->addDefaults([static::JSON_API_ROUTE_FLAG_KEY => TRUE]);
 
     return $routes;
   }
@@ -119,7 +126,7 @@ class Routes implements ContainerInjectionInterface {
 
     // Collection route like `/jsonapi/node/article`.
     $collection_route = new Route('/' . $resource_type->getPath());
-    $collection_route->setMethods(['GET', 'POST']);
+    $collection_route->setMethods($resource_type->isLocatable() ? ['GET', 'POST'] : ['POST']);
     $collection_route->addDefaults(['serialization_class' => JsonApiDocumentTopLevel::class]);
     $collection_route->setRequirement('_csrf_request_header_token', 'TRUE');
     $routes->add(static::getRouteName($resource_type, 'collection'), $collection_route);
@@ -152,6 +159,10 @@ class Routes implements ContainerInjectionInterface {
    *   The route collection.
    */
   protected static function getIndividualRoutesForResourceType(ResourceType $resource_type) {
+    if (!$resource_type->isLocatable()) {
+      return new RouteCollection();
+    }
+
     $routes = new RouteCollection();
 
     $path = $resource_type->getPath();
@@ -173,6 +184,7 @@ class Routes implements ContainerInjectionInterface {
     // other resources.
     $relationship_route = new Route("/{$path}/{{$entity_type_id}}/relationships/{related}");
     $relationship_route->setMethods(['GET', 'POST', 'PATCH', 'DELETE']);
+    // @todo: remove the _on_relationship default in https://www.drupal.org/project/jsonapi/issues/2953346.
     $relationship_route->addDefaults(['_on_relationship' => TRUE]);
     $relationship_route->addDefaults(['serialization_class' => EntityReferenceFieldItemList::class]);
     $relationship_route->setRequirement('_csrf_request_header_token', 'TRUE');
@@ -237,33 +249,20 @@ class Routes implements ContainerInjectionInterface {
   }
 
   /**
-   * Determines if the given route defaults are those of a JSON API route.
+   * Gets the resource type from a route or request's parameters.
    *
-   * @param array $route_defaults
-   *   A route's defaults.
+   * @param array $parameters
+   *   An array of parameters. These may be obtained from a route's
+   *   parameter defaults or from a request object.
    *
-   * @return bool
-   *   Whether the route targets a JSON API route.
+   * @return \Drupal\jsonapi\ResourceType\ResourceType|null
+   *   The resource type, NULL if one cannot be found from the given parameters.
    */
-  public static function isJsonApiRoute(array $route_defaults) {
-    return isset($route_defaults[RouteObjectInterface::CONTROLLER_NAME])
-      && $route_defaults[RouteObjectInterface::CONTROLLER_NAME] === static::FRONT_CONTROLLER;
-  }
-
-  /**
-   * Gets a route's resource type from its defaults.
-   *
-   * @param array $defaults
-   *   A request's route defaults.
-   *
-   * @return \Drupal\jsonapi\ResourceType\ResourceType
-   *   The request's resource type, NULL if one does not exist.
-   */
-  public static function getResourceTypeFromRouteDefaults(array $defaults) {
-    if (!static::isJsonApiRoute($defaults)) {
-      return NULL;
+  public static function getResourceTypeNameFromParameters(array $parameters) {
+    if (isset($parameters[static::JSON_API_ROUTE_FLAG_KEY]) && $parameters[static::JSON_API_ROUTE_FLAG_KEY]) {
+      return isset($parameters[static::RESOURCE_TYPE_KEY]) ? $parameters[static::RESOURCE_TYPE_KEY] : NULL;
     }
-    return $defaults[static::RESOURCE_TYPE_KEY];
+    return NULL;
   }
 
 }
