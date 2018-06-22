@@ -58,7 +58,8 @@
         "drupal/fontyourface": "^3.1",
         "drupal/shield": "^1.2",
         "drupal/jsonapi": "^1.14",
-        "drupal/pathauto": "^1.2"
+        "drupal/pathauto": "^1.2",
+        "symfony/polyfill-apcu": "^1.8"
     },
     "config": {
         "preferred-install": "source"
