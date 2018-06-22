@@ -59,7 +59,7 @@
         "drupal/shield": "^1.2",
         "drupal/jsonapi": "^1.14",
         "drupal/pathauto": "^1.2",
-        "symfony/polyfill-apcu": "^1.8"
+        "symfony/polyfill-apcu": "@dev"
     },
     "config": {
         "preferred-install": "source"
