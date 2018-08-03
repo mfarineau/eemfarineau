@@ -62,9 +62,6 @@
         "symfony/polyfill-apcu": "@dev",
         "symfony/polyfill-php70": "^1.8"
     },
-    "config": {
-        "preferred-install": "source"
-    },
     "require-dev": {
         "drupal/devel": "^1.0",
         "drupal/stage_file_proxy": "^1.0"
