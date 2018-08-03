@@ -148,7 +148,7 @@ try {
 
 ### Troubleshooting
 
-#### Exception: "Could not gather sufficient random data"**
+#### Exception: "Could not gather sufficient random data"
 
 If an Exception is thrown, then your operating system is not secure.
 
@@ -185,6 +185,8 @@ version 2 and above to be used instead of hard-locking users to version 1.
     ...
 }
 ```
+
+#### Version 9.99.99
 
 **Note**: There is a special version called `9.99.99` which makes this
 library do nothing, but is only installable on PHP 7.

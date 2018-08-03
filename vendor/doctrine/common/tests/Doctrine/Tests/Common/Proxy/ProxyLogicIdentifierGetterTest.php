@@ -1,27 +1,8 @@
 <?php
-/*
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
- * A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
- * OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
- * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * This software consists of voluntary contributions made by many individuals
- * and is licensed under the MIT license. For more information, see
- * <http://www.doctrine-project.org>.
- */
-
 namespace Doctrine\Tests\Common\Proxy;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Proxy\ProxyGenerator;
-use PHPUnit_Framework_TestCase;
 use stdClass;
 
 /**
@@ -31,7 +12,7 @@ use stdClass;
  * @author Marco Pivetta <ocramius@gmail.com>
  * @author Jan Langer <jan.langer@slevomat.cz>
  */
-class ProxyLogicIdentifierGetterTest extends PHPUnit_Framework_TestCase
+class ProxyLogicIdentifierGetterTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider methodsForWhichLazyLoadingShouldBeDisabled
@@ -47,7 +28,7 @@ class ProxyLogicIdentifierGetterTest extends PHPUnit_Framework_TestCase
         $proxyGenerator = new ProxyGenerator(__DIR__ . '/generated', __NAMESPACE__ . 'Proxy');
         $proxyFileName  = $proxyGenerator->getProxyFileName($className);
 
-        if (! class_exists($proxyClassName, false)) {
+        if ( ! class_exists($proxyClassName, false)) {
             $proxyGenerator->generateProxyClass($metadata, $proxyFileName);
 
             /** @noinspection PhpIncludeInspection */
@@ -68,7 +49,7 @@ class ProxyLogicIdentifierGetterTest extends PHPUnit_Framework_TestCase
         $reflection->setAccessible(true);
         $reflection->setValue($proxy, $expectedReturnedValue);
 
-        $this->assertSame($expectedReturnedValue, $proxy->{'get' . $fieldName}());
+        self::assertSame($expectedReturnedValue, $proxy->{'get' . $fieldName}());
     }
 
     /**
@@ -80,7 +61,7 @@ class ProxyLogicIdentifierGetterTest extends PHPUnit_Framework_TestCase
             [new LazyLoadableObjectClassMetadata(), 'protectedIdentifierField', 'foo'],
         ];
 
-        if (! class_exists(\ReflectionType::class, false)) {
+        if ( ! class_exists(\ReflectionType::class, false)) {
             return $methods;
         }
 
