@@ -18,13 +18,19 @@ body.maintenance-page {
 	 text-align:center !important;
 	 color:#363636 !important;
 	}
+img.concentric {
+    vertical-align: middle;
+    max-width: 100%;
+    width: auto !important;
+    height: auto !important;
+}
 </style>
 
 <header role="banner">
 
   {% if site_name or site_slogan %}
     {% if site_name %}
-<img src="/themes/custom/concentric/images/maintenance.jpg" alt="concentric" height="600" width="800">
+<img src="/themes/custom/concentric/images/maintenance.jpg" alt="concentric" class="concentric">
 <h1> 
 <!-- <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a> -->
       </h1>
