@@ -16,13 +16,22 @@
 body.maintenance-page {
 	 background:#000 !important;
 	 text-align:center !important;
-	 color:#363636 !important;
-	}
+	 color:#ccc !important;
+    	 color: #ccc !important;
+    	 font-family: fantasy;
+    	 letter-spacing: 3px;
+}
+a {
+	color:#ccc !important;
+}
 img.concentric {
-    vertical-align: middle;
-    max-width: 100%;
-    width: auto !important;
-    height: auto !important;
+	vertical-align: middle;
+	max-width: 100%;
+ 	width: auto !important;
+ 	height: auto !important;
+}
+.social p a {
+    margin-right:10px;
 }
 </style>
 
@@ -50,8 +59,10 @@ img.concentric {
   {{ page.highlighted }}
 
   {{ page.content }}
-<p style="color:#363636;"><br />Find us on:</p>
-<p style="color:#363636;"><img src="sites/concentric/files/2016-09/Facebook_logo_36x36.svg_.png" alt="facebook icon" height="15" width="15"><a href="https://www.facebook.com/ConcentricBrewing/" style="color:#363636"> Facebook </a><img src="sites/concentric/files/2016-09/twitter-icon-png-36x36.png" alt="twitter icon" height="15" width="15"><a href="https://twitter.com/concentricbrew" style="color:#363636"> Twitter </a><img src="sites/concentric/files/2016-09/instagram-icon.png" alt="instagram icon" height="15" width="15"><a href="https://www.instagram.com/concentricbrewing/" style="color:#363636"> Instagram</a></p>
+<div class="social">
+<p style="color:#ccc;"><br />Find us on:</p>
+<p style="color:#ccc;"><img src="sites/concentric/files/2016-09/Facebook_logo_36x36.svg_.png" alt="facebook icon" height="15" width="15"><a href="https://www.facebook.com/ConcentricBrewing/" style="color:#363636"> Facebook </a><img src="sites/concentric/files/2016-09/twitter-icon-png-36x36.png" alt="twitter icon" height="15" width="15"><a href="https://twitter.com/concentricbrew" style="color:#363636"> Twitter </a><img src="sites/concentric/files/2016-09/instagram-icon.png" alt="instagram icon" height="15" width="15"><a href="https://www.instagram.com/concentricbrewing/" style="color:#363636"> Instagram</a></p>
+</div>
 </main>
 
 {% if page.sidebar_first %}
