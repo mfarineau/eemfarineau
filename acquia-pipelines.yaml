@@ -12,11 +12,11 @@ events:
           type: script
           script:
             - composer install
-post-deploy:
+  post-deploy:
     steps:
       # Deploy the build artifact to an on-demand environment,
       # and sync the specified databases.
       - deploy:
           script:
             - pipelines-deploy
-            - pipelines-sync-dbs db1 db2
+            - pipelines-sync-dbs concentric
