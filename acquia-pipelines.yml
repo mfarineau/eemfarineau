@@ -3,12 +3,16 @@ version: 1.2.0
 cde-databases:
   - concentric
 
+services:
+  - php:
+      version: 7.1
+
 events:
       - build:
           type: script
           script:
             - composer install
-  post-deploy:
+post-deploy:
     steps:
       # Deploy the build artifact to an on-demand environment,
       # and sync the specified databases.
