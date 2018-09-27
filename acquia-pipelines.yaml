@@ -8,8 +8,12 @@ services:
       version: 7.1
 
 events:
-
-  post-deploy:
+  - build:
+    steps:
+      type: script
+        script:
+          - composer install
+  - post-deploy:
     steps:
       # Deploy the build artifact to an on-demand environment,
       # and sync the specified databases.
