@@ -8,10 +8,7 @@ services:
       version: 7.1
 
 events:
-      - build:
-          type: script
-          script:
-            - composer install
+
   post-deploy:
     steps:
       # Deploy the build artifact to an on-demand environment,
