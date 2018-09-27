@@ -18,6 +18,7 @@ events:
       # Deploy the build artifact to an on-demand environment,
       # and sync the specified databases.
       - deploy:
-          script:
-            - pipelines-deploy
-            - pipelines-sync-dbs concentric
+          type: script
+            script:
+              - pipelines-deploy
+              - pipelines-sync-dbs concentric
