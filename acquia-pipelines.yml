@@ -1,10 +1,18 @@
-version: 1.0.0
-services:
-  - mysql
+version: 1.2.0
+
+cde-databases:
+  - concentric
+
 events:
-  build:
-    steps:
       - build:
           type: script
           script:
-            - composer install -vvv
+            - composer install
+  post-deploy:
+    steps:
+      # Deploy the build artifact to an on-demand environment,
+      # and sync the specified databases.
+      - deploy:
+          script:
+            - pipelines-deploy
+            - pipelines-sync-dbs db1 db2
