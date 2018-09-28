@@ -1,6 +1,9 @@
 
 version: 1.0.0
 
+cde-databases:
+  - concentric
+
 events:
   build:
     steps:
@@ -14,3 +17,4 @@ events:
       - deploy:
           script:
             - pipelines-deploy
+            - pipelines-sync-dbs concentric
