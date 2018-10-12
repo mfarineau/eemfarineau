@@ -7,8 +7,7 @@ cde-databases:
 services:
   - php:
       version: 7.1
-  - mysql
-
+      
 events:
   build:
     steps:
@@ -22,4 +21,3 @@ events:
           script:
             - pipelines-deploy
             - pipelines-sync-dbs concentric
-            - drush updb --uri=ode.concentricbrewing.com
