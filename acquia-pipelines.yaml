@@ -22,4 +22,4 @@ events:
           script:
             - pipelines-deploy
             - pipelines-sync-dbs concentric
-            - drush updb
+            - drush updb --uri=ode.concentricbrewing.com
