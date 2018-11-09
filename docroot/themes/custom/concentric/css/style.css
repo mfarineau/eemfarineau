@@ -31,7 +31,7 @@ section#block-views-block-blog-block-1 article h2 a {
     font-size: .75em;
     color: #000;
     text-decoration: underline;
-    border: none;
+    border-bottom: none;
 }
 
 /*tap-list*/
