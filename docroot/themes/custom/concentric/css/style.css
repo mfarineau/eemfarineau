@@ -23,11 +23,11 @@ body {
   margin: 0px 10px 5px 0px;
 }
 
-section#block-views-block-blog-block-1 article h2 {
+section#block-views-block-blog-block-1 article h2.block-title {
     border-bottom: 1px solid #000;
 }
 
-section#block-views-block-blog-block-1 article h2 a {
+section#block-views-block-blog-block-1 article h2 {
     font-size: .75em;
     color: #000;
     text-decoration: underline;
