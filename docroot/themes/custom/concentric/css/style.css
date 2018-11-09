@@ -9,13 +9,14 @@
 /*body*/
 body {
     line-height:1.8;
+    background: #000;
+    /*
     background-size:100%;
-    /*background-image: url("../../../../sites/concentric/files/2018-02/Alesmith-Barrel-Room.jpg");*/
-    background-image: url("../images/chalkboard.jpg");
+    background-image: url("../../../../sites/concentric/files/2018-02/Alesmith-Barrel-Room.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: left top;
-    background-size: cover;
+    background-size: cover;*/
 }
 
 .content img {
