@@ -152,8 +152,10 @@ ul.menu.nav.navbar-nav li a {
   transition-timing-function: ease-out;
 }
 ul.menu.nav.navbar-nav li a:hover, ul.menu.nav.navbar-nav li a:focus, ul.menu.nav.navbar-nav li a:active {
-  -webkit-transform: translateY(8px);
-  transform: translateY(8px);
+  /*-webkit-transform: translateY(8px);
+  transform: translateY(8px);*/
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
 }
 /*end sink*/
 
