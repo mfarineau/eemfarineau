@@ -420,7 +420,7 @@ section#block-languageswitcher ul a.language-link {
       padding-right:0%;
     }
     body {
-      background-image:none !important;
+      /*background-image:none !important;*/
       background-size: cover !important;
     }
     .well {
