@@ -68,7 +68,7 @@
         "drupal/focal_point": "^1.0@beta"
     },
     "require-dev": {
-        "drupal/devel": "^1.0",
+        "drupal/devel": "^2.0",
         "drupal/stage_file_proxy": "^1.0"
     },
     "conflict": {
