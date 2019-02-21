@@ -504,7 +504,7 @@ if ($settings['hash_salt']) {
  * must exist and be writable by Drupal. This directory must be relative to
  * the Drupal installation directory and be accessible over the web.
  */
- $settings['file_public_path'] = 'sites/default/files';
+# $settings['file_public_path'] = 'sites/default/files';
 
 /**
  * Private file path:
@@ -519,7 +519,7 @@ if ($settings['hash_salt']) {
  * See https://www.drupal.org/documentation/modules/file for more information
  * about securing private files.
  */
- $settings['file_private_path'] = 'sites/default/files-private';
+# $settings['file_private_path'] = '';
 
 /**
  * Session write interval:
@@ -718,6 +718,12 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
 #   include __DIR__ . '/settings.local.php';
 # }
 
+if (isset($_ENV['AH_SITE_ENVIRONMENT'])) {
+  $settings['file_private_path'] = '/mnt/files/' . $_ENV['AH_SITE_GROUP'] . '.' . $_ENV['AH_SITE_ENVIRONMENT'] . '/' . $site_path . '/files-private';
+}
+else {
+  $settings['file_private_path'] = '{PATH}';
+}
 
 // On Acquia Cloud, this include file configures Drupal to use the correct
 // database in each site environment (Dev, Stage, or Prod). To use this
