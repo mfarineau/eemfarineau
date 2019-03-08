@@ -20,3 +20,8 @@ ul.menu {
     padding: 0;
     text-align: left;
 }
+.status {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+}
