@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\age_verification\Form\AgeVerificationForm.
- */
-
 namespace Drupal\age_verification\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -81,8 +76,8 @@ class AgeVerificationForm extends FormBase {
       if ($difference <= $accepted_age) {
         // Throw an error if user age is less than the age selected.
         // !variable: Inserted as is, with no sanitization or formatting.
-        $form_state->setErrorByName('dob', t('You need to be !age or over to access the site.', [
-          '!age' => (int) $config->get('age_verification_age_limit'),
+        $form_state->setErrorByName('dob', t('You need to be @age or over to access the site.', [
+          '@age' => (int) $config->get('age_verification_age_limit'),
         ]));
       }
     }

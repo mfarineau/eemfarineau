@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\age_verification\Form\AgeVerificationAdminForm.
- */
-
 namespace Drupal\age_verification\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
@@ -47,12 +42,12 @@ class AgeVerificationAdminForm extends ConfigFormBase {
       '#rows' => 3,
       '#cols' => 20,
       '#default_value' => $config->get('age_verification_urls_to_skip'),
-      '#description' => $this->t('Enter the node relative urls of the pages that the age verification should ignore. In example, user or node/62 or cookie-policy. One per line.'),
+      '#description' => $this->t('Enter the node relative urls of the pages that the age verification should ignore. In example, /user or /node/62 or /cookie-policy. One per line.'),
     ];
 
     $form['age_verification_description'] = [
       '#type' => 'textarea',
-      '#title' => t('Form description'),
+      '#title' => $this->t('Form description'),
       '#rows' => 3,
       '#cols' => 20,
       '#default_value' => $config->get('age_verification_description'),
@@ -61,7 +56,7 @@ class AgeVerificationAdminForm extends ConfigFormBase {
 
     $form['age_verification_user_agents'] = [
       '#type' => 'textarea',
-      '#title' => t('Search User Agents'),
+      '#title' => $this->t('Search User Agents'),
       '#rows' => 3,
       '#cols' => 20,
       '#default_value' => $config->get('age_verification_user_agents'),

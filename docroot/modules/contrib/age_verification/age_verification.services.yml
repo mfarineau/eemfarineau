@@ -1,5 +1,6 @@
 services:
-  age_verification.age_path_processor:
-    class: \Drupal\age_verification\AgePathProcessor
+  age_verification:
+    class: \Drupal\age_verification\EventSubscriber\pathGate
+    arguments: ['@path.matcher', '@current_user']
     tags:
-      - { name: path_processor_inbound, priority: 800, call: addInbound }
+      - { name: 'event_subscriber' }

@@ -1,6 +1,6 @@
 age_verification.settings:
   type: mapping
-  label: 'Age Veryfication Settings'
+  label: 'Age verification settings'
   mapping:
     age_verification_age_limit:
       type: integer
