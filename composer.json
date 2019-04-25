@@ -67,7 +67,8 @@
         "drupal/focal_point": "^1.0@beta",
         "drupal/crop": "^1.5",
         "drupal/paragraphs": "^1.6",
-        "drupal/entity_browser": "^2.1"
+        "drupal/entity_browser": "^2.1",
+        "drupal/migrate_tools": "^4.1"
     },
     "require-dev": {
         "drupal/devel": "^2.0",
