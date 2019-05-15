@@ -68,7 +68,8 @@
         "drupal/crop": "^1.5",
         "drupal/paragraphs": "^1.6",
         "drupal/entity_browser": "^2.1",
-        "drupal/migrate_tools": "^4.1"
+        "drupal/migrate_tools": "^4.1",
+        "drupal/migrate_plus": "^4.2"
     },
     "require-dev": {
         "drupal/devel": "^2.0",
