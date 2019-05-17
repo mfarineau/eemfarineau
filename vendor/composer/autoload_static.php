@@ -87,6 +87,10 @@ class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
         ),
+        'E' => 
+        array (
+            'Egulias\\EmailValidator\\' => 23,
+        ),
         'D' => 
         array (
             'Drupal\\Driver\\' => 14,
@@ -259,6 +263,10 @@ class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'Egulias\\EmailValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+        ),
         'Drupal\\Driver\\' => 
         array (
             0 => __DIR__ . '/../..' . '/docroot/drivers/lib/Drupal/Driver',
@@ -335,12 +343,15 @@ class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
                 0 => __DIR__ . '/..' . '/solarium/solarium/library',
             ),
         ),
+        'P' => 
+        array (
+            'PEAR' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/pear_exception',
+            ),
+        ),
         'E' => 
         array (
-            'Egulias\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/egulias/email-validator/src',
-            ),
             'EasyRdf_' => 
             array (
                 0 => __DIR__ . '/..' . '/easyrdf/easyrdf/lib',
@@ -353,6 +364,24 @@ class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
             ),
         ),
+        'C' => 
+        array (
+            'Console' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/console_getopt',
+            ),
+        ),
+        'A' => 
+        array (
+            'Archive_Tar' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/archive_tar',
+            ),
+        ),
+    );
+
+    public static $fallbackDirsPsr0 = array (
+        0 => __DIR__ . '/..' . '/pear/pear-core-minimal/src',
     );
 
     public static $classMap = array (
@@ -378,6 +407,7 @@ class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
             $loader->prefixLengthsPsr4 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$classMap;
 
         }, null, ClassLoader::class);
