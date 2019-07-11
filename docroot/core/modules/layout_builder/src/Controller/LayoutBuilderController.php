@@ -9,7 +9,6 @@ use Drupal\layout_builder\SectionStorageInterface;
  * Defines a controller to provide the Layout Builder admin UI.
  *
  * @internal
- *   Controller classes are internal.
  */
 class LayoutBuilderController {
 

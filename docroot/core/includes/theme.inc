@@ -8,7 +8,6 @@
  * customized by user themes.
  */
 
-use Drupal\Core\Url;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\Html;
@@ -1376,7 +1375,7 @@ function template_preprocess_page(&$variables) {
   }
 
   $variables['base_path'] = base_path();
-  $variables['front_page'] = Url::fromRoute('<front>')->toString();
+  $variables['front_page'] = \Drupal::url('<front>');
   $variables['language'] = $language_interface;
 
   // An exception might be thrown.

@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\rdf\Functional;
 
-use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Tests\image\Functional\ImageFieldTestBase;
 use Drupal\node\Entity\Node;
@@ -94,7 +93,7 @@ class ImageFieldAttributesTest extends ImageFieldTestBase {
     // Parse the teaser.
     $parser = new \EasyRdf_Parser_Rdfa();
     $graph = new \EasyRdf_Graph();
-    $base_uri = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+    $base_uri = \Drupal::url('<front>', [], ['absolute' => TRUE]);
     $parser->parse($graph, $html, 'rdfa', $base_uri);
 
     // Construct the node and image URIs for testing.

@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Route;
  * Loads the section storage from the layout tempstore.
  *
  * @internal
- *   Tagged services are internal.
  */
 class LayoutTempstoreParamConverter implements ParamConverterInterface {
 

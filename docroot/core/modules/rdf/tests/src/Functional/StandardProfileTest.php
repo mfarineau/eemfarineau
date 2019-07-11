@@ -109,7 +109,7 @@ class StandardProfileTest extends BrowserTestBase {
     \Drupal::service('theme_handler')->install(['classy']);
     $this->config('system.theme')->set('default', 'classy')->save();
 
-    $this->baseUri = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+    $this->baseUri = \Drupal::url('<front>', [], ['absolute' => TRUE]);
 
     // Create two test users.
     $this->adminUser = $this->drupalCreateUser([

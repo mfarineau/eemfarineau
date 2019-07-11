@@ -14,7 +14,6 @@ use Drupal\layout_builder\SectionStorage\SectionStorageTrait;
  * Defines a item list class for layout section fields.
  *
  * @internal
- *   Plugin classes are internal.
  *
  * @see \Drupal\layout_builder\Plugin\Field\FieldType\LayoutSectionItem
  */
@@ -78,9 +77,7 @@ class LayoutSectionItemList extends FieldItemList implements SectionListInterfac
   }
 
   /**
-   * Overrides \Drupal\Core\Field\FieldItemListInterface::defaultAccess().
-   *
-   * @ingroup layout_builder_access
+   * {@inheritdoc}
    */
   public function defaultAccess($operation = 'view', AccountInterface $account = NULL) {
     // @todo Allow access in https://www.drupal.org/node/2942975.

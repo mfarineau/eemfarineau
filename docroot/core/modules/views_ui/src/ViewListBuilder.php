@@ -235,6 +235,8 @@ class ViewListBuilder extends ConfigEntityListBuilder {
         $list[$status]['table']['#rows'][$entity->id()] = $this->buildRow($entity);
       }
     }
+    // @todo Use a placeholder for the entity label if this is abstracted to
+    // other entity types.
     $list['enabled']['table']['#empty'] = $this->t('There are no enabled views.');
     $list['disabled']['table']['#empty'] = $this->t('There are no disabled views.');
 

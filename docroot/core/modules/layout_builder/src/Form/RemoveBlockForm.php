@@ -9,7 +9,6 @@ use Drupal\layout_builder\SectionStorageInterface;
  * Provides a form to confirm the removal of a block.
  *
  * @internal
- *   Form classes are internal.
  */
 class RemoveBlockForm extends LayoutRebuildConfirmFormBase {
 

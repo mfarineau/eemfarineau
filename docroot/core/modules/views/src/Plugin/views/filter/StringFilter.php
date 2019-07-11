@@ -33,7 +33,7 @@ class StringFilter extends FilterPluginBase {
   protected $connection;
 
   /**
-   * Constructs a new StringFilter object.
+   * Constructs a new EntityReference object.
    *
    * @param array $configuration
    *   A configuration array containing information about the plugin instance.

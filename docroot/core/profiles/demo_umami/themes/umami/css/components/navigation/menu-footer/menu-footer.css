@@ -13,23 +13,23 @@
 }
 
 .menu-footer__item {
-  margin-bottom: 0.5em;
   list-style: none;
+  margin-bottom: 0.5em;
 }
 
 .menu-footer .menu-footer__link {
-  text-decoration: none;
-  color: #fff;
   background-color: inherit;
+  color: #fff;
   font-weight: 700;
+  text-decoration: none;
 }
 
 .menu-footer .menu-footer__link:active,
 .menu-footer .menu-footer__link:focus,
 .menu-footer .menu-footer__link:hover {
-  text-decoration: underline;
-  outline-color: #fff;
   background-color: #000;
+  outline-color: #fff;
+  text-decoration: underline;
 }
 
 @media screen and (min-width: 60rem) {

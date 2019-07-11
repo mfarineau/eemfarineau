@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\rdf\Functional;
 
-use Drupal\Core\Url;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Tests\taxonomy\Functional\TaxonomyTestBase;
 
@@ -104,7 +103,7 @@ class EntityReferenceFieldAttributesTest extends TaxonomyTestBase {
     // Parse the teaser.
     $parser = new \EasyRdf_Parser_Rdfa();
     $graph = new \EasyRdf_Graph();
-    $base_uri = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+    $base_uri = \Drupal::url('<front>', [], ['absolute' => TRUE]);
     $parser->parse($graph, $html, 'rdfa', $base_uri);
 
     // Node relations to taxonomy terms.

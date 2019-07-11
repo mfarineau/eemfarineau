@@ -7,7 +7,6 @@
  * This file handles tokens for the global 'site' and 'date' tokens.
  */
 
-use Drupal\Core\Url;
 use Drupal\Core\Datetime\Entity\DateFormat;
 use Drupal\Core\Render\BubbleableMetadata;
 
@@ -133,21 +132,21 @@ function system_tokens($type, $tokens, array $data, array $options, BubbleableMe
 
         case 'url':
           /** @var \Drupal\Core\GeneratedUrl $result */
-          $result = Url::fromRoute('<front>', [], $url_options)->toString(TRUE);
+          $result = \Drupal::url('<front>', [], $url_options, TRUE);
           $bubbleable_metadata->addCacheableDependency($result);
           $replacements[$original] = $result->getGeneratedUrl();
           break;
 
         case 'url-brief':
           /** @var \Drupal\Core\GeneratedUrl $result */
-          $result = Url::fromRoute('<front>', [], $url_options)->toString(TRUE);
+          $result = \Drupal::url('<front>', [], $url_options, TRUE);
           $bubbleable_metadata->addCacheableDependency($result);
           $replacements[$original] = preg_replace(['!^https?://!', '!/$!'], '', $result->getGeneratedUrl());
           break;
 
         case 'login-url':
           /** @var \Drupal\Core\GeneratedUrl $result */
-          $result = Url::fromRoute('user.page', [], $url_options)->toString(TRUE);
+          $result = \Drupal::url('user.page', [], $url_options, TRUE);
           $bubbleable_metadata->addCacheableDependency($result);
           $replacements[$original] = $result->getGeneratedUrl();
           break;

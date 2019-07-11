@@ -188,10 +188,11 @@ class RowRenderCacheTest extends ViewsKernelTestBase {
 
       if ($check_cache) {
         $keys = $cache_plugin->getRowCacheKeys($view->result[$index]);
+        $user_context = !$account->hasPermission('edit any test content') ? 'user' : 'user.permissions';
         $cache = [
           '#cache' => [
             'keys' => $keys,
-            'contexts' => ['languages:language_interface', 'theme', 'user.permissions'],
+            'contexts' => ['languages:language_interface', 'theme', $user_context],
           ],
         ];
         $element = $render_cache->get($cache);

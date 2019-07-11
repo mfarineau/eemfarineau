@@ -5,7 +5,6 @@ namespace Drupal\Tests\system\Functional\Update;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\Tests\RequirementsPageTrait;
 
 /**
  * Tests that update hooks are properly run.
@@ -13,8 +12,6 @@ use Drupal\Tests\RequirementsPageTrait;
  * @group Update
  */
 class UpdateSchemaTest extends BrowserTestBase {
-
-  use RequirementsPageTrait;
 
   /**
    * {@inheritdoc}
@@ -59,7 +56,6 @@ class UpdateSchemaTest extends BrowserTestBase {
 
     $this->drupalLogin($this->user);
     $this->drupalGet($this->updateUrl, ['external' => TRUE]);
-    $this->updateRequirementsProblem();
     $this->clickLink(t('Continue'));
     $this->assertRaw('Schema version 8001.');
     // Run the update hooks.

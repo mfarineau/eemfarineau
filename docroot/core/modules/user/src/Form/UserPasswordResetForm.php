@@ -10,8 +10,6 @@ use Drupal\Core\Url;
 /**
  * Form controller for the user password forms.
  *
- * Users followed the link in the email, now they can enter a new password.
- *
  * @internal
  */
 class UserPasswordResetForm extends FormBase {

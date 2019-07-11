@@ -10,7 +10,6 @@ use Drupal\Tests\BrowserTestBase;
 /**
  * Test various aspects of testing through the UI form.
  *
- * @group #slow
  * @group simpletest
  */
 class SimpletestUiTest extends BrowserTestBase {

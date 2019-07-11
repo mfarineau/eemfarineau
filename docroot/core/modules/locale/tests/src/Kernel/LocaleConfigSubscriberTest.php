@@ -416,7 +416,8 @@ class LocaleConfigSubscriberTest extends KernelTestBase {
    */
   protected function assertActiveConfig($config_name, $key, $value, $langcode) {
     $config = $this->configFactory->getEditable($config_name);
-    return $this->assertEqual($config->get('langcode'), $langcode) &&
+    return
+      $this->assertEqual($config->get('langcode'), $langcode) &&
       $this->assertIdentical($config->get($key), $value);
   }
 

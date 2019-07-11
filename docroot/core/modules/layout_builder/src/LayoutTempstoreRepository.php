@@ -6,6 +6,8 @@ use Drupal\Core\TempStore\SharedTempStoreFactory;
 
 /**
  * Provides a mechanism for loading layouts from tempstore.
+ *
+ * @internal
  */
 class LayoutTempstoreRepository implements LayoutTempstoreRepositoryInterface {
 
