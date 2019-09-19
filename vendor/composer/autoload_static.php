@@ -4,11 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
+class ComposerStaticInit8e09e822b3fd6938d47b4dc362946cc9
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
@@ -402,11 +401,11 @@ class ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$prefixesPsr0;
-            $loader->fallbackDirsPsr0 = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$fallbackDirsPsr0;
-            $loader->classMap = ComposerStaticInit1f8151639af01ab3c1c7e7b09ddec416::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8e09e822b3fd6938d47b4dc362946cc9::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8e09e822b3fd6938d47b4dc362946cc9::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8e09e822b3fd6938d47b4dc362946cc9::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit8e09e822b3fd6938d47b4dc362946cc9::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInit8e09e822b3fd6938d47b4dc362946cc9::$classMap;
 
         }, null, ClassLoader::class);
     }
