@@ -100,12 +100,12 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/cohesion_dev/dx8-module.git",
-                "reference": "d4dfbf43c13d1b56facbcb8a0f44fb2e003ddbee"
+                "reference": "ef39ffd1071437a7755c1afed3be354ac3d60fd9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/cohesion_dev/dx8-module/get/d4dfbf43c13d1b56facbcb8a0f44fb2e003ddbee.zip",
-                "reference": "d4dfbf43c13d1b56facbcb8a0f44fb2e003ddbee",
+                "url": "https://bitbucket.org/cohesion_dev/dx8-module/get/ef39ffd1071437a7755c1afed3be354ac3d60fd9.zip",
+                "reference": "ef39ffd1071437a7755c1afed3be354ac3d60fd9",
                 "shasum": ""
             },
             "require": {
@@ -156,12 +156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/cohesion_dev/dx8-theme.git",
-                "reference": "ea8ca8b29ce7dff63886b08f9c2484f59a579a1d"
+                "reference": "2ad72d630591e22448725ba89b1c8eba25224939"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/cohesion_dev/dx8-theme/get/ea8ca8b29ce7dff63886b08f9c2484f59a579a1d.zip",
-                "reference": "ea8ca8b29ce7dff63886b08f9c2484f59a579a1d",
+                "url": "https://bitbucket.org/cohesion_dev/dx8-theme/get/2ad72d630591e22448725ba89b1c8eba25224939.zip",
+                "reference": "2ad72d630591e22448725ba89b1c8eba25224939",
                 "shasum": ""
             },
             "type": "drupal-theme",
@@ -402,16 +402,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.7.0",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb"
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
-                "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
                 "shasum": ""
             },
             "require": {
@@ -420,7 +420,7 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^7.5@dev"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "extra": {
@@ -466,7 +466,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2019-08-08T18:11:40+00:00"
+            "time": "2019-10-01T18:55:10+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -1616,16 +1616,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "8.7.7",
+            "version": "8.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "32e1d7a67bbc28f07dc43d9ff692c0e90a4aeb92"
+                "reference": "476f491b85306c09101106d9b66a5dbe73c21bf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/32e1d7a67bbc28f07dc43d9ff692c0e90a4aeb92",
-                "reference": "32e1d7a67bbc28f07dc43d9ff692c0e90a4aeb92",
+                "url": "https://api.github.com/repos/drupal/core/zipball/476f491b85306c09101106d9b66a5dbe73c21bf0",
+                "reference": "476f491b85306c09101106d9b66a5dbe73c21bf0",
                 "shasum": ""
             },
             "require": {
@@ -1663,7 +1663,7 @@
                 "symfony/http-kernel": "~3.4.14",
                 "symfony/polyfill-iconv": "^1.0",
                 "symfony/process": "~3.4.0",
-                "symfony/psr-http-message-bridge": "^1.0",
+                "symfony/psr-http-message-bridge": "^1.1.2",
                 "symfony/routing": "~3.4.0",
                 "symfony/serializer": "~3.4.0",
                 "symfony/translation": "~3.4.0",
@@ -1857,7 +1857,7 @@
                 "GPL-2.0-or-later"
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
-            "time": "2019-09-04T10:26:35+00:00"
+            "time": "2019-10-02T18:41:30+00:00"
         },
         {
             "name": "drupal/crop",
@@ -2422,17 +2422,17 @@
         },
         {
             "name": "drupal/focal_point",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/focal_point.git",
-                "reference": "8.x-1.1"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/focal_point-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "5c48b6ebc0aeebec89af8b41a9ab2ef02a2950ed"
+                "url": "https://ftp.drupal.org/files/projects/focal_point-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "b274a5f4484ce99dece492dc7ae7149b34982244"
             },
             "require": {
                 "drupal/core": "*",
@@ -2447,8 +2447,8 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1568206088",
+                    "version": "8.x-1.2",
+                    "datestamp": "1569333485",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3066,17 +3066,17 @@
         },
         {
             "name": "drupal/purge",
-            "version": "3.0.0-beta8",
+            "version": "3.0.0-beta9",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/purge.git",
-                "reference": "8.x-3.0-beta8"
+                "reference": "8.x-3.0-beta9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/purge-8.x-3.0-beta8.zip",
-                "reference": "8.x-3.0-beta8",
-                "shasum": "5b6a53d6adcfa0d4e081edf2563d366fc7205bc4"
+                "url": "https://ftp.drupal.org/files/projects/purge-8.x-3.0-beta9.zip",
+                "reference": "8.x-3.0-beta9",
+                "shasum": "d7d5229806582f7553f3b46b56218a9e41e9e6c4"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -3087,8 +3087,8 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0-beta8",
-                    "datestamp": "1502719311",
+                    "version": "8.x-3.0-beta9",
+                    "datestamp": "1570108084",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -3121,10 +3121,11 @@
         },
         {
             "name": "drupal/purge_drush",
-            "version": "3.0.0-beta8",
+            "version": "3.0.0-beta9",
             "require": {
                 "drupal/core": "~8.0",
-                "drupal/purge": "self.version"
+                "drupal/purge": "self.version",
+                "php": ">=5.6.0"
             },
             "type": "metapackage",
             "extra": {
@@ -3132,22 +3133,27 @@
                     "dev-3.x": "3.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-3.0-beta8",
-                    "datestamp": "1502719311",
+                    "version": "8.x-3.0-beta9",
+                    "datestamp": "1570108084",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9"
                     }
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0-only"
             ],
             "authors": [
                 {
-                    "name": "SqyD",
-                    "homepage": "https://www.drupal.org/user/106525"
+                    "name": "Niels van Mourik",
+                    "homepage": "http://www.nielsvm.org"
                 },
                 {
                     "name": "djbobbydrake",
@@ -6242,17 +6248,17 @@
         },
         {
             "name": "drupal/stage_file_proxy",
-            "version": "1.0.0-beta1",
+            "version": "1.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/stage_file_proxy.git",
-                "reference": "8.x-1.0-beta1"
+                "reference": "8.x-1.0-rc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-8.x-1.0-beta1.zip",
-                "reference": "8.x-1.0-beta1",
-                "shasum": "6609a2166509fd7cc2e593ff2efd7c44daeb0e5b"
+                "url": "https://ftp.drupal.org/files/projects/stage_file_proxy-8.x-1.0-rc1.zip",
+                "reference": "8.x-1.0-rc1",
+                "shasum": "609dc94f9e6d5e4e0fe4c2f71f3134625a071860"
             },
             "require": {
                 "drupal/core": "~8.0"
@@ -6263,11 +6269,11 @@
                     "dev-1.x": "1.x-dev"
                 },
                 "drupal": {
-                    "version": "8.x-1.0-beta1",
-                    "datestamp": "1555515785",
+                    "version": "8.x-1.0-rc1",
+                    "datestamp": "1569931178",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -6281,7 +6287,7 @@
                     "homepage": "https://www.drupal.org/user/107229"
                 },
                 {
-                    "name": "axel.rutz",
+                    "name": "geek.merlin aka axel.rutz",
                     "homepage": "https://www.drupal.org/user/229048"
                 },
                 {
