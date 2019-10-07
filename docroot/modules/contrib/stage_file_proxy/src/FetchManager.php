@@ -31,7 +31,7 @@ class FetchManager implements FetchManagerInterface {
   /**
    * The logger.
    *
-   * @var \Psr\Log\LoggerInterface.
+   * @var \Psr\Log\LoggerInterface
    */
   protected $logger;
 
