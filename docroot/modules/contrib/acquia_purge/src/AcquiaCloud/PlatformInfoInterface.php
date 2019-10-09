@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\acquia_purge;
+namespace Drupal\acquia_purge\AcquiaCloud;
 
 /**
- * Describes technical information accessors for the Acquia Cloud environment.
+ * Describes an information object interfacing with the Acquia platform.
  */
-interface HostingInfoInterface {
+interface PlatformInfoInterface {
 
   /**
    * Get the load balancer IP adresses installed in front of this site.
@@ -22,6 +22,21 @@ interface HostingInfoInterface {
    *   Token string, e.g. 'oursecret' or 'sitedev'.
    */
   public function getBalancerToken();
+
+  /**
+   * Get the Acquia Platform CDN configuration.
+   *
+   * @throws \RuntimeException
+   *   Thrown when either no configuration is available.
+   *
+   * @return array[]
+   *   Associated array with configuration parameters for Acquia Platform CDN,
+   *   which has at minimum the following two keys:
+   *    - config: Configuration source string, either 'settings' or 'state'.
+   *    - vendor: The underlying CDN backend used by the platform.
+   *    - ... other keys can be present depending on the used backend.
+   */
+  public function getPlatformCdnConfiguration();
 
   /**
    * Get the Acquia site environment.
@@ -64,7 +79,7 @@ interface HostingInfoInterface {
   public function getSitePath();
 
   /**
-   * Determine whether the current hosting environment is Acquia Cloud or not.
+   * Determine whether the current site is running on Acquia Cloud.
    *
    * @return true|false
    *   Boolean expression where 'true' indicates Acquia Cloud or 'false'.

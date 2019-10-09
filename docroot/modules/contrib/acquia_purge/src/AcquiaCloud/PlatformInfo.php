@@ -1,17 +1,16 @@
 <?php
 
-namespace Drupal\acquia_purge;
+namespace Drupal\acquia_purge\AcquiaCloud;
 
-use Symfony\Component\HttpFoundation\RequestStack;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Site\Settings;
-use Drupal\acquia_purge\HostingInfoInterface;
-use Drupal\acquia_purge\Hash;
+use Drupal\Core\State\StateInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Provides technical information accessors for the Acquia Cloud environment.
+ * Provides an information object interfacing with the Acquia platform.
  */
-class HostingInfo implements HostingInfoInterface {
+class PlatformInfo implements PlatformInfoInterface {
 
   /**
    * Name of the PHP function that's available when on Acquia Cloud.
@@ -28,17 +27,30 @@ class HostingInfo implements HostingInfoInterface {
   protected $balancerAddresses = [];
 
   /**
-   * The token used to authenticate cache invalidations with
+   * The token used to authenticate cache invalidations with.
    *
    * @var string
    */
   protected $balancerToken = '';
 
   /**
-  * Whether the current hosting environment is Acquia Cloud or not.
-  *
-  * @var bool
-  */
+   * Acquia Platform CDN configuration settings.
+   *
+   * Associated array with configuration parameters for Acquia Platform CDN,
+   * which has at minimum the following two keys:
+   *  - config: Configuration source string, either 'settings' or 'cmi'.
+   *  - vendor: The underlying CDN backend used by the platform.
+   *  - ... other keys can be present depending on the used backend.
+   *
+   * @var string[]
+   */
+  protected $platformCdn = [];
+
+  /**
+   * Whether the current site is running on Acquia Cloud or not.
+   *
+   * @var bool
+   */
   protected $isThisAcquiaCloud = FALSE;
 
   /**
@@ -77,14 +89,16 @@ class HostingInfo implements HostingInfoInterface {
   protected $sitePath = '';
 
   /**
-   * Constructs a HostingInfo object.
+   * Constructs a PlatformInfo object.
    *
    * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack.
    * @param \Drupal\Core\Site\Settings $settings
    *   Drupal site settings object.
+   * @param \Drupal\Core\State\StateInterface $state
+   *   The state key value store.
    */
-  public function __construct(RequestStack $request_stack, Settings $settings) {
+  public function __construct(RequestStack $request_stack, Settings $settings, StateInterface $state) {
 
     // Generate the Drupal sitepath by querying the SitePath from this request.
     $this->sitePath = DrupalKernel::findSitePath($request_stack->getCurrentRequest());
@@ -99,9 +113,9 @@ class HostingInfo implements HostingInfoInterface {
     }
 
     // Call the AH_INFO_FUNCTION and take the keys 'sitename' and 'sitegroup'.
-    $function = SELF::AH_INFO_FUNCTION;
+    $function = self::AH_INFO_FUNCTION;
     if (function_exists($function)) {
-      if (is_array($info = $function ())) {
+      if (is_array($info = $function())) {
         if (isset($info['environment'])) {
           if (is_string($info['environment']) && $info['environment']) {
             $this->siteEnvironment = $info['environment'];
@@ -119,7 +133,7 @@ class HostingInfo implements HostingInfoInterface {
         }
       }
     }
-    else if(!empty($GLOBALS['gardens_site_settings'])) {
+    elseif (!empty($GLOBALS['gardens_site_settings'])) {
       $this->siteEnvironment = $GLOBALS['gardens_site_settings']['env'];
       $this->siteGroup = $GLOBALS['gardens_site_settings']['site'];
       $this->siteName = $this->siteGroup . '.' . $this->siteEnvironment;
@@ -131,6 +145,26 @@ class HostingInfo implements HostingInfoInterface {
       if ($token) {
         $this->balancerToken = $token;
       }
+    }
+
+    // Retrieval of the Acquia Platform CDN configuration is implemented via
+    // a *temporary* hybrid implementation. For as long as the Platform CDN
+    // product is in beta, the configuration object can come via state, after
+    // that it will come through platform settings (which takes priority).
+    $cdn_asc = $settings->get('acquia_service_credentials');
+    $cdn_state = (array) $state->get('acquia_purge.platform_cdn', []);
+    if (isset($cdn_asc['platform_cdn']['vendor'])
+        && isset($cdn_asc['platform_cdn']['configuration'])
+        && strlen($cdn_asc['platform_cdn']['vendor'])
+        && is_array($cdn_asc['platform_cdn']['configuration'])
+        && count($cdn_asc['platform_cdn']['configuration'])) {
+      $this->platformCdn['config'] = 'settings';
+      $this->platformCdn['vendor'] = (string) $cdn_asc['platform_cdn']['vendor'];
+      $this->platformCdn = array_merge($this->platformCdn, $cdn_asc['platform_cdn']['configuration']);
+    }
+    elseif (isset($cdn_state['vendor']) && strlen($cdn_state['vendor']) && (count($cdn_state) > 2)) {
+      $this->platformCdn = $cdn_state;
+      $this->platformCdn['config'] = 'state';
     }
 
     // Use the sitename and site path directory as site identifier.
@@ -164,15 +198,31 @@ class HostingInfo implements HostingInfoInterface {
   }
 
   /**
-  * {@inheritdoc}
-  */
+   * {@inheritdoc}
+   */
+  public function getPlatformCdnConfiguration() {
+    if (empty($this->platformCdn)) {
+      throw new \RuntimeException("No Platform CDN configuration available.");
+    }
+    if (!(isset($this->platformCdn['vendor']) && strlen($this->platformCdn['vendor']))) {
+      throw new \RuntimeException("Platform CDN vendor not specified.");
+    }
+    if (!(isset($this->platformCdn['config']) && strlen($this->platformCdn['config']))) {
+      throw new \RuntimeException("Platform CDN config has no 'config' key.");
+    }
+    return $this->platformCdn;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getSiteEnvironment() {
     return $this->siteEnvironment;
   }
 
   /**
-  * {@inheritdoc}
-  */
+   * {@inheritdoc}
+   */
   public function getSiteGroup() {
     return $this->siteGroup;
   }
