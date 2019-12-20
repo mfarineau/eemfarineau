@@ -80,8 +80,7 @@
         "webflo/drupal-core-strict": "*",
         "cohesion/dx8": "5.7.7",
         "cohesion/dx8-theme": "5.7.7",
-        "drush/drush": "^9.7",
-        "drupal/entity_update": "^1.2@RC"
+        "drush/drush": "^9.7"
     },
     "require-dev": {
         "drupal/devel": "^2.0",
