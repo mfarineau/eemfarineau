@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4be0dc3a9e4f3fad70c349ddc4f1ba04",
+    "content-hash": "0911866f84c30a45c76c6e7d301b0e48",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -105,16 +105,16 @@
         },
         {
             "name": "cohesion/dx8",
-            "version": "5.7.7",
+            "version": "5.7.8",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/cohesion_dev/dx8-module.git",
-                "reference": "938386e1195a7c991daa7c3dec1773efe246b43b"
+                "reference": "d0e7933fbd40ff8780a9ee9c59be2ab2e163abec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/cohesion_dev/dx8-module/get/938386e1195a7c991daa7c3dec1773efe246b43b.zip",
-                "reference": "938386e1195a7c991daa7c3dec1773efe246b43b",
+                "url": "https://bitbucket.org/cohesion_dev/dx8-module/get/d0e7933fbd40ff8780a9ee9c59be2ab2e163abec.zip",
+                "reference": "d0e7933fbd40ff8780a9ee9c59be2ab2e163abec",
                 "shasum": ""
             },
             "require": {
@@ -152,31 +152,31 @@
             "description": "DX8 module",
             "homepage": "https://bitbucket.org/cohesion_dev/dx8-module",
             "support": {
-                "source": "https://bitbucket.org/cohesion_dev/dx8-module/src/938386e1195a7c991daa7c3dec1773efe246b43b/?at=5.7.7"
+                "source": "https://bitbucket.org/cohesion_dev/dx8-module/src/d0e7933fbd40ff8780a9ee9c59be2ab2e163abec/?at=5.7.8"
             },
-            "time": "2019-12-11T14:35:17+00:00"
+            "time": "2019-12-16T15:23:00+00:00"
         },
         {
             "name": "cohesion/dx8-theme",
-            "version": "5.7.7",
+            "version": "5.7.8",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/cohesion_dev/dx8-theme.git",
-                "reference": "2711fa4d16a67b0d95faf25b9181740bc18478c6"
+                "reference": "172824f45aba1c924aef8e4bd43bbee6a8534799"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/cohesion_dev/dx8-theme/get/2711fa4d16a67b0d95faf25b9181740bc18478c6.zip",
-                "reference": "2711fa4d16a67b0d95faf25b9181740bc18478c6",
+                "url": "https://bitbucket.org/cohesion_dev/dx8-theme/get/172824f45aba1c924aef8e4bd43bbee6a8534799.zip",
+                "reference": "172824f45aba1c924aef8e4bd43bbee6a8534799",
                 "shasum": ""
             },
             "type": "drupal-theme",
             "description": "DX8 base theme",
             "homepage": "https://bitbucket.org/cohesion_dev/dx8-theme",
             "support": {
-                "source": "https://bitbucket.org/cohesion_dev/dx8-theme/src/2711fa4d16a67b0d95faf25b9181740bc18478c6/?at=5.7.7"
+                "source": "https://bitbucket.org/cohesion_dev/dx8-theme/src/172824f45aba1c924aef8e4bd43bbee6a8534799/?at=5.7.8"
             },
-            "time": "2019-12-11T14:35:30+00:00"
+            "time": "2019-12-16T15:23:11+00:00"
         },
         {
             "name": "composer/installers",

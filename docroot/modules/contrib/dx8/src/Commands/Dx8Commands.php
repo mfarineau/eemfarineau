@@ -39,6 +39,5 @@ class Dx8Commands extends DrushCommands {
   public function rebuild() {
     $this->say(t('Rebuilding all entities.'));
     DX8CommandHelpers::rebuild();
-    $this->yell(t('Finished rebuilding.'));
   }
 }

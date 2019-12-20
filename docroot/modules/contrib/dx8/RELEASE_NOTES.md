@@ -1,6 +1,13 @@
 
 # Release notes
 
+## 5.7.8
+
+### PHP out of memory on drush dx8:rebuild
+
+Improve a memory usage on drush dx8:rebuild to allow less memory to be used to 
+run the process
+
 ## 5.7.7 
 
 ### Icon picker not rendering 

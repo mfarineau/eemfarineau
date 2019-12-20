@@ -120,7 +120,7 @@ function cohesion_website_settings_batch_import_finished($success, $results, $op
  * @throws \Drupal\Core\Entity\EntityStorageException
  */
 function _resave_entity($entity, $realsave = FALSE, &$context = []) {
-  $context['message'] = t('Building ' . $entity->getEntityTypeId());
+  $context['message'] = t('Building ' . $entity->getEntityTypeId() . ' - ' . $entity->label() . ' - ' . $entity->id());
   // Ignore base styles that have not been created.
   if (isset($context['results']['error']) || ($entity->getEntityTypeId() === 'cohesion_base_styles' && !$entity->get('modified'))) {
     return;
@@ -199,6 +199,7 @@ function _resave_cohesion_layout_entity($ids, &$context) {
         // Rebuild the Usage.
         if ($parent_entity = $entity->getParentEntity()) {
           \Drupal::service('cohesion_usage.update_manager')->buildRequires($entity);
+          $context['message'] = t('Building ' . $parent_entity->getEntityTypeId() . ' - ' . $parent_entity->label() . ' - ' . $parent_entity->id());
         }
 
         // Re-save the entity.
