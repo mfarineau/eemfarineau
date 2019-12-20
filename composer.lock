@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6753e49420c143df047e2382f69043b3",
+    "content-hash": "b4c3765cb5ef208a2fbb1240e04cf502",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3158,6 +3158,60 @@
             "homepage": "https://www.drupal.org/project/entity_reference_revisions",
             "support": {
                 "source": "https://git.drupalcode.org/project/entity_reference_revisions"
+            }
+        },
+        {
+            "name": "drupal/entity_update",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/entity_update.git",
+                "reference": "8.x-1.2-rc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/entity_update-8.x-1.2-rc7.zip",
+                "reference": "8.x-1.2-rc7",
+                "shasum": "1da5f2de7c6adcda9eac8140b5406e588910d50b"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev",
+                    "dev-master": "1.2.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.2-rc7",
+                    "datestamp": "1515696784",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "Nuwantha",
+                    "homepage": "https://www.drupal8.ovh",
+                    "role": "Admin"
+                },
+                {
+                    "name": "iwsp",
+                    "homepage": "https://www.drupal.org/user/3514484"
+                }
+            ],
+            "description": "Update Drupal 8 Entity schema.",
+            "homepage": "https://www.drupal.org/project/entity_update",
+            "support": {
+                "source": "http://git.drupal.org/project/entity_update.git",
+                "issues": "https://www.drupal.org/project/issues/entity_update"
             }
         },
         {
@@ -7948,7 +8002,8 @@
         "drupal/flexslider": 10,
         "symfony/polyfill-apcu": 20,
         "drupal/purge": 10,
-        "drupal/focal_point": 10
+        "drupal/focal_point": 10,
+        "drupal/entity_update": 5
     },
     "prefer-stable": true,
     "prefer-lowest": false,
