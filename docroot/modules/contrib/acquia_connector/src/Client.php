@@ -86,7 +86,7 @@ class Client {
    */
   public function getSubscriptionCredentials($email, $password) {
     $body = ['email' => $email];
-    $authenticator = $this->buildAuthenticator($email, ['rpc_version' => ACQUIA_SPI_DATA_VERSION]);
+    $authenticator = $this->buildAuthenticator($email, ['rpc_version' => ACQUIA_CONNECTOR_ACQUIA_SPI_DATA_VERSION]);
     $data = [
       'body' => $body,
       'authenticator' => $authenticator,
@@ -101,9 +101,9 @@ class Client {
       $body = [
         'email' => $email,
         'pass' => $pass,
-        'rpc_version' => ACQUIA_SPI_DATA_VERSION,
+        'rpc_version' => ACQUIA_CONNECTOR_ACQUIA_SPI_DATA_VERSION,
       ];
-      $authenticator = $this->buildAuthenticator($pass, ['rpc_version' => ACQUIA_SPI_DATA_VERSION]);
+      $authenticator = $this->buildAuthenticator($pass, ['rpc_version' => ACQUIA_CONNECTOR_ACQUIA_SPI_DATA_VERSION]);
       $data = [
         'body' => $body,
         'authenticator' => $authenticator,
@@ -388,7 +388,7 @@ class Client {
       $key = $storage->getKey();
     }
     // Used in HMAC validation.
-    $params['rpc_version'] = ACQUIA_SPI_DATA_VERSION;
+    $params['rpc_version'] = ACQUIA_CONNECTOR_ACQUIA_SPI_DATA_VERSION;
     $ip = \Drupal::request()->server->get('SERVER_ADDR', '');
     $host = \Drupal::request()->server->get('HTTP_HOST', '');
     $ssl = \Drupal::request()->isSecure();

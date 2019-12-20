@@ -9,12 +9,21 @@ namespace Drupal\cohesion;
 
 use Drupal\cohesion_elements\Entity\Component;
 use Drupal\Component\Serialization\Json;
-use Drupal\cohesion\Plugin\LayoutCanvas\LayoutCanvas;
+use Drupal\cohesion\LayoutCanvas\LayoutCanvas;
 
 /**
  * Trait for EntityJsonValuesTrait.
  */
 trait EntityJsonValuesTrait {
+
+  /**
+   * Gets the api processor manager.
+   *
+   * @return ApiPluginManager
+   */
+  public function apiProcessorManager() {
+    return \Drupal::service('plugin.manager.api.processor');
+  }
 
   /**
    * {@inheritdoc}
@@ -48,7 +57,7 @@ trait EntityJsonValuesTrait {
    */
   public function preProcessJsonValues() {
     $this->resetElementsUUIDs();
-    if($canvas_instance = $this->getLayoutCanvasInstance()){
+    if ($canvas_instance = $this->getLayoutCanvasInstance()) {
       $this->setJsonValue(json_encode($canvas_instance));
     }
     return FALSE;
@@ -154,7 +163,10 @@ trait EntityJsonValuesTrait {
    * another entity
    */
   public function resetElementsUUIDs() {
-    if ($this->isNew() && $this->getJsonValues()) {
+    $is_modified = method_exists($this, 'isModified') ? $this->isModified() : FALSE;
+
+    // The !isModified() makes sure that imported entities are ignored.
+    if (($this->isNew() && !$is_modified) && $this->getJsonValues()) {
       $json_values = $this->getDecodedJsonValues(TRUE);
 
       if (property_exists($json_values, 'canvas')) {

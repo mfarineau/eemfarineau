@@ -1,12 +1,14 @@
-name: DX8 core
+name: Cohesion core
 type: module
 description: 'Defines the base DX8 entities, import and administration controllers and drush commands.'
 core: 8.x
-version: 8.x-5.5.6
+version: 8.x-5.7.7
 package: cohesion
 dependencies:
+  - drupal:system
   - contextual
   - imce
   - token
   - entity_reference_revisions
   - settings_tray
+  - rest

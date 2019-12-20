@@ -68,7 +68,7 @@ class WebsiteSettings extends WebsiteSettingsEntityBase implements CohesionSetti
    */
   public function process() {
     /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = \Drupal::service('plugin.manager.api.processor')->createInstance('website_settings_api');
+    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
     $send_to_api->setEntity($this);
 
     // Send or delete.
@@ -80,7 +80,7 @@ class WebsiteSettings extends WebsiteSettingsEntityBase implements CohesionSetti
       $send_to_api->delete();
     }
     else {
-      $send_to_api->send('style');
+      $send_to_api->send();
     }
     return $send_to_api;
   }
@@ -90,10 +90,9 @@ class WebsiteSettings extends WebsiteSettingsEntityBase implements CohesionSetti
    */
   public function jsonValuesErrors() {
     /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = \Drupal::service('plugin.manager.api.processor')->createInstance('website_settings_api');
+    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
     $send_to_api->setEntity($this);
-    $send_to_api->setSaveData(FALSE);
-    $success = $send_to_api->send('style');
+    $success = $send_to_api->sendWithoutSave();
     $responseData = $send_to_api->getData();
     if ($success === TRUE) {
       return FALSE;

@@ -38,7 +38,7 @@ class CustomStylesApi extends StylesApi {
         //Only process enable children
         if ($child->getStatus()) {
           $resource = $child->getResourceObject();
-          $this->processStyleTokensRecursive($resource->values);
+          $this->processBackgroundImageInheritance($resource->values);
 
           $child_resources[] = $resource;
         }
@@ -46,14 +46,23 @@ class CustomStylesApi extends StylesApi {
     }
 
     // Send the parent and children to the API.
-    // processStyleTokensRecursive
+    // processBackgroundImageInheritance
     $resource = $this->parent->getResourceObject();
-    $this->processStyleTokensRecursive($resource->values);
+    $this->processBackgroundImageInheritance($resource->values);
+
 
     $this->data->settings->forms[] = $this->getFormElement($resource, $child_resources);
 
     // Reorder custom style styles
-    $style_order = \Drupal::service('cohesion_custom_styles.utils')->loadCustomStylesOrder();
+    $custom_styles = CustomStyle::loadParentChildrenOrdered();
+    $style_order = [];
+    if ($custom_styles) {
+      foreach ($custom_styles as $custom_style) {
+        $key = $custom_style->id() . '_' . $custom_style->getConfigItemId();
+        $style_order[] = $key;
+      }
+    }
+
     $this->data->sort_order = $style_order;
     $this->data->style_group = 'cohesion_custom_style';
   }
@@ -61,7 +70,7 @@ class CustomStylesApi extends StylesApi {
   /**
    * {@inheritdoc}
    */
-  public function send($type) {
+  public function send() {
 
     // Assume this entity is the parent.
     $this->parent = $this->entity;
@@ -73,7 +82,7 @@ class CustomStylesApi extends StylesApi {
 
     // Send to API only if the parent of this entity is enabled.
     if ($this->parent && $this->parent->status() || $this->getSaveData()) {
-      return parent::send($type);
+      return parent::send();
     }
 
     return TRUE;

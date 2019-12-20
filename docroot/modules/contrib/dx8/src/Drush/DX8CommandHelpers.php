@@ -20,10 +20,9 @@ final class DX8CommandHelpers {
    * Import s3forms and rebuild element styles.
    */
   public static function import() {
-    $config = \Drupal::configFactory()->getEditable('cohesion.settings');
+    $config = \Drupal::config('cohesion.settings');
 
     if ($config->get('api_key') !== '') {
-
       // Get a list of the batch items.
       $batch = AdministrationController::batchAction(TRUE);
 
@@ -49,7 +48,7 @@ final class DX8CommandHelpers {
       }
     }
     else {
-      return ['error' => t('Your API KEY has not been set.') . $config->get('site_id')];
+      return ['error' => t('Your Cohesion API KEY has not been set.') . $config->get('site_id')];
     }
 
     return FALSE;

@@ -242,8 +242,9 @@ function cohesion_templates_suggestions(array &$suggestions, ContentEntityInterf
     $candidate_template = $candidate_template_storage->load($candidate_template_id);
 
 
-    // Add suggestion for first template.
+    // Add suggestions.
     $suggestions[] = $hook . '__cohesion__' . $candidate_template->get('id');
+    $suggestions[] = $hook . '__cohesion__' . $candidate_template->get('id') . '__' . \Drupal::service('theme.manager')->getActiveTheme()->getName();
 
     if ($view_mode == 'full' && $candidate_template->get('master_template') != '__none__') {
       $master_template_storage = \Drupal::entityTypeManager()
@@ -282,11 +283,12 @@ function cohesion_templates_theme() {
  *
  */
 function cohesion_templates_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  // Only apply master templates if this theme is DX8 enabled enabled.
-  if (\Drupal::service('cohesion.utils')->isDX8EnabledTheme()) {
+  // Only apply master templates if this theme is DX8 enabled.
+  if (\Drupal::service('cohesion.utils')->currentThemeUseCohesion()) {
     $master_template = 'page__cohesion__' . _cohesion_templates_get_master_template();
     if ($master_template !== FALSE && (!isset($_GET['coh_clean_page']) || $_GET['coh_clean_page'] !== 'true')) {
       $suggestions[] = $master_template;
+      $suggestions[] = $master_template . '__' . \Drupal::service('theme.manager')->getActiveTheme()->getName();
     }
   }
 }
@@ -301,7 +303,7 @@ function cohesion_templates_theme_suggestions_page_alter(array &$suggestions, ar
 function cohesion_templates_module_implements_alter(&$implementations, $hook) {
   if ($hook == 'theme_suggestions_page_alter') {
     // Only apply templates if this theme is DX8 enabled.
-    if (\Drupal::service('cohesion.utils')->isDX8EnabledTheme()) {
+    if (\Drupal::service('cohesion.utils')->currentThemeUseCohesion()) {
       if (isset($implementations['cohesion_templates'])) {
         unset($implementations['cohesion_templates']);
         $implementations = ['cohesion_templates' => FALSE] + $implementations;

@@ -2,6 +2,7 @@
 
 namespace Drupal\cohesion_custom_styles;
 
+use Drupal\cohesion_custom_styles\Entity\CustomStyle;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\cohesion\CohesionListBuilder;
 use Drupal\Core\Form\FormInterface;
@@ -75,25 +76,25 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
       '#type' => 'container',
     ];
 
-    if ($custom_style_types = $this->entityTypeManager->getStorage('custom_style_type')->loadMultiple()) {
+    // Group by custom style types
+    if ($custom_style_types = $this->entityTypeManager->getStorage('custom_style_type')
+      ->loadMultiple()) {
       // Make sure the custom style types are in alphabetical order.
       ksort($custom_style_types);
+      $custom_styles = $this->load();
 
       foreach ($custom_style_types as $custom_style_type) {
         $custom_style_type_id = $custom_style_type->id();
         // Filter entities by custom style group ID
-        $grouped_entities = array_filter($this->load(), function ($value) use ($custom_style_type_id) {
+        $grouped_entities = array_filter($custom_styles, function ($value) use ($custom_style_type_id) {
           return ($custom_style_type_id === $value->get('custom_style_type')) ? TRUE : FALSE;
         });
-
-        $style_count = \Drupal::service('cohesion_custom_styles.utils')
-          ->countCustomStylesByGroupId($custom_style_type_id);
 
         // Build the accordions
         $form['styles'][$custom_style_type_id]['accordion'] = [
           '#type' => 'details',
           '#open' => FALSE,
-          '#title' => $custom_style_type->label() . ' (' . $style_count . ')',
+          '#title' => $custom_style_type->label() . ' (' . count($grouped_entities) . ')',
         ];
 
         $title = $custom_style_type->label();
@@ -129,12 +130,12 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
 
     $header['type'] = [
       'data' => t('Type'),
-      'class' => [RESPONSIVE_PRIORITY_LOW]
+      'class' => [RESPONSIVE_PRIORITY_LOW],
     ];
 
     $header['status'] = [
       'data' => t('Status'),
-      'class' => [RESPONSIVE_PRIORITY_MEDIUM]
+      'class' => [RESPONSIVE_PRIORITY_MEDIUM],
     ];
 
     return $header;
@@ -163,7 +164,8 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
 
     if ($entity->getParentId()) {
       try {
-        $parent_entity = $this->entityTypeManager->getStorage('cohesion_custom_style')->load($entity->getParentId());
+        $parent_entity = $this->entityTypeManager->getStorage('cohesion_custom_style')
+          ->load($entity->getParentId());
         if ($parent_entity && !$parent_entity->status()) {
           unset($operations['enable']);
         }
@@ -179,7 +181,7 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
    * @return \Drupal\Core\Entity\EntityInterface[]
    */
   public function load() {
-    return \Drupal::service('cohesion_custom_styles.utils')->loadCustomStyles();
+    return CustomStyle::loadParentChildrenOrdered();
   }
 
   /**
@@ -191,7 +193,7 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
       '#header' => ($style_entities) ? $this->buildHeader() : [],
       '#title' => $group_title,
       '#rows' => [],
-      '#empty' => $this->t('There are no @label.', ['@label' => mb_strtolower($this->entityType->getLabel())]),
+      '#empty' => $this->t('There are no @label yet.', ['@label' => mb_strtolower($this->entityType->getLabel())]),
       '#cache' => [
         'contexts' => $this->entityType->getListCacheContexts(),
         'tags' => $this->entityType->getListCacheTags(),
@@ -226,7 +228,8 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
       ];
 
       try {
-        $type_entity = $this->entityTypeManager->getStorage('custom_style_type')->load($entity->getCustomStyleType());
+        $type_entity = $this->entityTypeManager->getStorage('custom_style_type')
+          ->load($entity->getCustomStyleType());
       } catch (\Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException $ex) {
         watchdog_exception('cohesion', $ex);
         $type_entity = NULL;
@@ -297,21 +300,53 @@ class CustomStylesListBuilder extends CohesionListBuilder implements FormInterfa
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $sort_data = $form_state->getValue('table');
+    $table = $form_state->getValue('table');
+
+    $temp_sort_data = [];
+    $i = 0;
+    foreach ($table as $entity_id => $value) {
+      $temp_sort_data[] = [
+        'index' => $i,
+        'entity_id' => $entity_id,
+        'value' => $value,
+      ];
+      $i++;
+    }
+    uasort($temp_sort_data, function ($a, $b) {
+      if ($a['value']['weight'] == $b['value']['weight']) {
+        return $a['index'] - $b['index'];
+      }
+      return ($a['value']['weight'] < $b['value']['weight']) ? -1 : 1;
+    });
+
+    $sort_data = [];
+    foreach ($temp_sort_data as $temp_sort_datum) {
+      $sort_data[] = $temp_sort_datum['entity_id'];
+    }
+
     try {
-      $entities = $this->entityTypeManager->getStorage('cohesion_custom_style')->loadMultiple(array_keys($sort_data));
+      $entities = $this->entityTypeManager->getStorage('cohesion_custom_style')->loadMultiple($sort_data);
     } catch (\Exception $ex) {
       $entities = [];
     }
 
     // Update custom style config entity with current order.
-    $i = 0;
     if ($entities) {
+      $custom_style_type = NULL;
+      $weight = 0;
       foreach ($entities as $id => $entity) {
+
         // Store the current order so we can use it to sort custom styles in stylesheet.json
         $config_name = $entity->getConfigDependencyName();
-        \Drupal::service('cohesion_custom_styles.utils')->updateCustomStylesWeight($config_name, $i);
-        $i++;
+        try {
+          $config = \Drupal::configFactory()->getEditable($config_name);
+          $config->set('weight', $weight);
+          $config->save(TRUE);
+        } catch (\Exception $ex) {
+
+        }
+
+        $weight++;
       }
 
       // Re-save all the custom styles via a batch process to ensure they are

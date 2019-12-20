@@ -78,8 +78,8 @@
         "drupal/migrate_tools": "^4.1",
         "drupal/migrate_plus": "^4.2",
         "webflo/drupal-core-strict": "*",
-        "cohesion/dx8": "5.5.6",
-        "cohesion/dx8-theme": "5.5.6",
+        "cohesion/dx8": "5.7.7",
+        "cohesion/dx8-theme": "5.7.7",
         "drush/drush": "^9.7"
     },
     "require-dev": {
@@ -102,7 +102,7 @@
         },
         "patches": {
             "drupal/animate_any": {
-                "Drupal Animate Any resolve library naming": "https://www.drupal.org/files/issues/resolved_animate_library_issue-2905067-2.patch"     
+                "Drupal Animate Any resolve library naming": "https://www.drupal.org/files/issues/resolved_animate_library_issue-2905067-2.patch"
             }
         }
     }

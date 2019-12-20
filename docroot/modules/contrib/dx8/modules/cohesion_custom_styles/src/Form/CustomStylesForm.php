@@ -40,10 +40,9 @@ class CustomStylesForm extends CohesionStyleBuilderForm {
       $this->entity->setDefaultValues();
       $this->entity->set('parent', $parent_class);
 
-      $form['#title'] = $this->t('Extend %label', [
-        '%label' => strtolower($this->entity->label()),
-      ]);
     }
+
+    $form = parent::form($form, $form_state);
 
     if ($operation == 'add') {
       $form['#title'] = $this->t('Create %label', [
@@ -51,9 +50,12 @@ class CustomStylesForm extends CohesionStyleBuilderForm {
       ]);
     }
 
-    $form = parent::form($form, $form_state);
 
     if ($operation == 'extend') {
+
+        $form['#title'] = $this->t('Extend %label', [
+          '%label' => strtolower($this->entity->label()),
+        ]);
 
       // Set Title to Extended from: ...
       $form['details']['label']['#default_value'] = t('Extended from ') . $form['details']['label']['#default_value'];
@@ -62,7 +64,8 @@ class CustomStylesForm extends CohesionStyleBuilderForm {
     }
 
     // Boot angular with the given custom style type
-    $form['#attributes']['ng-init'] = "onInit(formRenderer, 'custom_styles', '" . $custom_style_type->id() . "')";
+    $form['#attached']['drupalSettings']['cohesion']['formGroup'] = 'custom_styles';
+    $form['#attached']['drupalSettings']['cohesion']['formId'] = $custom_style_type->id();
     $form['#attached']['drupalSettings']['cohOnInitForm'] = \Drupal::service('settings.endpoint.utils')
       ->getCohFormOnInit('custom_styles', $custom_style_type->id());
     $form['#attached']['drupalSettings']['cohesion']['custom_style_type'] = $this->entity->get('custom_style_type');

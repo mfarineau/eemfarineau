@@ -9,6 +9,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Config\BootstrapConfigStorageFactory;
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
 use Drupal\Core\DrupalKernel;
@@ -40,9 +41,12 @@ class SpiController extends ControllerBase {
    *
    * @param \Drupal\acquia_connector\Client $client
    *   Acquia Client.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   Config factory service.
    */
-  public function __construct(Client $client) {
+  public function __construct(Client $client, ConfigFactoryInterface $config_factory) {
     $this->client = $client;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -50,7 +54,8 @@ class SpiController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('acquia_connector.client')
+      $container->get('acquia_connector.client'),
+      $container->get('config.factory')
     );
   }
 
@@ -106,9 +111,9 @@ class SpiController extends ControllerBase {
 
     $spi = [
       // Used in HMAC validation.
-      'rpc_version'        => ACQUIA_SPI_DATA_VERSION,
+      'rpc_version'        => ACQUIA_CONNECTOR_ACQUIA_SPI_DATA_VERSION,
       // Used in Fix it now feature.
-      'spi_data_version'   => ACQUIA_SPI_DATA_VERSION,
+      'spi_data_version'   => ACQUIA_CONNECTOR_ACQUIA_SPI_DATA_VERSION,
       'site_key'           => sha1(\Drupal::service('private_key')->get()),
       'site_uuid'          => $this->config('acquia_connector.settings')->get('spi.site_uuid'),
       'env_changed_action' => $this->config('acquia_connector.settings')->get('spi.environment_changed_action'),
@@ -1017,11 +1022,11 @@ class SpiController extends ControllerBase {
   public function send(Request $request) {
     // Mark this page as being uncacheable.
     \Drupal::service('page_cache_kill_switch')->trigger();
-    $method = ACQUIA_SPI_METHOD_CALLBACK;
+    $method = ACQUIA_CONNECTOR_ACQUIA_SPI_METHOD_CALLBACK;
 
     // Insight's set variable feature will pass method insight.
-    if ($request->query->has('method') && ($request->query->get('method') === ACQUIA_SPI_METHOD_INSIGHT)) {
-      $method = ACQUIA_SPI_METHOD_INSIGHT;
+    if ($request->query->has('method') && ($request->query->get('method') === ACQUIA_CONNECTOR_ACQUIA_SPI_METHOD_INSIGHT)) {
+      $method = ACQUIA_CONNECTOR_ACQUIA_SPI_METHOD_INSIGHT;
     }
 
     $response = $this->sendFullSpi($method);

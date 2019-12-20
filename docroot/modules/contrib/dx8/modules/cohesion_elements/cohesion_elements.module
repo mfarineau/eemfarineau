@@ -136,6 +136,7 @@ function cohesion_elements_theme($existing, $type, $theme, $path) {
         'parentIsComponent' => FALSE,
         'componentFields' => [],
         'componentUuid' => '',
+        'template' => '',
       ],
       'preprocess functions' => [
         'preprocess_cohesion_elements_component',
@@ -175,7 +176,7 @@ function cohesion_elements_get_elements_style_process_batch(&$context) {
 
   /** @var ElementsApi $send_to_api */
   $send_to_api = \Drupal::service('plugin.manager.api.processor')->createInstance('elements_api');
-  $send_to_api->send('elements');
+  $send_to_api->send();
 
   $data = $send_to_api->getData();
   if (isset($data['error'])) {
@@ -210,6 +211,16 @@ function cohesion_elements_page_attachments(array &$attachments) {
   // tray overrides.
   if (\Drupal::currentUser()->hasPermission('access contextual links') && \Drupal::currentUser()->hasPermission('access components') && $route_name != 'cohesion_elements.component.preview') {
     $attachments['#attached']['library'][] = 'cohesion_elements/settings-tray';
+  }
+}
+
+/**
+ * @inheritdoc
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function cohesion_elements_theme_suggestions_component_alter(array &$suggestions, array &$variables) {
+  if(isset($variables['template'])) {
+    $suggestions[] = $variables['template'] . '__' . \Drupal::service('theme.manager')->getActiveTheme()->getName();
   }
 }
 
@@ -435,11 +446,13 @@ function cohesion_elements_menu_local_actions_alter(&$local_actions) {
   if (isset($local_actions['entity.cohesion_component.toggle_components_groups'])) {
     $local_actions['entity.cohesion_component.toggle_components_groups']['options']['attributes']['class'][] = 'coh-toggle-accordion';
     $local_actions['entity.cohesion_component.toggle_components_groups']['options']['attributes']['class'][] = 'open';
+    $local_actions['entity.cohesion_component.toggle_components_groups']['options']['attributes']['role'][] = 'button';
   }
 
   if (isset($local_actions['entity.cohesion_helper.toggle_helpers_groups'])) {
     $local_actions['entity.cohesion_helper.toggle_helpers_groups']['options']['attributes']['class'][] = 'coh-toggle-accordion';
     $local_actions['entity.cohesion_helper.toggle_helpers_groups']['options']['attributes']['class'][] = 'open';
+    $local_actions['entity.cohesion_helper.toggle_helpers_groups']['options']['attributes']['role'][] = 'button';
   }
 }
 

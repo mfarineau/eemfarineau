@@ -4,6 +4,7 @@ namespace Drupal\cohesion_elements\Form;
 
 use Drupal\Core\Entity\EntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\cohesion_elements\Entity\ElementCategoryBase;
 
 /**
  * Class CategoryForm
@@ -11,6 +12,9 @@ use Drupal\Core\Form\FormStateInterface;
  * @package Drupal\cohesion_elements\Form
  */
 class CategoryForm extends EntityForm {
+
+  /** @var ElementCategoryBase */
+  protected $entity;
 
   /**
    * {@inheritdoc}
@@ -79,8 +83,8 @@ class CategoryForm extends EntityForm {
     $form['#attributes']['class'][] = 'coh-form';
 
     // Include the Angualar css (which controls the cohesion_accordion and other form styling).
-    $form['#attached']['library'][] = 'cohesion/cohesion-admin';
-    
+    $form['#attached']['library'][] = 'cohesion/cohesion-admin-styles';
+
     return $form;
   }
 

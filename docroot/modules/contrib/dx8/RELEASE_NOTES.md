@@ -1,12 +1,417 @@
 
 # Release notes
 
+## 5.7.7 
+
+### Icon picker not rendering 
+
+Fixed a bug where uploading a icon libraries would render correctly on the front end but 
+not on the icon picker
+
+### Style guide manager values lost
+
+Fixed a bug where some of the style guide manager values were lost after saving
+
+### Custom style ordering  
+
+Fixes a bug where ordering custom styles with similar weights, the order would not be exact. 
+
+### Drupal 8.8.0 compatibility 
+
+Fixed a few dblog warnings and code style issues related to Drupal 8.8.0 
+
+## 5.7.6 
+
+### Nested components not rendering with multiple Cohesion enabled themes enabled
+
+Fixed an edge case where components that were placed inside dropzones that were themselves inside other components were not rendering. 
+
+### Improvements to Cohesion sync error reporting
+
+When importing an entity with a UUID / machine name mismatch, the errors provided to the end user were not helpful. This
+has been fixed and provides enough information for the user to start debugging the issue with their package. 
+
+An example is as follows:  
+
+> The validation failed with the following message: Custom style with UUID 00000000-0000-0000-0000-0000000000000 already exists but the machine name "coh_existing_machine_name" of the existing entity does not match the machine name "coh_mismatched_machine_name" of the entity being imported. 
+
+## 5.7.5 
+
+### Improved warning message for missing template files. 
+
+When a generated component twig template file was missing from the file system, Cohesion was printing "something here" on the front end of the website. 
+
+This message was not helpful and has been replaced with a message indicating the missing template suggestion. 
+
+### Style guide form - padding missing
+
+Fixed an issue where there was some padding missing from `Group accordion` fields when used in a style guide form.
+
+This only affects the form shown in Drupal `Appearance settings`.  
+
+### Existing theme settings not updating when saving SGM 
+
+Fixed an issue where theme settings that are not included in the SGM form (such as logo and favicon) were not being saved when the SGM save performed a rebuild of 
+Cohesion entities.    
+
+### The numerical value on the range slider not always displayed correctly
+
+Fixed an issue where the numerical value on the range slider was not always rendering correctly.
+
+## 5.7.4
+
+Please note, upgrading to this release will require a re-import and rebuild which can be performed with `drush dx8:import` and `drush dx8:rebuild` 
+
+### Bugfix: correctly look up available text formats by account
+
+Fixed an issue where available text formats were being queried up by the current user role(s) instead of directly 
+with the user account object. This meant that if user 1 had no role, they were incorrectly unable to access any text formats. 
+
+### Fixed an issue with the Range slider handle positioning
+
+This fixes the issue when reloading / loading a page the Range slider handle was sometimes in the incorrect position.
+
+### Base and custom styles - pseudo content image
+
+Fixed an issue that prevented rendering of `:before` and `:after` pseudo element images that were specified in base and custom styles.
+
+Content image styles applied directly to elements are unaffected.
+
+You can now also select a `Drupal image style`.
+
+**A rebuild is required to update all existing styles, otherwise re-save base/custom styles on a case-by-case basis.**
+
+### Bugfix: Cohesion layout canvas preview 
+
+Fixed an issue where the Cohesion layout canvas field was not rendering correctly on content entity preview pages. 
+
+### Component - existing select field
+
+Fixed an issue when tokenizing an existing select field in a component.
+
+This was causing the following validation error when selecting a value on a component instance:
+```
+Invalid type, expected ["string","number","boolean"]
+``` 
+
+### Fixed an issue where inserting media into the WYSIWYG element could fail to save
+
+Entering an entity via the entity browser and pressing apply without ever focusing into the WYSIWYG could cause the embedded entity data not to be saved and you would end up with an empty WYSIWYG when re-opening.
+
+### Fixed an issue that prevented the order of custom styles changing when they were re-ordered in the UI 
+
+This fixes an issue that prevented the re-ordering of the custom styles.
+
+### Fixed an issue with the help text element on style guide forms
+
+Added code to ensure the text in the Help Text element is loaded on the SGM forms. 
+
+## 5.7.3
+
+### Fix an issue where the master template was not rendering
+
+This fixes an issue where when using style guide manager tokens in master template 
+it would not render the master template
+
+## 5.7.2
+
+### Fixed issue saving master templates with multiple enabled Cohesion themes.
+
+This fixes templates failing in some edge cases and the following dblog warnings:
+ 
+`Warning: Illegal string offset 'template' in Drupal\cohesion\Plugin\Api\TemplatesApi->send()` 
+
+`Warning: Illegal string offset 'themeName' in Drupal\cohesion\Plugin\Api\TemplatesApi->send()`
+
+## 5.7.1
+
+### Fixed function declaration warning. 
+
+Fixed a function declaration that was incompatible with the interface. It was causing this warning: 
+
+`Declaration of Drupal\cohesion\StreamWrapper\CohesionStream::basePath($site_path = NULL) should be compatible with Drupal\Core\StreamWrapper\PublicStream::basePath(?SplString $site_path = NULL)` 
+
+## 5.7.0 
+
+### Style guide manager 
+
+The style guide manager is a new (optional) sub module and will need to be enabled to use it ("Cohesion style guide manager" via the UI or "cohesion_style_guide" via drush).  
+
+You can use the Style guide manager to create theme-specific overrides for your website's styles and appearance settings.
+
+Theme specific overrides can use theme inheritance. This means a sub-theme will automatically inherit the settings of its parent theme. Changes made to sub-theme settings will override its parent theme settings.
+
+The Style guide manager has two main interfaces:
+
+1. Style guide builder. 
+This is an interface for defining theme-specific overrides. The output of the Style guide builder is a ‘Style guide’. This can be accessed at: `/admin/cohesion/style_guides` 
+
+2. Style guides
+This is an interface for applying values to your theme-specific overrides. These overrides are theme specific and can be access on the appearance settings form for any Cohesion enabled theme.
+
+The style guide definition entities (1 above) and style guide manager instance entities (2 above) are config entities that work with the Cohesion sync module.
+
+For more information on how to set up and use the style guide manager feature, please refer to the latest Cohesion user guide.     
+
+### Bugfix: Video in Modal continues to play
+
+Fixes issues when there is a Video in a Modal and the modal is closed the video continued to play.
+
+Fixed for native HTML5 videos, YouTube and Vimeo. 
+
+### Bugfix: Rendering regions of inactive themes
+
+Fixed a bug where regions for inactive themes were being rendered if they had the name machine name as a region in the inactive theme. For example, adding two "content" regions from different themes would render the "content" region of the active theme twice.
+
+This is now fixed as the system checks if a region belongs to the active theme before rendering it. 
+
+### Bugfix: WYSIWYG form fields in custom elements not working 
+
+Fixed and issue where tokenising a custom element WYSIWYG in a component didn't render the WYSIWYG content. 
+
+### Lock and unlock the Font stacks
+
+Adds the ability to lock and unlock the Label and Variable fields when adding a Font stack.
+
+### Bugfix: Authentication via settings.php and drush
+
+Fixed an issue where defining the API authentication credentials in settings.php was not working with Cohesion drush commands. 
+
+### Toggle parent menu visibility
+
+Added an interaction option to the menu button element to allow site builders to add a Menu button, which will toggle the visibility of the parent menu.
+
+### Font picker field added for use on Style Guides
+
+Added a new field type that allows for the selection of fonts. The list dynamically updates and will pull newly added/removed fonts.
+
+Note, this field is only available for use with style guide entities. 
+
+### Bugfix: Fixed API warning
+
+A Drupal warning was being thrown when saving custom styles that had ben upgraded from an earlier version of Cohesion and had an unset image background.
+
+This is now fixed.    
+
+### Bugfix: empty styles edge case
+
+Fixed an edge case where a malformed response from the API could fail to update the website stylesheet correctly.   
+
+### Support for tokens in View item element settings
+
+When building a view template, it is now possible to toggle variable mode in the View item settings form and apply tokens to the view mode settings. 
+
+### Component and helper category permission changes 
+
+Users with permissions to create, edit and delete component and helper entities will:
+
+- Automatically have permissions to select from any category on the component and helper entity form
+- Be able to select from any component or helper in the Cohesion sidebar.    
+
+### Element forms UI changes. 
+
+The "Toggle variable mode" and "Open token browser" buttons in the element ellipsis menu have been moved to the toolbar containing the title and properties menu. 
+
+### Bugfix: Using images and gradients together on an element inline style.
+
+When using a background image and a gradient together on an inline style for an element, the gradient was not being rendered in the CSS. This is now fixed.  
+
+### Bugfix: Conflicts with remote stream wrappers 
+
+Resolved an issue where Cohesion would conflict with stream wrappers that did not invoke `getDirectoryPath` (remote
+stream wrappers for example).    
+
+### Support for embed media plugins in Cohesion WYSIWYG
+
+Added support for CKEditor plugins like Drupal 8.8.x "Insert from Media Library" and "Node" that use the "Embed media" or "Display embedded entities" setting in the text format definition.
+
+These plugins can now be used in Cohesion WYSIWYG elements and Cohesion WYSIWYG component form elements.  
+
+### Color palette tagging
+
+Adds the ability to "tag" colors in the Website settings, Color palette. 
+
+Website builders can then group certain colors and then restrict a Color picker Component field to specific tags.
+
+### Bugfix: Package upload button disabled state
+
+Fixed a bug where the upload button on the sync package upload form (DX8 -> Sync packages -> Import packages) was always enabled. This meant it was possible to upload the validation of a package before it was complete by clicking the button prematurely. 
+
+This button is now disabled until the validation is complete.
+
+### Bugfix: Saving an element as a helper and then placing the helper on the same layout canvas as the original element.
+
+Fixed an issue where after creating a helper from an element, it would have the same UUID as the original element and would clash if you placed that helper back onto the same layout canvas it was saved from resulting in form data being overwritten with blank values.
+
+## 5.6.2
+
+### Bugfix: Elements inside dropzones being lost when importing templates and components. 
+
+Fixed an issue where a element inside a dropzone was being removed from a template or component layout canvas when importing an entity that was new to the local site. 
+
+### Bugfix: Helpers not showing in the sidebar browser
+
+Fixed a bug where helpers containing components with drop zones were not showing in the list of helper in the sidebar browser
+
+### Bugfix: Video controls assets not showing
+
+Fixed a bug where the video controls assets were not loading correctly from the right path  
+
+### Setting Cohesion API and organization keys in settings.php
+
+Fixed a bug where Cohesion configuration settings could not be set in environment settings files. See README.md for more details.  
+
+### Bugfix: XSS validation applying to component fields
+
+Fixed an issue where the XSS validation was sometimes being applied to component form field data. This is now fixed so XSS validation only applied to elements settings.
+
+### Bugfix: canvas preview 
+
+Fixed an issue that prevented the Canvas Preview working when opened in a new window. 
+
+### Enabling Restful on update. 
+
+The Restful web services module is now enabled as part of an update script. This only affects websites being upgraded from versions prior to `5.6.0` and the rest module does not need to be enabled manually before upgrading.
+
+## 5.6.1
+
+### Bugfix: composer issue
+
+Removed Entity reference revisions patch from Cohesion composer.json as version 1.7 of Entity reference revisions now includes the patch. 
+
+### Custom element fields can now be required
+
+When developing custom elements for Cohesion, developers can now make text inputs, text areas, selects and file browsers required and set a custom validation message.  
+
+## 5.6.0
+
+### SCSS variables behave in a more predictable way
+
+- `$coh-color-` variables from the color palette can be used within SCSS variables.
+- SCSS variables can used within the value field of other SCSS variables. For example: `calc ($var1 + 10px);`
+- The API now catches syntax errors in SCSS variable values and prints warnings within the generated CSS. This makes debugging easier.  
+
+### Webform usage plugin
+
+If a Cohesion Custom style is used on a Webform entity, the style will now show as in-use by the Webform.
+
+### Block element available within Menu templates
+
+The Block element can now be placed within a Cohesion Menu template. 
+
+### Set the default cohesion sidebar list view
+
+There is a new settings in the global cohesion settings page: /admin/cohesion/configuration/system-settings called "Default sidebar view style."
+
+This allows the site administrator to set the default list view style of cohesion elements, components and helpers in the sidebar. Thumbnails are show by default. 
+
+As before, this setting can be changed by the user by clicking the toggle icon at the top of the sidebar and those changes persist across the browser session.
+
+(Existing sites being upgraded will see the original list by default unless the user has already changed this for their session). 
+
+### XSS validation in element forms 
+
+Cohesion now validates all element settings inputs for script tags and other potentially dangerous markup using the Drupal core `Xss::filterAdmin` utility. 
+
+Examples of potentially dangerous markup that are filtered:
+
+- `<script>` tags within markup prefix and suffix fields. 
+- `<object>` tags within markup prefix and suffix fields. 
+- `onClick` and other Javascript event attributes. 
+- Custom `href` attributes that contain values prefixed with: `javascript:`
+
+There is a new permission that can be applied to certain roles to allow users to bypass this check: *"Bypass XSS validation in element forms"*
+
+This permission has the "restrict access" flag so will appear in the permissions table with the label *"Warning: Give to trusted roles only; this permission has security implications."*
+
+Notes: 
+
+- If you're upgrading an existing site, it's important that you review your role permissions after the upgrade and only give this permission to users that absolutely need it (the `user=1` administrator will have this permission by default)..
+- Bypassing this check to add javascript libraries or snippets in elements is not recommended. Javascript libraries should be added to source control within your theme or a custom module and attached programmatically via the Drupal core library system: https://www.drupal.org/docs/8/api/javascript-api/add-javascript-to-your-theme-or-module   
+
+### ‘Elements’ will be disabled by default and not show in the ‘Sidebar’ when using the ‘Layout canvas’ field on a content entity.
+
+Using primitive elements to create content means there is no separation between content and design. This approach is discouraged in favor of using ‘Components’ which have a clear separation between content and design.
+
+To discourage page creators from using primitive elements for content, they will now be disabled by default and not show in the ‘Sidebar’.
+
+When using the ‘Layout canvas’ on content entities, ‘Components’ will be shown first for all users.
+
+Site builders can choose to enable primitive elements on the ‘Layout canvas’ field within the field settings (although this is not recommended).
+
+Cohesion ‘Helpers’ will still be available in the ‘Sidebar’ unless they include primitive elements. In which case, they will be hidden.
+
+Existing instances of the ‘Layout canvas’ field on sites upgraded to this version will remain unaffected and can continue to use primitive elements on the ‘Layout canvas’ (although this is not recommended).
+
+### Bugfix: Using global tokens in templates
+
+Fixed an issue where global tokens like [current-page:title] was breaking the generated twig
+
+### Bugfix - Tokenizing values in styles on elements when building a component
+
+Fixes a bug when tokenizing values on element styles when switching between levels in the style tree. 
+
+### Bugfix - Using images containing ampersands in the filename resulted in a server error
+
+Fixed a bug where selecting an uploaded image where the filename contained an ampersand resulted in a server error.
+
+### New dependency on the core RESTful Web Services module. 
+
+Cohesion is now using the `RESTful Web Services` core module for its endpoints. Before upgrading you MUST enable this module.
+‌
+### Modal trigger elements - `Trigger ID` field 
+
+Focus will return to the body when a modal is closed. If you would like focus to return to your trigger element, give it a unique ID.
+
+To make this easier, we've added a `Trigger ID` field to elements that support the `Open modal` interaction type. These are currently:
+
+- Link
+- Button
+- Container
+- Column
+- Slide
+
+You can still add an ID through `Markup > Properties > Classes and ID` as with other elements, but this value will override the `Trigger ID` value.
+
+### New component form field - Range slider
+
+The range slider field can be used as an alternate input method for number-based fields in your components.
+
+You can specify `min`, `max` and `step` values, as well as a default value within the specified range.
+
+### Enable Cohesion on a theme
+
+When creating a new theme that is Cohesion enabled, you will need to add `cohesion: true` to the .info.yml of your theme.
+Note, if you extend from the base `cohesion_theme` you do not need to add this flag because the system will detect 
+the flag has been set in the parent theme. 
+
+If you have an existing theme extended from `cohesion_theme`, you do not need to add this flag. Your existing theme will
+just work without modification. 
+
+Because of this change, the selector for the global theme on the System settings configuration page
+`/admin/cohesion/configuration/system-settings` has been removed. 
+
+### "Existing selects" used in components are now dynamic, not hard coded on save.
+
+Selects chosen from the "Existing select" picker on a component will now dynamically load options when used in components. Previously the options were fetched when the component was created and not updated afterwards.
+
+### Removed experimental layout builder module.  
+
+The removes the ability for site builders to see the content templates injected around the layout builder canvas at `node/x/layout`
+
+Other layout builder support is unaffected, including:
+- Custom block templates can still be themed with Cohesion (`/admin/cohesion/templates/content_templates/block_content`)
+- Tokens can still be used in custom blocks.
+- New "Drupal -> Content" element still available in the Cohesion sidebar browser.  
+
+Notes:
+- If `cohesion_layout_builder` is enabled on your site, you should uninstall that module before upgrading to this version. 
+
 ## 5.5.6
 
 ### Using Drupal tokens in slide container, slides to show and scroll does not process the Drupal token
 
 Fixed an issue where using Drupal tokens within Slides to show and slides to scroll did not process the Drupal token.
-
 
 ## 5.5.5
 
@@ -32,7 +437,7 @@ Fixed a bug where an image added to a content pseudo style would not convert the
 
 ### Module compatibility with web profiler
 
-Fixed a bug when the web profiler module was installed on your DX8 website, which was causing error messages.
+Fixed a bug when the web profiler module was installed on your Cohesion website, which was causing error messages.
 
 ## 5.5.3
 
@@ -42,7 +447,7 @@ Fixed bug where external urls to background images would see the domain stripped
 
 ### Menu button elements created before 5.5 can error in certain circumstances
 
-Fixed an issue where menu button element could throw an error when clicked after being upgraded from an older version of DX8.
+Fixed an issue where menu button element could throw an error when clicked after being upgraded from an older version of Cohesion.
 
 ## 5.5.2
 
@@ -56,13 +461,13 @@ to enable the permission on each individual ones for the user to be able to sele
 Fix a bug where font libraries were not moved from the temporary directory 
 to the cohesion directory therefore not loading when included in the head
 
-### DX8 sync packages not accessible unless site admin
+### Cohesion sync packages not accessible unless site admin
 
-Fixed an issue where DX8 sync packages were only accessible to users with the role of Administrator. Roles that have the 'Access DX8 Sync' permission will be able to manage sync packages. 
+Fixed an issue where Cohesion sync packages were only accessible to users with the role of Administrator. Roles that have the 'Access Cohesion Sync' permission will be able to manage sync packages. 
 
-### Drupal config import failing on DX8 entities
+### Drupal config import failing on Cohesion entities
 
-Fix a bug where DX8 was creating content template config entities
+Fix a bug where Cohesion was creating content template config entities
 on config import of view modes and entity type which cause the import
 content templates to fail
 
@@ -70,7 +475,7 @@ content templates to fail
 
 ### Background image enabled but not set a top breakpoint
 
-Fix a warning that was thrown ( in Drupal\cohesion\Plugin\LayoutCanvas\ElementModel:122 ) if you had an element with background image enabled 
+Fix a warning that was thrown ( in Drupal\cohesion\LayoutCanvas\ElementModel:122 ) if you had an element with background image enabled 
 at the top breakpoint bu had not selected any image
 
 ### WYSIWYG element - first line of pasted text cut off
@@ -136,9 +541,9 @@ In menu templates, you can now add a new element called `Menu button`. This allo
 
 It has the same click animation settings as the `Menu link` element.
 
-### Lock DX8 entities to prevent them being updated by Sync. 
+### Lock entities to prevent them being updated by Sync. 
 
-It's now possible to decouple / lock a DX8 entity on a site. This means that this entity will be ignored by Sync when running an import. 
+It's now possible to decouple / lock a Cohesion entity on a site. This means that this entity will be ignored by Sync when running an import. 
 
 For example, if you have a `package.yml` that contains a component and you import that component to your site. Now you lock the component and make some changes. If you attempt to re-import the same `package.yml` file, Sync will ignore the locked component and report that there are no changes to apply. 
 
@@ -148,7 +553,7 @@ To lock/unlock an entity, visit the entity list builder page and under the actio
 
 ### Support for Chosen model. 
 
-Previously it was not possible to use the Chosen module: https://www.drupal.org/project/chosen with the DX8 layout canvas on the same content entity form. 
+Previously it was not possible to use the Chosen module: https://www.drupal.org/project/chosen with the layout canvas on the same content entity form. 
 
 This has now been fixed. 
 
@@ -158,8 +563,8 @@ You can now add a new element called Entity browser. This element allows you to 
 an entity in a specific view mode. You also have a component field element that you can attach to this element to give this capability
 to site editors.
 
-DX8 has a new dependency on the Entity browser module https://www.drupal.org/project/entity_browser. You will need to install and enable
-this module if upgrading DX8 from a previous version.
+A new dependency on the Entity browser module https://www.drupal.org/project/entity_browser. You will need to install and enable
+this module if upgrading from a previous version.
 
 ### Slider container - slide count
 
@@ -181,7 +586,7 @@ Previously, the "Link to page" field on the link element and the link component 
 
 ### Analytics data layer
 
-The analytics tab on DX8 elements now has options for adding data layer key and value pairs. This data can be pushed to Google tag manager when triggered by a selected event.
+The analytics tab on elements now has options for adding data layer key and value pairs. This data can be pushed to Google tag manager when triggered by a selected event.
 
 ### New options for deploying Sync packages 
 
@@ -205,7 +610,7 @@ Images and Pictures can now have a "Lazy load" option which can be set to make t
 
 When uploading fonts it is now possible to enter Font License Information which will be displayed as a comment in your generated CSS file.
 
-### DX8 sync packages and updates to existing sync functionality
+### Sync packages and updates to existing sync functionality
 #### New package entity.
 
 The sync module menu items have moved from under "Config -> Development -> Sync" to "DX8 -> Sync".
@@ -467,7 +872,7 @@ When using certain contributed admin themes the admin links on the website setti
 
 ### New permission for DX8 Sync
 
-Previously DX8 sync was accessible if the user had access to core config import/export. A new permission has been created called "Access DX8 sync" which will grant access to the DX8 sync admin interface. 
+Previously DX8 sync was accessible if the user had access to core config import/export. A new permission has been created called "Access Cohesion sync" which will grant access to the DX8 sync admin interface. 
 
 ### You can no longer import packages exported from later versions of DX8
 

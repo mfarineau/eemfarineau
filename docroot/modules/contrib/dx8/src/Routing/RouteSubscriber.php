@@ -4,7 +4,6 @@ namespace Drupal\cohesion\Routing;
 
 use Drupal\Core\Routing\RouteSubscriberBase;
 use Symfony\Component\Routing\RouteCollection;
-use Drupal\cohesion\Helper\CohesionUtils;
 
 class RouteSubscriber extends RouteSubscriberBase {
 
