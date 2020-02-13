@@ -11,6 +11,9 @@ use Drupal\cohesion_website_settings\Entity\SCSSVariable;
  */
 class SCSSVariableUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -35,8 +38,8 @@ class SCSSVariableUsageUnitTest extends UsagePluginBaseUnitTest {
         'value' => json_encode([
           'content' => '$coh-color-r3-D $coh-font-r3_D $SOME_var1able    f;g;flkg $s0me-variable $some_^^^variable',
           'content2' => 'starttext$coh-color-green endtext',
-        ])
-      ]
+        ]),
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new SCSSVariable([], 'cohesion_scss_variable'));

@@ -3,48 +3,70 @@
 namespace Drupal\cohesion;
 
 use Drupal\Component\Serialization\Json;
-use Drupal\Console\Bootstrap\Drupal;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\BadResponseException;
 use Drupal\Core\Site\Settings;
 
 /**
- * Client to perform API calls to Cohesion API
+ * Client to perform API calls to Cohesion API.
  *
- * Class CohesionApiClient
+ * Class CohesionApiClient.
  *
  * @package Drupal\cohesion
  */
 class CohesionApiClient {
 
+  /**
+   *
+   */
   public static function buildStyle($payload) {
     return static::send('POST', '/build/style', $payload);
   }
 
+  /**
+   *
+   */
   public static function buildDeleteStyle($payload) {
     return static::send('DELETE', '/build/style', $payload);
   }
 
+  /**
+   *
+   */
   public static function buildTemplate($payload) {
     return static::send('POST', '/build/template', $payload);
   }
 
+  /**
+   *
+   */
   public static function buildElements($payload) {
     return static::send('POST', '/build/elements', $payload);
   }
 
+  /**
+   *
+   */
   public static function getAssetConfig() {
     return static::send('GET', '/assets/config');
   }
 
+  /**
+   *
+   */
   public static function resourceIcon($payload) {
     return static::send('POST', '/resource/icon', $payload);
   }
 
+  /**
+   *
+   */
   public static function valiatePMC($payload) {
     return static::send('POST', '/validate/pmc', $payload);
   }
 
+  /**
+   *
+   */
   public static function parseJson($command, $payload) {
     return static::send('POST', '/parse/' . $command, $payload, TRUE);
   }
@@ -91,6 +113,7 @@ class CohesionApiClient {
    * @param bool $retry
    *
    * @return array
+   *
    * @throws \GuzzleHttp\Exception\GuzzleException
    */
   protected static function send($method, $uri, $data = [], $json_as_object = FALSE, $retry = TRUE) {
@@ -111,7 +134,7 @@ class CohesionApiClient {
     $code = NULL;
     $response_data = NULL;
     $with_message = TRUE;
-    // Add drupal messages only if not dx8 api call
+    // Add drupal messages only if not dx8 api call.
     if (strpos(\Drupal::service('path.current')->getPath(), 'cohesionapi') !== FALSE) {
       $with_message = FALSE;
     }
@@ -126,7 +149,8 @@ class CohesionApiClient {
       else {
         $response_data = Json::decode($request->getBody()->getContents());
       }
-    } catch (RequestException $e) {
+    }
+    catch (RequestException $e) {
 
       // If there are network errors, we need to ensure the application doesn't crash.
       // if $e->hasResponse is not null we can attempt to get the message
@@ -162,4 +186,5 @@ class CohesionApiClient {
 
     return ['code' => $code, 'data' => $response_data];
   }
+
 }

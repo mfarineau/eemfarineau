@@ -2,18 +2,15 @@
 
 namespace Drupal\cohesion\Controller;
 
-use Drupal\cohesion\LayoutCanvas\LayoutCanvas;
-use Drupal\cohesion_custom_styles\Entity\CustomStyle;
-use Drupal\cohesion_elements\Entity\Component;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\system\SystemManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\cohesion\CohesionApiClient;
-use \Drupal\Core\Url;
+use Drupal\Core\Url;
 
 /**
- * Class AdministrationController
+ * Class AdministrationController.
  *
  * Controller routines for Administration settings page.
  *
@@ -58,7 +55,7 @@ class AdministrationController extends ControllerBase {
   }
 
   /**
-   * Import DX8 assets for the API and create entities
+   * Import Acquia Cohesion assets for the API and create entities.
    *
    * @param bool $cron
    *
@@ -68,7 +65,7 @@ class AdministrationController extends ControllerBase {
     // Clean the scratch directory.
     \Drupal::service('cohesion.local_files_manager')->resetScratchDirectory();
 
-    // Get config from API
+    // Get config from API.
     $content = CohesionApiClient::getAssetConfig();
     if ($content['code'] !== 200) {
       drupal_set_message($content['data'], 'error');
@@ -84,7 +81,7 @@ class AdministrationController extends ControllerBase {
 
     $operations[] = ['cohesion_website_settings_process_batch_import_start', []];
 
-    // Batch process assets in groups
+    // Batch process assets in groups.
     if (isset($content['data']) && $results = $content['data']) {
       $asset_group = array_keys($results);
       foreach ($asset_group as $group) {
@@ -96,7 +93,7 @@ class AdministrationController extends ControllerBase {
     }
 
     $operations[] = ['cohesion_website_settings_process_batch', []];
-    // Enable wesite settings
+    // Enable wesite settings.
     $operations[] = [
       'cohesion_website_settings_enable_website_settings',
       [
@@ -117,7 +114,7 @@ class AdministrationController extends ControllerBase {
 
     $operations[] = ['cohesion_templates_secure_directory', []];
 
-    // Run the batch import
+    // Run the batch import.
     $batch = [
       'title' => t('Importing elements'),
       'operations' => $operations,

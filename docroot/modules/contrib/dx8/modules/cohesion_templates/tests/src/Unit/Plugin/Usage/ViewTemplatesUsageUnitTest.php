@@ -11,6 +11,9 @@ use Drupal\cohesion_templates\Entity\ViewTemplates;
  */
 class ViewTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -34,7 +37,7 @@ class ViewTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
       [
         'type' => 'entity_id',
         'entity_type' => 'cohesion_view_template',
-        'id' => 'view-template-id'
+        'id' => 'view-template-id',
       ],
       [
         'type' => 'entity_id',

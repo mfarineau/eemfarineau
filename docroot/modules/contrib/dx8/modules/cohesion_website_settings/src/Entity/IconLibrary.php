@@ -2,14 +2,10 @@
 
 namespace Drupal\cohesion_website_settings\Entity;
 
-use Drupal\cohesion\Entity\CohesionConfigEntityBase;
 use Drupal\cohesion\EntityHasResourceObjectTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Component\Serialization\Json;
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\cohesion\Entity\CohesionSettingsInterface;
-use Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi;
 
 /**
  * Defines the Cohesion website settings entity.
@@ -60,13 +56,13 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
   protected $label_collection = '';
 
   /**
-   * Return all the icons combined for the form[]
+   * Return all the icons combined for the form[].
    *
-   * @return array|\stdClass|string
+   * @return array|object|string
    */
   public function getResourceObject() {
-    /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
+    /** @var \Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi $send_to_api */
+    $send_to_api = $this->getApiPluginInstance();
 
     return $send_to_api->getIconGroup();
   }
@@ -82,12 +78,13 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
         $original_json_values = $original->getDecodedJsonValues();
         $json_values = $this->getDecodedJsonValues();
 
-        // Clear the previous font files if the new icon library files are different or as no files,
+        // Clear the previous font files if the new icon library files are different or as no files,.
         if (isset($json_values['fontFiles'])) {
           if ((isset($original_json_values['fontFiles']) && $json_values['fontFiles'] != $original_json_values['fontFiles'])) {
             $this->clearIconFontFiles($original_json_values);
           }
-        } else {
+        }
+        else {
           $this->clearIconFontFiles($original_json_values);
         }
 
@@ -95,7 +92,8 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
           if ((isset($original_json_values['iconJSON']['json']) && $json_values['iconJSON']['json'] != $original_json_values['iconJSON']['json'])) {
             $this->clearSelectionJson($original_json_values);
           }
-        } else {
+        }
+        else {
           $this->clearSelectionJson($original_json_values);
         }
       }
@@ -106,8 +104,8 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
    * {@inheritdoc}
    */
   public function process() {
-    /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
+    /** @var \Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi $send_to_api */
+    $send_to_api = $this->getApiPluginInstance();
     $send_to_api->setEntity($this);
     $send_to_api->send();
   }
@@ -125,7 +123,8 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
     parent::postSave($storage, $update);
 
     // Send settings to API if enabled and modified!.
-    if ($this->status()) {  // && $this->isModified()) {
+    // && $this->isModified()) {.
+    if ($this->status()) {
       $this->process();
     }
 
@@ -155,9 +154,12 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
    * {@inheritdoc}
    */
   public function getInUseMessage() {
-    return ['message' => ['#markup' => t('This icon library has been tracked as in use in the places listed below. You should not delete it until you have removed its use.'),],];
+    return ['message' => ['#markup' => t('This icon library has been tracked as in use in the places listed below. You should not delete it until you have removed its use.')]];
   }
 
+  /**
+   *
+   */
   public function clearData() {
     $json_value = $this->getDecodedJsonValues();
     $this->clearIconFontFiles($json_value);
@@ -166,7 +168,7 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
   }
 
   /**
-   * Clear font files for a given json values of a icon library
+   * Clear font files for a given json values of a icon library.
    *
    * @param $json_value
    */
@@ -181,7 +183,7 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
   }
 
   /**
-   * Clear selection json for a given json values of a icon library
+   * Clear selection json for a given json values of a icon library.
    *
    * @param $json_value
    */
@@ -197,4 +199,5 @@ class IconLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
   public function isLayoutCanvas() {
     return FALSE;
   }
+
 }

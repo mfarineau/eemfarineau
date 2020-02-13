@@ -2,9 +2,6 @@
 
 namespace Drupal\cohesion_templates\Entity;
 
-use Drupal\cohesion\Entity\CohesionConfigEntityBase;
-use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Component\Serialization\Json;
 use Drupal\cohesion\Entity\CohesionSettingsInterface;
 
 /**

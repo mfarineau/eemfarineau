@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class CohesionEnableForm
+ * Class CohesionEnableForm.
  *
  * Builds the form to enable a cohesion entity.
  *

@@ -11,6 +11,9 @@ use Drupal\cohesion_templates\Entity\MasterTemplates;
  */
 class MasterTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -41,7 +44,7 @@ class MasterTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
         'type' => 'entity_id',
         'entity_type' => 'cohesion_master_templates',
         'id' => '__none__',
-      ]
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new MasterTemplates([], 'cohesion_master_templates'));

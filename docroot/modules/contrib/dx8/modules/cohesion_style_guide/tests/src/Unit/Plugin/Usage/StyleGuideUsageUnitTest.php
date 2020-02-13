@@ -11,6 +11,9 @@ use Drupal\cohesion_style_guide\Entity\StyleGuide;
  */
 class StyleGuideUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -33,8 +36,7 @@ class StyleGuideUsageUnitTest extends UsagePluginBaseUnitTest {
       [
         'type' => 'json_string',
         'value' => '{token: "some prefix [style-guide:styleguideuid:fielduid] some suffix"}',
-        'decoded' => [
-        ],
+        'decoded' => [],
       ],
     ], new StyleGuide([], 'cohesion_style_guide'));
 
@@ -45,8 +47,7 @@ class StyleGuideUsageUnitTest extends UsagePluginBaseUnitTest {
       [
         'type' => 'json_string',
         'value' => '{token: "some prefix [style-guide:broken] some suffix"}',
-        'decoded' => [
-        ],
+        'decoded' => [],
       ],
     ], new StyleGuide([], 'cohesion_style_guide'));
 
@@ -57,8 +58,7 @@ class StyleGuideUsageUnitTest extends UsagePluginBaseUnitTest {
       [
         'type' => 'json_string',
         'value' => '{token: "some prefix [style-guide] some suffix"}',
-        'decoded' => [
-        ],
+        'decoded' => [],
       ],
     ], new StyleGuide([], 'cohesion_style_guide'));
 

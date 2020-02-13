@@ -6,35 +6,19 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Class BatchImportController
+ * Class BatchImportController.
  *
  * @package Drupal\cohesion_sync\Controller
  */
 class BatchImportController extends ControllerBase {
 
   /**
-   * Clear the results session data.
-   *
-   * @param $entry
-   * @param $context
-   */
-  public static function batchStartAction($entry, &$context) {
-    $context['message'] = t('Starting the import.');
-    $context['results'][] = TRUE;
-
-    \Drupal::service('user.private_tempstore')->get('sync_report')->delete('report');
-  }
-
-  /**
    * @param $entry
    * @param $context
    */
   public static function batchAction($entry, &$context) {
-
-    // Let this throw errors if something goes wrong.
     \Drupal::service('cohesion_sync.packager')->applyPackageEntry($entry);
-
-    $context['message'] = t('Importing %uuid', ['%uuid' => $entry['export']['uuid']]);
+    $context['message'] = t('Importing:  @type - @uuid', ['@type' => $entry['type'], '@uuid' => $entry['export']['uuid']]);
     $context['results'][] = TRUE;
   }
 
@@ -47,7 +31,7 @@ class BatchImportController extends ControllerBase {
     // Let this throw errors if something goes wrong.
     \Drupal::service('cohesion_sync.packager')->postApplyPackageEntry($entry);
 
-    $context['message'] = t('Applying %uuid', ['%uuid' => $entry['export']['uuid']]);
+    $context['message'] = t('Building:  @type - @uuid', ['@type' => $entry['type'], '@uuid' => $entry['export']['uuid']]);
     $context['results'][] = TRUE;
   }
 

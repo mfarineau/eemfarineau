@@ -2,7 +2,7 @@ cohesion.settings:
   path: 'admin/cohesion'
   defaults:
     _controller: '\Drupal\cohesion\Controller\CohesionController::index'
-    _title: 'DX8'
+    _title: 'Acquia Cohesion'
   requirements:
     _permission: 'administer cohesion'
 
@@ -34,7 +34,7 @@ cohesion.configuration.batch:
   path: 'admin/cohesion/configuration/batch'
   defaults:
     _controller: '\Drupal\cohesion\Controller\AdministrationController::batchAction'
-    _title: 'DX8 Assets import and create entities'
+    _title: 'Cohesion assets import and create entities'
   requirements:
     _permission: 'administer cohesion settings'
 
@@ -445,12 +445,12 @@ drupal_data_endpoint.element_save:
     _permission: 'administer components+administer helpers'
     _content_type_format: json
 
-#  DX8 style/layout builder select options
+#  Cohesion style/layout builder select options
 drupal_data_endpoint.select_options:
   path: '/cohesionapi/select-options'
   defaults:
     _controller: '\Drupal\cohesion\Controller\CohesionEndpointController::getSelectOptions'
-    _title: "DX8 style/layout builder select options"
+    _title: "Cohesion style/layout builder select options"
   methods:  [GET,POST]
   requirements:
     _user_is_logged_in: 'TRUE'

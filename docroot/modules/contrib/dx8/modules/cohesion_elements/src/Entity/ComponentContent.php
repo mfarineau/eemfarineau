@@ -3,18 +3,14 @@
 namespace Drupal\cohesion_elements\Entity;
 
 use Drupal\cohesion_elements\ComponentContentInterface;
-use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EditorialContentEntityBase;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\user\UserInterface;
 
 /**
  * Defines the component content entity class.
- *
  *
  * @ContentEntityType(
  *   id = "component_content",
@@ -129,14 +125,12 @@ class ComponentContent extends EditorialContentEntityBase implements ComponentCo
     return $this->get('component')->entity;
   }
 
-
   /**
    * {@inheritdoc}
    */
   public function getCreatedTime() {
     return $this->get('created')->value;
   }
-
 
   /**
    * {@inheritdoc}
@@ -227,12 +221,12 @@ class ComponentContent extends EditorialContentEntityBase implements ComponentCo
       ]);
 
     $fields['status']->setDisplayOptions('form', [
-        'type' => 'boolean_checkbox',
-        'settings' => [
-          'display_label' => TRUE,
-        ],
-        'weight' => 120,
-      ])->setDisplayConfigurable('form', TRUE);
+      'type' => 'boolean_checkbox',
+      'settings' => [
+        'display_label' => TRUE,
+      ],
+      'weight' => 120,
+    ])->setDisplayConfigurable('form', TRUE);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Authored on'))
@@ -255,7 +249,7 @@ class ComponentContent extends EditorialContentEntityBase implements ComponentCo
       ->setCardinality(1)
       ->setSetting('target_type', 'cohesion_layout')
       ->setRevisionable(TRUE)
-      ->setDescription(t("The DX8 layout canvas associated to this content"))
+      ->setDescription(t("The Acquia Cohesion layout canvas associated to this content"))
       ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
@@ -281,7 +275,6 @@ class ComponentContent extends EditorialContentEntityBase implements ComponentCo
    * @return array
    *   An array of default values.
    * @see ::baseFieldDefinitions()
-   *
    */
   public static function getCurrentUserId() {
     return [\Drupal::currentUser()->id()];
@@ -309,4 +302,5 @@ class ComponentContent extends EditorialContentEntityBase implements ComponentCo
       ],
     ];
   }
+
 }

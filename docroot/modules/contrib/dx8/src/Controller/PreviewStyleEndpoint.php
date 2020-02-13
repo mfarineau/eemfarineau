@@ -5,11 +5,10 @@ namespace Drupal\cohesion\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\cohesion\CohesionJsonResponse;
-use Drupal\cohesion\Plugin\Api\PreviewApi;
 use Drupal\Component\Serialization\Json;
 
 /**
- * Class PreviewStyleEndpoint
+ * Class PreviewStyleEndpoint.
  *
  * Makes a request to the API to create a stylesheet for the element preview.
  *
@@ -31,7 +30,7 @@ class PreviewStyleEndpoint extends ControllerBase {
     // Sanitize the style JSON form data sent from Angular.
     $style_model = Json::decode($request->getContent());
 
-    /** @var PreviewApi $send_to_api */
+    /** @var \Drupal\cohesion\Plugin\Api\PreviewApi $send_to_api */
     $send_to_api = \Drupal::service('plugin.manager.api.processor')->createInstance('preview_api');
 
     $send_to_api->setupPreview($entity_type_id, $style_model);

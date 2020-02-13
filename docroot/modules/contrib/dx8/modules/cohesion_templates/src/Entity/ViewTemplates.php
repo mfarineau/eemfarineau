@@ -4,7 +4,6 @@ namespace Drupal\cohesion_templates\Entity;
 
 use Drupal\cohesion\Entity\CohesionSettingsInterface;
 
-
 /**
  * Defines the Cohesion view templates entity.
  *
@@ -53,7 +52,6 @@ class ViewTemplates extends CohesionTemplateBase implements CohesionSettingsInte
   const ASSET_GROUP_ID = 'view_template';
 
   const entity_machine_name_prefix = 'view_tpl_';
-
 
   /**
    * {@inheritdoc}

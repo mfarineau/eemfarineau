@@ -11,6 +11,9 @@ use Drupal\cohesion_elements\Entity\Component;
  */
 class ComponentContentUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -32,16 +35,17 @@ class ComponentContentUsageUnitTest extends UsagePluginBaseUnitTest {
     $fixture = [
       [
         'type' => 'json_string',
-        'value' => null,
+        'value' => NULL,
         'decoded' => [
           'canvas' => [
-            'componentContentId' => 'cc_mycomponentcontent'
-          ]
-        ]
-      ]
+            'componentContentId' => 'cc_mycomponentcontent',
+          ],
+        ],
+      ],
     ];
 
-    $entities = $this->unit->scanForInstancesOfThisType($fixture, new Component([], 'component_content')); // This should be ComponentContent but works regardless.
+    // This should be ComponentContent but works regardless.
+    $entities = $this->unit->scanForInstancesOfThisType($fixture, new Component([], 'component_content'));
 
     // Check the results.
     $this->assertEquals(count($entities), 1);

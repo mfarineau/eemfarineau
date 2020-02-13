@@ -11,6 +11,9 @@ use Drupal\cohesion_elements\Entity\Component;
  */
 class ComponentUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -32,13 +35,13 @@ class ComponentUsageUnitTest extends UsagePluginBaseUnitTest {
     $fixture = [
       [
         'type' => 'json_string',
-        'value' => null,
+        'value' => NULL,
         'decoded' => [
           'canvas' => [
-            'componentId' => 'mycomponent'
-          ]
-        ]
-      ]
+            'componentId' => 'mycomponent',
+          ],
+        ],
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new Component([], 'cohesion_component'));

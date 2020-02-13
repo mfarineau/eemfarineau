@@ -3,9 +3,11 @@
 namespace Drupal\cohesion\Services;
 
 use Drupal\Component\PhpStorage\FileStorage;
+use Drupal\Core\StringTranslation\TranslationInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class LocalFilesManager
+ * Class LocalFilesManager.
  *
  * Helper service used to move local cohesion:// files around for entity save / dx8:import.
  *
@@ -14,6 +16,16 @@ use Drupal\Component\PhpStorage\FileStorage;
  * @package Drupal\cohesion\Helper
  */
 class LocalFilesManager {
+  use StringTranslationTrait;
+
+  /**
+   * LocalFilesManager constructor.
+   *
+   * @param \Drupal\Core\StringTranslation\TranslationInterface $stringTranslation
+   */
+  public function __construct(TranslationInterface $stringTranslation) {
+    $this->stringTranslation = $stringTranslation;
+  }
 
   /**
    * Flush the css dummy query string parameter (forces browser reload).
@@ -65,9 +77,9 @@ class LocalFilesManager {
   }
 
   /**
-   * Move temporary template to cohesion template directory
+   * Move temporary template to cohesion template directory.
    *
-   * @return boolean
+   * @return bool
    */
   public function moveTemporaryTemplateToLive() {
     // Create cohesion:// templates if it doesn't exist.
@@ -89,11 +101,11 @@ class LocalFilesManager {
           $files[] = $file;
         }
         else {
-          drupal_set_message(t('Error moving @file', ['@file' => $temp_template]), 'error');
+          drupal_set_message($this->t('Error moving @file', ['@file' => $temp_template]), 'error');
         }
       }
 
-      // Reset temporary template list
+      // Reset temporary template list.
       \Drupal::keyValue('cohesion.temporary_template')->set('temporary_templates', []);
     }
 
@@ -131,7 +143,6 @@ class LocalFilesManager {
       'grid' => 'cohesion-responsive-grid-settings.css',
       'icons' => 'cohesion-icon-libraries.css',
     ];
-
 
     if (array_key_exists($type, $cohesion_uris) && array_key_exists($type, $tmp_uris)) {
       $filename = '';
@@ -183,9 +194,10 @@ class LocalFilesManager {
   }
 
   /**
-   * Delete a file by URI checking if it's a managed file or not first
+   * Delete a file by URI checking if it's a managed file or not first.
    *
-   * @param $uri - the uri of the file
+   * @param $uri
+   *   - the uri of the file
    *
    * @return bool
    */
@@ -241,7 +253,7 @@ class LocalFilesManager {
    *
    * @param $tmp_file
    *
-   * @return bool|\stdClass
+   * @return bool|object
    */
   private function resolveTemporaryFile($tmp_file) {
     $temp_folder = $this->scratchDirectory();
@@ -263,4 +275,5 @@ class LocalFilesManager {
     }
     return FALSE;
   }
+
 }

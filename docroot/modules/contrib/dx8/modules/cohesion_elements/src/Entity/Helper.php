@@ -3,7 +3,6 @@
 namespace Drupal\cohesion_elements\Entity;
 
 use Drupal\cohesion\Entity\CohesionSettingsInterface;
-use Drupal\cohesion\LayoutCanvas\LayoutCanvas;
 use Drupal\Core\Entity\EntityStorageInterface;
 
 /**
@@ -65,7 +64,7 @@ class Helper extends CohesionElementEntityBase implements CohesionSettingsInterf
    * {@inheritdoc}
    */
   public function clearData() {
-    // Helpers have no data to be cleared
+    // Helpers have no data to be cleared.
   }
 
   /**

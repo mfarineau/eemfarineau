@@ -1,5 +1,5 @@
 name: Cohesion breakpoint indicator
-description: Adds a breakpoint indicator to DX8, which displays the current breakpoint you're viewing.
+description: Adds a breakpoint indicator to Cohesion, which displays the current breakpoint you're viewing.
 type: module
 package: cohesion
 core: 8.x

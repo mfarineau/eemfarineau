@@ -71,16 +71,17 @@ class MasterTemplates extends CohesionTemplateBase implements CohesionSettingsIn
    * @param $entities
    *
    * @return bool
+   *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  static public function importEntities($entities) {
+  public static function importEntities($entities) {
     $current_entities = self::loadMultiple();
-    // Only import master templates if there is some to import or if there no master template already
+    // Only import master templates if there is some to import or if there no master template already.
     if (!is_array($entities) || (count($entities) == 0) || count($current_entities) > 0) {
       return FALSE;
     }
 
-    // Import each entity
+    // Import each entity.
     $canonical_list = [];
     foreach ($entities as $e) {
       $entity_exists = self::load($e['element_id']);

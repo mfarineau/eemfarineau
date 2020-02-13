@@ -2,6 +2,7 @@
 
 namespace Drupal\cohesion\Controller;
 
+use Drupal\entity_browser\Element\EntityBrowserElement;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Site\Settings;
@@ -14,9 +15,10 @@ use Drupal\cohesion\CohesionJsonResponse;
 use Drupal\block\BlockRepositoryInterface;
 use Drupal\Component\Utility\Tags;
 use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Extension\ModuleHandlerInterface;
 
 /**
- * Class CohesionDrupalEndpointController
+ * Class CohesionDrupalEndpointController.
  *
  * Returns Drupal data to Angular (views, blocks, node lists, etc).
  * See function index() for the entry point.
@@ -43,16 +45,23 @@ class CohesionDrupalEndpointController extends ControllerBase {
   protected $entityTypeManager;
 
   /**
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
    * CohesionDrupalEndpointController constructor.
    *
    * @param \Drupal\Core\Entity\EntityAutocompleteMatcher $matcher
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $themeHandler
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    */
-  public function __construct(EntityAutocompleteMatcher $matcher, ThemeHandlerInterface $themeHandler, EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityAutocompleteMatcher $matcher, ThemeHandlerInterface $themeHandler, EntityTypeManagerInterface $entityTypeManager, ModuleHandlerInterface $moduleHandler) {
     $this->matcher = $matcher;
     $this->themeHandler = $themeHandler;
     $this->entityTypeManager = $entityTypeManager;
+    $this->moduleHandler = $moduleHandler;
   }
 
   /**
@@ -64,7 +73,12 @@ class CohesionDrupalEndpointController extends ControllerBase {
    * @return static
    */
   public static function create(ContainerInterface $container) {
-    return new static($container->get('cohesion.autocomplete_matcher'), $container->get('theme_handler'), $container->get('entity_type.manager'));
+    return new static(
+      $container->get('cohesion.autocomplete_matcher'),
+      $container->get('theme_handler'),
+      $container->get('entity_type.manager'),
+      $container->get('module_handler')
+    );
   }
 
   /**
@@ -86,6 +100,11 @@ class CohesionDrupalEndpointController extends ControllerBase {
       }
     }
 
+    $themes_values[] = [
+      'value' => 'all',
+      'name' => 'All themes',
+    ];
+
     $error = empty($themes_values) ? TRUE : FALSE;
 
     return new CohesionJsonResponse([
@@ -95,7 +114,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
   }
 
   /**
-   * Return a list of themes
+   * Return a list of themes.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
@@ -122,12 +141,35 @@ class CohesionDrupalEndpointController extends ControllerBase {
 
     // Get a list of regions for the desired theme.
     $regions = [];
-    if (($region_list = system_region_list($theme, BlockRepositoryInterface::REGIONS_ALL))) {
-      foreach ($region_list as $key => $region) {
-        $regions[] = [
-          'value' => $key,
-          'name' => $region,
-        ];
+    if(isset($theme)) {
+      if (($region_list = system_region_list($theme, BlockRepositoryInterface::REGIONS_ALL))) {
+        foreach ($region_list as $key => $region) {
+          $regions[] = [
+            'value' => $key,
+            'name' => $region,
+          ];
+        }
+      }
+    }
+    // If "all themes" option is selected
+    if($themeParam == 'all') {
+      // Get all themes
+      $themes = $this->themeHandler->listInfo();
+      foreach($themes as $theme) {
+        // Get themes regions
+        if (($region_list = system_region_list($theme, BlockRepositoryInterface::REGIONS_ALL))) {
+          foreach ($region_list as $key => $region) {
+            $region_key = array_column($regions, 'value');
+
+            // check if already in the array or not
+            if(!in_array($key, $region_key)) {
+              $regions[] = [
+                'value' => $key,
+                'name' => $region,
+              ];
+            }
+          }
+        }
       }
     }
 
@@ -145,12 +187,12 @@ class CohesionDrupalEndpointController extends ControllerBase {
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
-   * @return CohesionJsonResponse
+   * @return \Drupal\cohesion\CohesionJsonResponse
    */
   public function getContexts(Request $request) {
 
     $context = [];
-    if (\Drupal::service('module_handler')->moduleExists('context')) {
+    if ($this->moduleHandler->moduleExists('context')) {
 
       // Get all available contexts..
       $groups = \Drupal::service('context.manager')->getContextsByGroup();
@@ -181,16 +223,17 @@ class CohesionDrupalEndpointController extends ControllerBase {
    */
   public function getBlocks(Request $request) {
     $blocks_data = [];
-    if (($blocks = \Drupal::service('entity_type.manager')
+    if (($blocks = $this->entityTypeManager
       ->getStorage('block')
       ->loadMultiple())) {
       foreach ($blocks as $block_id => $block) {
         $blocks_data[] = [
           'value' => $block_id,
-          'label' => $block->label() . $this->t(" (theme: @theme, region: @region)", [
-              '@theme' => $block->getTheme(),
-              '@region' => $block->getRegion(),
-            ]),
+          'label' => $this->t("@label (theme: @theme, region: @region)", [
+            '@label' => $block->label(),
+            '@theme' => $block->getTheme(),
+            '@region' => $block->getRegion(),
+          ]),
         ];
       }
     }
@@ -256,6 +299,9 @@ class CohesionDrupalEndpointController extends ControllerBase {
     ]);
   }
 
+  /**
+   *
+   */
   public function linkEntityTypes(Request $request) {
     $data = [];
     $entity_types_definitions = $this->entityTypeManager->getDefinitions();
@@ -273,16 +319,16 @@ class CohesionDrupalEndpointController extends ControllerBase {
       'value' => 'view',
     ];
 
-
     return new CohesionJsonResponse([
       'status' => 'success',
       'data' => $data,
     ]);
   }
 
+  /**
+   *
+   */
   public function linkAutoComplete(Request $request) {
-    $data = [];
-
     $entity_types = $request->query->get('entity_types');
 
     $content_entity_types = [];
@@ -294,6 +340,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
     }
 
     $grouped_data = [];
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
 
     if ($input = $request->query->get('q')) {
       $input_string = Tags::explode($input);
@@ -309,7 +356,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
               $executable->initDisplay();
               foreach ($executable->displayHandlers as $display_id => $display) {
 
-                // Search by view label and display title
+                // Search by view label and display title.
                 if ($display_id == $query_split[2] && $display->hasPath()) {
                   if (!isset($grouped_data['views'])) {
                     $grouped_data['views'] = [];
@@ -333,6 +380,9 @@ class CohesionDrupalEndpointController extends ControllerBase {
               if (!isset($grouped_data[$entity->getEntityType()->id()])) {
                 $grouped_data[$entity->getEntityType()->id()] = [];
               }
+              if($entity->hasTranslation($language)){
+                $entity = $entity->getTranslation($language);
+              }
               $grouped_data[$entity->getEntityType()->id()][] = [
                 'name' => $entity->label(),
                 'id' => $query_split[0] . '::' . $entity->id(),
@@ -354,6 +404,9 @@ class CohesionDrupalEndpointController extends ControllerBase {
               if (!isset($grouped_data[$content_entity_type->id()])) {
                 $grouped_data[$content_entity_type->id()] = [];
               }
+              if($entity->hasTranslation($language)){
+                $entity = $entity->getTranslation($language);
+              }
               $grouped_data[$content_entity_type->id()][] = [
                 'name' => $entity->label(),
                 'id' => $content_entity_type->id() . '::' . $entity->id(),
@@ -371,7 +424,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
         ];
 
         foreach ($content_entity_types as $content_entity_type) {
-          /** @var ContentEntityTypeInterface $content_entity_type */
+          /** @var \Drupal\Core\Entity\ContentEntityTypeInterface $content_entity_type */
           $entity_type = $this->entityTypeManager->getStorage($content_entity_type->id());
 
           try {
@@ -389,15 +442,16 @@ class CohesionDrupalEndpointController extends ControllerBase {
                     $grouped_data[$content_entity_type->id()] = [];
                   }
                   $grouped_data[$content_entity_type->id()][] = [
-                    'name' => $entity->label(),
+                    'name' => $match['label'],
                     'id' => $content_entity_type->id() . '::' . $entity->id(),
                     'group' => $content_entity_type->getLabel(),
                   ];
                 }
               }
             }
-          } catch (\Exception $e) {
-            // Some modules don't handle autocomplete so we ignore them
+          }
+          catch (\Exception $e) {
+            // Some modules don't handle autocomplete so we ignore them.
           }
         }
 
@@ -410,7 +464,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
               $executable->initDisplay();
               foreach ($executable->displayHandlers as $display_id => $display) {
 
-                // Search by view label and display title
+                // Search by view label and display title.
                 if ($display->hasPath() && (stripos($view->label(), $typed_string) !== FALSE || stripos($display->display['display_title'], $typed_string) !== FALSE)) {
 
                   if (!isset($grouped_data['views'])) {
@@ -445,7 +499,6 @@ class CohesionDrupalEndpointController extends ControllerBase {
       $data = array_merge($data, $group_data);
     }
 
-
     return new CohesionJsonResponse([
       'status' => 'success',
       'data' => $data,
@@ -458,11 +511,12 @@ class CohesionDrupalEndpointController extends ControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
    * @return \Drupal\cohesion\CohesionJsonResponse
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    */
   public function getMenus(Request $request) {
 
-    // Get list of menus
+    // Get list of menus.
     $menus_data = [];
     if (($menus = \Drupal::entityTypeManager()
       ->getStorage('menu')
@@ -487,6 +541,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
    * @return \Drupal\cohesion\CohesionJsonResponse
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    */
   public function getImageStyles(Request $request) {
@@ -528,6 +583,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
    * @return \Drupal\cohesion\CohesionJsonResponse
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    */
   public function getEntityTypes(Request $request) {
@@ -564,6 +620,9 @@ class CohesionDrupalEndpointController extends ControllerBase {
     ]);
   }
 
+  /**
+   *
+   */
   public function getEntityBrowsers(Request $request) {
     if ($this->moduleHandler()
       ->moduleExists('entity_browser')) {
@@ -580,7 +639,8 @@ class CohesionDrupalEndpointController extends ControllerBase {
             'value' => $entity_browser->id(),
           ];
         }
-      } catch (\Exception $e) {
+      }
+      catch (\Exception $e) {
       }
 
       return new CohesionJsonResponse([
@@ -591,10 +651,13 @@ class CohesionDrupalEndpointController extends ControllerBase {
 
     return new CohesionJsonResponse([
       'status' => 'error',
-      'data' => ['error' => t('This element requires the Entity browser module to be installed.'),],
+      'data' => ['error' => $this->t('This element requires the Entity browser module to be installed.')],
     ], 400);
   }
 
+  /**
+   *
+   */
   public function getEntityTypesBundles(Request $request) {
     $types = [];
     try {
@@ -607,7 +670,8 @@ class CohesionDrupalEndpointController extends ControllerBase {
           'value' => $bundle_id,
         ];
       }
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
     }
 
     return new CohesionJsonResponse([
@@ -616,9 +680,12 @@ class CohesionDrupalEndpointController extends ControllerBase {
     ]);
   }
 
+  /**
+   *
+   */
   public function getEntityBrowserUrl(Request $request) {
     if ($this->moduleHandler()
-        ->moduleExists('entity_browser') && \Drupal::hasService('entity_browser.selection_storage')) {
+      ->moduleExists('entity_browser') && \Drupal::hasService('entity_browser.selection_storage')) {
       $entity_browser_id = $request->query->get('entity_browser_id');
       $entity_type = $request->query->get('entity_type');
       $target_bundles_ids = $request->query->get('target_bundles');
@@ -633,7 +700,7 @@ class CohesionDrupalEndpointController extends ControllerBase {
             ->load($entity_browser_id)) {
 
             $display = $entity_browser->getDisplay();
-            // Reset display id
+            // Reset display id.
             $display->setUuid('');
             $url = $display->path() . '?uuid=' . $display->getUuid();
 
@@ -662,15 +729,15 @@ class CohesionDrupalEndpointController extends ControllerBase {
             \Drupal::service('entity_browser.selection_storage')
               ->setWithExpire($display->getUuid(), $persistent_data, Settings::get('entity_browser_expire', 21600));
 
-
             $data = [
               'url' => $url,
               'uuid' => $display->getUuid(),
               'cardinality' => 1,
-              'selection_mode' => \Drupal\entity_browser\Element\EntityBrowserElement::SELECTION_MODE_APPEND,
+              'selection_mode' => EntityBrowserElement::SELECTION_MODE_APPEND,
             ];
           }
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
         }
       }
 
@@ -682,9 +749,8 @@ class CohesionDrupalEndpointController extends ControllerBase {
 
     return new CohesionJsonResponse([
       'status' => 'error',
-      'data' => ['error' => t('This element requires the Entity browser module to be installed.'),],
+      'data' => ['error' => $this->t('This element requires the Entity browser module to be installed.')],
     ], 400);
   }
-
 
 }

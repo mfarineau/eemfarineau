@@ -2,14 +2,11 @@
 
 namespace Drupal\cohesion_website_settings\Entity;
 
-use Drupal\cohesion\Entity\CohesionConfigEntityBase;
 use Drupal\cohesion\EntityHasResourceObjectTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\cohesion\Entity\CohesionSettingsInterface;
-use Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi;
-
 
 /**
  * Defines the Cohesion website settings entity.
@@ -67,8 +64,8 @@ class WebsiteSettings extends WebsiteSettingsEntityBase implements CohesionSetti
    * {@inheritdoc}
    */
   public function process() {
-    /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
+    /** @var \Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi $send_to_api */
+    $send_to_api = $this->getApiPluginInstance();
     $send_to_api->setEntity($this);
 
     // Send or delete.
@@ -89,8 +86,8 @@ class WebsiteSettings extends WebsiteSettingsEntityBase implements CohesionSetti
    * {@inheritdoc}
    */
   public function jsonValuesErrors() {
-    /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
+    /** @var \Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi $send_to_api */
+    $send_to_api = $this->getApiPluginInstance();
     $send_to_api->setEntity($this);
     $success = $send_to_api->sendWithoutSave();
     $responseData = $send_to_api->getData();

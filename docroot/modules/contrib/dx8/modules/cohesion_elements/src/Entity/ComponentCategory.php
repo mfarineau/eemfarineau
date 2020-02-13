@@ -55,4 +55,5 @@ class ComponentCategory extends ElementCategoryBase {
   const target_entity_type = 'cohesion_component';
 
   const default_category_id = 'cpt_cat_uncategorized';
+
 }

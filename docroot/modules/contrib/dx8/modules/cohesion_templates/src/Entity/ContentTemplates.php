@@ -142,7 +142,7 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
         foreach ($entity['view_modes'] as $entity_view_mode) {
           // Try to import entity.
           list($entity_type_id, $view_mode) = explode('.', $entity_view_mode['id']);
-          // Determine if has already been imported by finding some existing templates in DB
+          // Determine if has already been imported by finding some existing templates in DB.
           $already_imported_ids = \Drupal::service('entity.query')
             ->get('cohesion_content_templates')
             ->condition('entity_type', $entity_type)
@@ -162,8 +162,9 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
             $new_entity->setDefaultValues();
             $new_entity->save();
             $canonical_list[$entity_id] = $entity_id;
-          }else{
-            foreach ($already_imported_ids as $entity_id){
+          }
+          else {
+            foreach ($already_imported_ids as $entity_id) {
               $canonical_list[$entity_id] = $entity_id;
             }
           }
@@ -200,8 +201,9 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
             $entity->setDefaultValues();
             $entity->save();
             $canonical_list[$entity_id] = $entity_id;
-          }else{
-            foreach ($already_imported_ids as $entity_id){
+          }
+          else {
+            foreach ($already_imported_ids as $entity_id) {
               $canonical_list[$entity_id] = $entity_id;
             }
           }
@@ -257,7 +259,6 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
 
     $uri_route_parameters['content_entity_type'] = $this->entity_type;
 
-
     return $uri_route_parameters;
   }
 
@@ -268,9 +269,16 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
     return $this->get('master_template');
   }
 
+  /**
+   *
+   */
   public function canEditMachineName() {
-    if ($this->get('view_mode') !== 'full' && $this->get('modified') === TRUE || $this->get('bundle') === '__any__' || $this->get('view_mode') === 'full' && !$this->isNew()) {
+    if ($this->get('bundle') === '__any__') {
       return FALSE;
+    }
+
+    if($this->get('view_mode') !== 'full' && $this->get('modified') === FALSE){
+      return TRUE;
     }
 
     return parent::canEditMachineName();
@@ -278,7 +286,6 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
 
   /**
    * {@inheritdoc}
-   *
    */
   public function getInUseMarkup() {
     if ($this->get('bundle') == '__any__' || $this->get('view_mode') != 'full') {
@@ -311,7 +318,7 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
   public function reset() {
 
     $this->clearData();
-    // Only delete full view mode content template
+    // Only delete full view mode content template.
     if ($this->get('view_mode') == 'full') {
       $candidate_template_ids = \Drupal::service('entity.query')
         ->get('cohesion_content_templates')
@@ -327,7 +334,6 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
 
     $this->setDefaultValues();
     $this->save();
-    return;
   }
 
   /**
@@ -347,4 +353,5 @@ class ContentTemplates extends CohesionTemplateBase implements CohesionSettingsI
 
     return $machine_name_prefix . '_';
   }
+
 }

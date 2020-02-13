@@ -23,7 +23,7 @@ function entity_rebuild_finished_callback($success, $results, $operations) {
 
     \Drupal::service('cohesion.local_files_manager')->tempToLive();
     \Drupal::service('cohesion.local_files_manager')->moveTemporaryTemplateToLive();
-    drupal_set_message(t('DX8 entities have successfully been rebuilt. Your styles are now live.'));
+    drupal_set_message(t('Cohesion entities have successfully been rebuilt. Your styles are now live.'));
   }
   else {
     drupal_set_message($results['error'], 'error');

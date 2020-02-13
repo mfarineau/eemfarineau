@@ -13,11 +13,11 @@ function cohesion_drush_command() {
     ],
     'dx8-import' => [
       'description' => dt('Import assets and rebuild element styles (replacement for the CRON).'),
-      'aliases' => ['dx8:import'],
+      'aliases' => ['dx8:import', 'cohesion:import', 'cohesion-import'],
     ],
     'dx8-rebuild' => [
       'description' => dt('Resave all Cohesion config entities.'),
-      'aliases' => ['dx8:rebuild'],
+      'aliases' => ['dx8:rebuild', 'cohesion:rebuild', 'cohesion-rebuild'],
     ],
   ];
 }
@@ -54,7 +54,7 @@ function drush_cohesion_dx8($op = '', $oldNamingConvention = true) {
       if($errors){
         drush_set_error('DX8', $errors['error']);
       }else{
-        drush_log(t('DX8 entities have successfully been rebuilt. Your styles are now live.'));
+        drush_log(t('Cohesion entities have successfully been rebuilt. Your styles are now live.'));
       }
       break;
   }

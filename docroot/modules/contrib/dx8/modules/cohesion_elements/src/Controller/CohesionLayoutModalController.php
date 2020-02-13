@@ -1,19 +1,14 @@
 <?php
-/**
- * @file
- * Contains Drupal\cohesion_elements\Controller\CohesionLayoutModalController;
- */
 
 namespace Drupal\cohesion_elements\Controller;
 
-use Drupal\cohesion\CohesionJsonResponse;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 
 /**
- * Class CohesionLayoutModalController
+ * Class CohesionLayoutModalController.
  *
  * @package Drupal\cohesion_elements\Controller
  */
@@ -50,7 +45,7 @@ class CohesionLayoutModalController extends ControllerBase {
   }
 
   /**
-   * Ajax handler for quick edit cohesion layout
+   * Ajax handler for quick edit cohesion layout.
    */
   public static function cohesionLayoutAjax($form, FormStateInterface $form_state) {
     return new AjaxResponse([]);

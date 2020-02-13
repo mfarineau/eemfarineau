@@ -2,12 +2,11 @@
 
 namespace Drupal\cohesion_sync\Plugin\Sync;
 
-use Drupal\Component\Serialization\Json;
 use Drupal\cohesion_sync\SyncPluginBase;
 use Drupal\file\Entity\File;
 
 /**
- * Class FileSync
+ * Class FileSync.
  *
  * @package Drupal\cohesion_sync
  *
@@ -21,10 +20,11 @@ class FileSync extends SyncPluginBase {
 
   /**
    * {@inheritdoc}
+   *
    * @testme
    */
   public function buildExport($entity) {
-    /** @var File $entity */
+    /** @var \Drupal\file\Entity\File $entity */
     $struct = [];
 
     // Get all the field values into the struct.
@@ -51,7 +51,6 @@ class FileSync extends SyncPluginBase {
       throw new \Exception($this->t('File @uri does not exist on the local filesystem although the entity @label exists.', ['@uri' => $entity->getFileUri(), '@label' => $entity->label()]));
     }
 
-
     return $struct;
   }
 
@@ -59,7 +58,7 @@ class FileSync extends SyncPluginBase {
    * {@inheritdoc}
    */
   public function getDependencies($entity) {
-    /** @var File $entity */
+    /** @var \Drupal\file\Entity\File $entity */
     return [];
   }
 
@@ -100,7 +99,8 @@ class FileSync extends SyncPluginBase {
 
           if (isset($entity_val['value']) && $entity_val['value'] !== $value) {
             // Entity has changes.
-            return ENTRY_EXISTING_ASK;  // Ask the user what to do.
+            // Ask the user what to do.
+            return ENTRY_EXISTING_ASK;
           }
         }
       }
@@ -109,7 +109,8 @@ class FileSync extends SyncPluginBase {
       @ $local_file_contents = file_get_contents($entry['uri']);
       if ($local_file_contents) {
         if (base64_encode($local_file_contents) !== $entry['content']) {
-          return ENTRY_EXISTING_ASK;  // Ask the user what to do.
+          // Ask the user what to do.
+          return ENTRY_EXISTING_ASK;
         }
       } else {
         throw new \Exception($this->t('File @uri does not exist on the local filesystem although the entity exists.', ['@uri' => $entry['uri']]));
@@ -133,7 +134,8 @@ class FileSync extends SyncPluginBase {
     // Load existing entity.
     try {
       $entity = $this->entityRepository->loadEntityByUuid('file', $entry['uuid']);
-    } catch (\Throwable $e) {
+    }
+    catch (\Throwable $e) {
       $entity = NULL;
     }
 
@@ -150,7 +152,6 @@ class FileSync extends SyncPluginBase {
       // Create new entity.
       if (!$entity) {
         // $user = \Drupal::currentUser();
-
         $entity = File::create([
           'uri' => $entry['uri'],
           'uuid' => $entry['uuid'],

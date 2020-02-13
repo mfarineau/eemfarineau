@@ -11,6 +11,9 @@ use Drupal\cohesion_website_settings\Entity\Color;
  */
 class ColorPaletteUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -35,8 +38,8 @@ class ColorPaletteUsageUnitTest extends UsagePluginBaseUnitTest {
         'value' => json_encode([
           'content' => '$coh-color-r3-D $coh-color||eg@|-characters',
           'content2' => 'starttext$coh-color-green endtext',
-        ])
-      ]
+        ]),
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new Color([], 'cohesion_color'));

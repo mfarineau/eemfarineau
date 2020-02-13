@@ -11,6 +11,9 @@ use Drupal\cohesion_website_settings\Entity\IconLibrary;
  */
 class IconLibraryUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -36,10 +39,10 @@ class IconLibraryUsageUnitTest extends UsagePluginBaseUnitTest {
           "contentIcon" => [
             "value" => [
               "fontFamily" => "valueicon",
-              "iconName" => "123456"
-            ]
-          ]
-        ]
+              "iconName" => "123456",
+            ],
+          ],
+        ],
       ],
       [
         'type' => 'json_string',
@@ -47,20 +50,21 @@ class IconLibraryUsageUnitTest extends UsagePluginBaseUnitTest {
           "contentIcon" => [
             "differentParentKey" => [
               "fontFamily" => "differenticon",
-              "iconName" => "789012"
-            ]
-          ]
-        ]
+              "iconName" => "789012",
+            ],
+          ],
+        ],
       ],
       [
         'type' => 'json_string',
         'decoded' => [
           "contentIcon" => [
             "value" => [
-              "fontFamily" => "valuenoiconname",  // This won't be found because "iconName" sibling is not set.
-            ]
-          ]
-        ]
+      // This won't be found because "iconName" sibling is not set.
+              "fontFamily" => "valuenoiconname",
+            ],
+          ],
+        ],
       ],
     ];
 

@@ -26,7 +26,6 @@ class ComponentForm extends ElementBaseForm {
 
     $form['details']['#help_link'] = \Drupal::service('cohesion.support_url')->getSupportUrlPrefix() . 'component-form-builder-details';
 
-
     $form_state->setCached(FALSE);
     // Tell Angular that this is a component sidebar.
     $form['#attached']['drupalSettings']['cohesion']['isComponentForm'] = TRUE;

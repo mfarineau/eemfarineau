@@ -11,6 +11,9 @@ use Drupal\cohesion_custom_styles\Entity\CustomStyle;
  */
 class CustomStylesUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -40,7 +43,7 @@ class CustomStylesUsageUnitTest extends UsagePluginBaseUnitTest {
         'type' => 'entity_id',
         'entity_type' => 'cohesion_custom_style',
         'id' => 'id-green',
-      ]
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new CustomStyle([], 'cohesion_custom_style'));

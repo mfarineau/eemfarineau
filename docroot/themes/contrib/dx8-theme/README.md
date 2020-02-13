@@ -1,4 +1,4 @@
-# DX8 minimal theme
+# Cohesion minimal theme
 
 Developer documentation. 
 

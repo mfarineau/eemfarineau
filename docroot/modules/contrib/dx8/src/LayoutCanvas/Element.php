@@ -3,7 +3,7 @@
 namespace Drupal\cohesion\LayoutCanvas;
 
 /**
- * Class LayoutCanvas
+ * Class LayoutCanvas.
  *
  * @package Drupal\cohesion
  *
@@ -14,33 +14,39 @@ namespace Drupal\cohesion\LayoutCanvas;
  */
 class Element implements LayoutCanvasElementInterface, \JsonSerializable {
 
-  /** @var \Drupal\cohesion\LayoutCanvas\Element|\Drupal\cohesion\LayoutCanvas\LayoutCanvas $parent */
+  /**
+   * @var \Drupal\cohesion\LayoutCanvas\Element|\Drupal\cohesion\LayoutCanvas\LayoutCanvas*/
   protected $parent;
 
-  /** @var \Drupal\cohesion\LayoutCanvas\Element[] $children */
+  /**
+   * @var \Drupal\cohesion\LayoutCanvas\Element[]*/
   protected $children = [];
 
-  /** @var object $original the raw element as it is stored in the database */
+  /**
+   * @var object*/
   protected $original;
 
-  /** @var \Drupal\cohesion\LayoutCanvas\ElementModel|NULL $model */
+  /**
+   * @var \Drupal\cohesion\LayoutCanvas\ElementModel|null*/
   protected $model;
 
-  /** @var $element \stdClass The element properties without children */
+  /**
+   * @var element\stdClassTheelementpropertieswithoutchildren*/
   protected $element;
 
-  /** @var bool */
+  /**
+   * @var bool*/
   protected $is_api_ready = FALSE;
 
   /**
    * Element constructor.
    *
    * @param object $raw_element
-   *  The element object as it is after json_decode
+   *   The element object as it is after json_decode.
    * @param \Drupal\cohesion\LayoutCanvas\Element|\Drupal\cohesion\LayoutCanvas\LayoutCanvas $parent
-   *  The parent of the element. Either other Element or the LayoutCanvas
-   * @param object|FALSE $raw_model
-   *  The whole model as it is after json_decode
+   *   The parent of the element. Either other Element or the LayoutCanvas.
+   * @param object|false $raw_model
+   *   The whole model as it is after json_decode.
    */
   public function __construct($raw_element, $parent, $raw_model) {
 
@@ -63,7 +69,7 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
       $this->model = new ElementModel($raw_model->{$this->getModelUUID()}, $this);
     }
 
-    // Set the parentUid
+    // Set the parentUid.
     if ($this->parent instanceof Element) {
       $this->setProperty('parentUid', $this->parent->getProperty('uid'));
     }
@@ -78,11 +84,11 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Find a property in the element
+   * Find a property in the element.
    *
    * @param string|array $path_to_property
-   *  The path in the element to get this property. Specify a string if top
-   *   level, or an array to search in leaves
+   *   The path in the element to get this property. Specify a string if top
+   *   level, or an array to search in leaves.
    *
    * @return mixed|null
    */
@@ -141,7 +147,7 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * @return \Drupal\cohesion\LayoutCanvas\ElementModel|NULL
+   * @return \Drupal\cohesion\LayoutCanvas\ElementModel|null
    */
   public function getModel() {
     return $this->model;
@@ -150,7 +156,7 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
   /**
    * Return the element uuid.
    *
-   * @return NULL|string
+   * @return null|string
    */
   public function getUUID() {
     return (property_exists($this->element, 'uuid')) ? $this->element->uuid : NULL;
@@ -164,7 +170,7 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Return TRUE if the element is a component content
+   * Return TRUE if the element is a component content.
    *
    * @return bool
    */
@@ -209,9 +215,9 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Recursively loop through the element children
+   * Recursively loop through the element children.
    *
-   * Returns a flat array of Element[] of the element children
+   * Returns a flat array of Element[] of the element children.
    *
    * Ex:
    *  -> first_child
@@ -230,7 +236,6 @@ class Element implements LayoutCanvasElementInterface, \JsonSerializable {
    *  -> second_child_child_1
    *
    * @return \Drupal\cohesion\LayoutCanvas\Element[]
-   *
    */
   public function iterateChildren() {
     $elements = [];

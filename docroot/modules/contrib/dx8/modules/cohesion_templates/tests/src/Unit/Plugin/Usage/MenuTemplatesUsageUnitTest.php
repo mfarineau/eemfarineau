@@ -11,6 +11,9 @@ use Drupal\cohesion_templates\Entity\MenuTemplates;
  */
 class MenuTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -34,9 +37,9 @@ class MenuTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
         'type' => 'json_string',
         'decoded' => [
           "model" => [
-            "menu"=> [
+            "menu" => [
               "id" => "someid",
-              "template" => "menu-template-id"
+              "template" => "menu-template-id",
             ],
           ],
         ],
@@ -45,7 +48,7 @@ class MenuTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
         'type' => 'json_string',
         'decoded' => [
           "model" => [
-            "menu"=> [
+            "menu" => [
               "id" => "will not find this",
             ],
           ],

@@ -2,11 +2,8 @@
 
 namespace Drupal\cohesion_website_settings\Entity;
 
-use Drupal\cohesion\Entity\CohesionConfigEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\Component\Serialization\Json;
 use Drupal\Core\Cache\Cache;
-use Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi;
 use Drupal\cohesion\Entity\CohesionSettingsInterface;
 
 /**
@@ -48,13 +45,13 @@ class FontLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
   const ASSET_GROUP_ID = 'website_settings';
 
   /**
-   * Return all the icons combined for the form[]
+   * Return all the icons combined for the form[].
    *
-   * @return array|\stdClass|string
+   * @return array|object|string
    */
   public function getResourceObject() {
-    /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
+    /** @var \Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi $send_to_api */
+    $send_to_api = $this->getApiPluginInstance();
 
     return $send_to_api->getFontGroup();
   }
@@ -63,8 +60,8 @@ class FontLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
    * {@inheritdoc}
    */
   public function process() {
-    /** @var WebsiteSettingsApi $send_to_api */
-    $send_to_api = $this->apiProcessorManager()->createInstance('website_settings_api');
+    /** @var \Drupal\cohesion_website_settings\Plugin\Api\WebsiteSettingsApi $send_to_api */
+    $send_to_api = $this->getApiPluginInstance();
     $send_to_api->setEntity($this);
     $send_to_api->send();
     $send_to_api->getData();
@@ -88,12 +85,16 @@ class FontLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
         $original_json_values = $original->getDecodedJsonValues();
         $json_values = $this->getDecodedJsonValues();
 
-        // Clear the previous font files if the new font library files are different or as no files,
+        // Set the entity label from the name inside the JSON.
+        $this->setlabel($json_values['name']);
+
+        // Clear the previous font files if the new font library files are different or as no files,.
         if (isset($json_values['fontFiles'])) {
           if ((isset($original_json_values['fontFiles']) && $json_values['fontFiles'] != $original_json_values['fontFiles'])) {
             $this->clearFontFiles($original_json_values);
           }
-        } else {
+        }
+        else {
           $this->clearFontFiles($original_json_values);
         }
       }
@@ -110,8 +111,16 @@ class FontLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
     $this->process();
 
     // Invalidate settings endpoint shared cache entries.
-    $tags = ('font_libraries' == $this->id()) ? [$this->id(), 'font_stack',] : [$this->id()];
+    $tags = ('font_libraries' == $this->id()) ? [$this->id(), 'font_stack'] : [$this->id()];
     Cache::invalidateTags($tags);
+  }
+
+  /**
+   * Set a description.
+   */
+  public function setLabel($label) {
+    $this->label = $label;
+    return $this;
   }
 
   /**
@@ -125,16 +134,19 @@ class FontLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
    * {@inheritdoc}
    */
   public function getInUseMessage() {
-    return ['message' => ['#markup' => t('This font library has been tracked as in use in the places listed below. You should not delete it until you have removed its use.'),],];
+    return ['message' => ['#markup' => t('This font library has been tracked as in use in the places listed below. You should not delete it until you have removed its use.')]];
   }
 
+  /**
+   *
+   */
   public function clearData() {
     $json_value = $this->getDecodedJsonValues();
     $this->clearFontFiles($json_value);
   }
 
   /**
-   * Clear font files for a given json values of a font library
+   * Clear font files for a given json values of a font library.
    *
    * @param $json_value
    */
@@ -164,4 +176,5 @@ class FontLibrary extends WebsiteSettingsEntityBase implements CohesionSettingsI
     $this->modified = TRUE;
     $this->status = TRUE;
   }
+
 }

@@ -2,19 +2,18 @@
 
 namespace Drupal\cohesion_elements;
 
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Drupal\Core\Datetime\DateFormatterInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\RedirectDestinationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Component\Serialization\Json;
-use Drupal\cohesion_elements\Entity\ComponentContent;
 
 /**
- * Class ComponentContentListBuilder
+ * Class ComponentContentListBuilder.
  *
  * Provides a listing of Cohesion custom styles entities.
  *
@@ -62,7 +61,7 @@ class ComponentContentListBuilder extends EntityListBuilder {
    */
   protected function getTitle() {
     $request = \Drupal::request();
-    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+    if ($route = $request->attributes->get(RouteObjectInterface::ROUTE_OBJECT)) {
       $route->setDefault('_title', 'Component content');
     }
   }
@@ -140,9 +139,9 @@ class ComponentContentListBuilder extends EntityListBuilder {
   }
 
   /**
-   * Get the markup for in use
+   * Get the markup for in use.
    *
-   * @param ComponentContent $entity
+   * @param \Drupal\cohesion_elements\Entity\ComponentContent $entity
    *
    * @return mixed|null
    *
@@ -174,4 +173,5 @@ class ComponentContentListBuilder extends EntityListBuilder {
 
     return render($markup);
   }
+
 }

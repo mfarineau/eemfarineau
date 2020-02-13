@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Class MasterTemplateSetDefaultForm
+ * Class MasterTemplateSetDefaultForm.
  *
  * Builds the form to confirm settings content template as default.
  *

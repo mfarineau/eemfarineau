@@ -52,6 +52,9 @@
         }
 
         function setContainerType(boxedWidth) {
+            if(!self.el.container) {
+                return;
+            }
             if (boxedWidth) {
                 self.el.container.children[0].classList.add('coh-container-boxed');
             } else {
@@ -63,6 +66,9 @@
         }
 
         function setContentWidth(colWidth) {
+            if(!self.el.colContainer) {
+                return;
+            }
             self.el.colContainer.classList.remove('dx-preview-col-' + self.columnWidth);
             self.el.colContainer.classList.add('dx-preview-col-' + colWidth);
             self.columnWidth = colWidth;
@@ -297,6 +303,11 @@
         }
 
         function initResizable() {
+            // only if we have jquery, jquery.ui and jquery ui resizable.
+            if (!$ || typeof $.ui === 'undefined' || typeof $().resizable !== 'function'){
+              return;
+            }
+
             $(function() {
                 $('.dx-resizable').resizable({
                     autoHide: true,
@@ -332,15 +343,17 @@
 
         function handleBreakpointIndicator() {
             // if we are not popped out, we need to prevent the breakpoint indicator module from showing unnecessarily.
-            if (drupalSettings && drupalSettings.path.currentQuery.popped !== 'true') {
+            if (drupalSettings && (!drupalSettings.path.currentQuery || drupalSettings.path.currentQuery.popped !== 'true')) {
                 delete Drupal.behaviors.cohesionBreakpointIndicator;
             }
         }
 
         function init() {
-            if(!self.el.colContainer.children.length) {
-                self.el.colContainer.innerText = 'No content';
-                self.el.colContainer.classList.add('dx-no-content');
+            if(self.el.colContainer) {
+                if(!self.el.colContainer.children.length) {
+                    self.el.colContainer.innerText = 'No content';
+                    self.el.colContainer.classList.add('dx-no-content');
+                }
             }
 
             if (navigator.userAgent.match(/(iPhone|iPod|iPad)/i)) {
@@ -349,10 +362,12 @@
 
             initGridMask();
             initHighlight();
-            self.el.container.style.transition = 'width ' + self.animSpeed + 'ms ease-in-out';
+            if(self.el.container) {
+                self.el.container.style.transition = 'width ' + self.animSpeed + 'ms ease-in-out';
+                self.disableLinks();
+            }
             handleBreakpointIndicator();
             self.bindEvents();
-            self.disableLinks();
             onResizeWindowFinished();
             window.parent.postMessage(JSON.stringify({
                 type: 'ready',

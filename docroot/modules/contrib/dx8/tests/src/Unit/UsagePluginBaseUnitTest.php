@@ -10,11 +10,11 @@ use Drupal\Core\Database\Connection;
 use Drupal\cohesion\UsagePluginInterface;
 
 /**
- * Class MockEntity
+ * Class MockUsageEntity
  *
  * @package Drupal\Tests\cohesion\Unit
  */
-class MockEntity {
+class MockUsageEntity {
   protected $id;
 
   public function __construct($id) {
@@ -109,13 +109,13 @@ abstract class UsagePluginBaseUnitTest extends UnitTestCase {
     // Mock function call.
     $prophecy->load(\Prophecy\Argument::type('string'))->will(function ($args) {
       // Just return the ID of the entity sent to ->load()
-      return new MockEntity($args[0]);
+      return new MockUsageEntity($args[0]);
     });
     $prophecy->loadByProperties(\Prophecy\Argument::type('array'))->will(function ($args) {
       $key = key($args[0]);
       // Just return the whatever key and value of the entity sent to ->load()
       return [
-        new MockEntity($key . '-' . $args[0][$key])
+        new MockUsageEntity($key . '-' . $args[0][$key])
       ];
     });
     // Mock function call.
@@ -126,7 +126,7 @@ abstract class UsagePluginBaseUnitTest extends UnitTestCase {
     // Mock function call.
     $prophecy->loadMultiple(\Prophecy\Argument::type('array'))->will(function ($args) {
       return array_map(function($id) {
-        return new MockEntity($id[0]);
+        return new MockUsageEntity($id[0]);
       }, $args[0]);
     });
     $storage_manager_mock = $prophecy->reveal();

@@ -8,9 +8,10 @@ use Drupal\Component\Utility\UrlHelper;
 use Drupal\Core\DrupalKernel;
 use Drupal\Core\Site\Settings;
 use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Class CohesionStream
+ * Class CohesionStream.
  *
  * Defines a Drupal public (cohesion://) stream wrapper class.
  *
@@ -20,6 +21,14 @@ use Symfony\Component\HttpFoundation\Request;
  * @package Drupal\cohesion\StreamWrapper
  */
 class CohesionStream extends PublicStream {
+  use StringTranslationTrait;
+
+  /**
+   * CohesionStream constructor.
+   */
+  public function __construct() {
+    $this->stringTranslation = \Drupal::translation();
+  }
 
   /**
    * {@inheritdoc}
@@ -32,14 +41,14 @@ class CohesionStream extends PublicStream {
    * {@inheritdoc}
    */
   public function getName() {
-    return t('DX8 files');
+    return $this->t('Acquia Cohesion files');
   }
 
   /**
    * {@inheritdoc}
    */
   public function getDescription() {
-    return t('DX8 local files served by the webserver.');
+    return $this->t('Acquia Cohesion local files served by the webserver.');
   }
 
   /**

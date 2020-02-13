@@ -6,14 +6,14 @@
 function cohesion_sync_drush_command() {
   return [
     'sync-export' => [
-      'description' => 'Export DX8 packages to sync.',
+      'description' => 'Export Cohesion packages to sync.',
       'options' => [
         'filename-prefix' => 'The export filename prefix that will output a file like: [prefix]-package.yml_',
       ],
       'drupal dependencies' => ['cohesion_sync'],
     ],
     'sync-import' => [
-      'description' => 'Import DX8 packages from sync.',
+      'description' => 'Import Cohesion packages from sync.',
       'options' => [
         'overwrite-all' => 'Overwrite existing entities when differences detected',
         'keep-all' => 'Keep any existsing entities when differences detected',
@@ -37,11 +37,11 @@ function drush_cohesion_sync_sync_export() {
       drush_print($result);
     }
     else {
-      drush_set_error('DX8', 'Unable to export DX8 packages. Check the dblog for more information.');
+      drush_set_error('Cohesion', 'Unable to export Cohesion packages. Check the dblog for more information.');
     }
   }
   catch (\Exception $e) {
-    drush_set_error('DX8', $e->getMessage());
+    drush_set_error('Cohesion', $e->getMessage());
   }
 }
 
@@ -64,11 +64,11 @@ function drush_cohesion_sync_sync_import() {
     }
     // None of the options set.
     else {
-      drush_set_error('DX8', 'You must use one of the following options: --overwrite-all OR --keep-all');
+      drush_set_error('Cohesion', 'You must use one of the following options: --overwrite-all OR --keep-all');
     }
   }
   catch (\Exception $e) {
-    drush_set_error('DX8', $e->getMessage());
+    drush_set_error('Cohesion', $e->getMessage());
   }
 
 }

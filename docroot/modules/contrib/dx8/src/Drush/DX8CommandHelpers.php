@@ -6,7 +6,7 @@ use Drupal\cohesion_website_settings\Controller\WebsiteSettingsController;
 use Drupal\cohesion\Controller\AdministrationController;
 
 /**
- * Class DX8CommandHelpers
+ * Class DX8CommandHelpers.
  *
  * @package Drupal\cohesion\Drush
  */
@@ -37,7 +37,8 @@ final class DX8CommandHelpers {
       }
 
       // Give access to all routes.
-      cohesion_website_settings_batch_import_finished(TRUE, $context['results'], '');   // Enable the routes.
+      // Enable the routes.
+      cohesion_website_settings_batch_import_finished(TRUE, $context['results'], '');
 
       if (isset($context['results']['error'])) {
         return ['error' => $context['results']['error']];
@@ -59,7 +60,7 @@ final class DX8CommandHelpers {
   public static function rebuild() {
     \Drupal::state()->set('system.maintenance_mode', TRUE);
 
-    // Reset temporary template list
+    // Reset temporary template list.
     $batch = WebsiteSettingsController::batch(TRUE);
     batch_set($batch);
     drush_backend_batch_process();

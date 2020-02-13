@@ -55,4 +55,5 @@ class HelperCategory extends ElementCategoryBase {
   const target_entity_type = 'cohesion_helper';
 
   const default_category_id = 'hlp_cat_uncategorized';
+
 }

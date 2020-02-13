@@ -1,6 +1,6 @@
 {
-    "name": "cohesion/dx8-theme",
-    "description": "DX8 base theme",
-    "type": "drupal-theme",
-    "version": "5.7.10"
+  "name": "cohesion/dx8-theme",
+  "description": "Acquia Cohesion minimal theme",
+  "type": "drupal-theme",
+  "version": "6.0.0"
 }

@@ -6,7 +6,7 @@ use Drupal\views\Plugin\views\style\StylePluginBase;
 use Drupal\core\Form\FormStateInterface;
 
 /**
- * DX8 layout style plugin to render views using DX8 layouts.
+ * Acquia Cohesion layout style plugin to render views using Acquia Cohesion layouts.
  *
  * @ingroup views_style_plugins
  *
@@ -47,7 +47,6 @@ class CohesionViewsStylePlugin extends StylePluginBase {
    * @var bool
    */
   protected $usesRowClass = FALSE;
-
 
   /**
    * Set default options.
@@ -136,7 +135,7 @@ class CohesionViewsStylePlugin extends StylePluginBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    * @param string $type
-   *    The display type, either block or page.
+   *   The display type, either block or page.
    */
   public function wizardForm(&$form, FormStateInterface $form_state, $type) {
   }
@@ -169,7 +168,8 @@ class CohesionViewsStylePlugin extends StylePluginBase {
    */
   protected function renderRowGroup(array $rows = []) {
 
-    $theme = $this->themeFunctions(); // Default.
+    // Default.
+    $theme = $this->themeFunctions();
 
     return [
       '#theme' => $theme,
@@ -223,4 +223,5 @@ class CohesionViewsStylePlugin extends StylePluginBase {
     unset($this->view->row_index);
     return $output;
   }
+
 }

@@ -11,6 +11,9 @@ use Drupal\cohesion_templates\Entity\ContentTemplates;
  */
 class ContentTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -34,7 +37,7 @@ class ContentTemplatesUsageUnitTest extends UsagePluginBaseUnitTest {
         'type' => 'entity_id',
         'entity_type' => 'cohesion_content_templates',
         'id' => 'id-green',
-      ]
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new ContentTemplates([], 'cohesion_content_templates'));

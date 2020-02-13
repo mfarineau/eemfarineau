@@ -11,6 +11,9 @@ use Drupal\cohesion_website_settings\Entity\FontStack;
  */
 class FontStackUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -35,8 +38,8 @@ class FontStackUsageUnitTest extends UsagePluginBaseUnitTest {
         'value' => json_encode([
           'content' => '$coh-font-r3_D $coh-font-||eg@|-characters',
           'content2' => 'starttext$coh-font-green endtext',
-        ])
-      ]
+        ]),
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new FontStack([], 'cohesion_font_stack'));

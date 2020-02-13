@@ -7,13 +7,12 @@ use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Component\Serialization\Json;
 
 /**
- * Class ComponentContentForm
+ * Class ComponentContentForm.
  *
  * Form handler for the node edit forms.
  *
@@ -173,7 +172,7 @@ class ComponentContentForm extends ContentEntityForm {
     }
     else {
       $this->logger('content')->notice('@type: updated %title.', $context);
-      drupal_set_message(t('@type %title has been updated.', $context));
+      drupal_set_message($this->t('@type %title has been updated.', $context));
     }
   }
 

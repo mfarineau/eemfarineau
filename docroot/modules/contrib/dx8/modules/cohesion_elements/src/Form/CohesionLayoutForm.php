@@ -1,23 +1,25 @@
 <?php
-/**
- * @file
- * Contains Drupal\cohesion_elements\Form\CohesionLayoutForm;
- */
 
 namespace Drupal\cohesion_elements\Form;
 
-use Drupal\cohesion_elements\Entity\ComponentContent;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Class CohesionLayoutForm
+ * Class CohesionLayoutForm.
  *
  * @package Drupal\cohesion_elements\Form
  */
 class CohesionLayoutForm extends ContentEntityForm {
 
+  /**
+   * @var mixed
+   */
   private $component_instance_uuid;
+
+  /**
+   * @var mixed
+   */
   private $component_form_json;
 
   /**
@@ -33,29 +35,28 @@ class CohesionLayoutForm extends ContentEntityForm {
     $component_id = \Drupal::request()->attributes->get('component_id');
 
     if ($component_id && ($component_entity = \Drupal::service('entity_type.manager')
-        ->getStorage('cohesion_component')
-        ->load($component_id))) {
+      ->getStorage('cohesion_component')
+      ->load($component_id))) {
       // Return the json data.
       $this->component_form_json = $component_entity->getJsonValues();
     }
 
-
   }
 
-    /**
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
 
     $form['#attributes']['class'] = [
-      'cohesion-component-in-context'
+      'cohesion-component-in-context',
     ];
 
-    $form['actions']['submit']['#ajax'] = array(
+    $form['actions']['submit']['#ajax'] = [
       'callback' => '\Drupal\cohesion_elements\Controller\CohesionLayoutModalController::cohesionLayoutAjax',
       'wrapper' => 'cohesion',
-    );
+    ];
 
     $json_values = $this->entity->get('json_values')->getValue();
     $json_values = array_shift($json_values);
@@ -77,7 +78,6 @@ class CohesionLayoutForm extends ContentEntityForm {
     $form['#attached']['drupalSettings']['cohesion']['componentInstanceUuid'] = $this->component_instance_uuid;
     $form['#attached']['drupalSettings']['cohesion']['componentFormJson'] = $this->component_form_json;
 
-
     // Add the shared attachments.
     _cohesion_shared_page_attachments($form);
 
@@ -92,7 +92,7 @@ class CohesionLayoutForm extends ContentEntityForm {
     $entity = $this->getEntity();
     $values = $form_state->getValues();
 
-    if(isset($values['json_values'])){
+    if (isset($values['json_values'])) {
       $entity->setJsonValue($values['json_values']);
       $entity->save();
     }

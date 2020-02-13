@@ -6,7 +6,7 @@ use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Class CohesionLayoutViewBuilder
+ * Class CohesionLayoutViewBuilder.
  *
  * Render controller for cohesion_layout.
  *
@@ -42,7 +42,7 @@ class CohesionLayoutViewBuilder extends EntityViewBuilder {
       'revision_id' => $entity->getRevisionId(),
     ];
 
-    // Tell the field to render as a "cohesion_layout"
+    // Tell the field to render as a "cohesion_layout".
     $build = [
       '#type' => 'inline_template',
       '#template' => $entity->getTwig(),

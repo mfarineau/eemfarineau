@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @file
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\PhpStorage\PhpStorageFactory;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -7,8 +14,6 @@ use Drupal\block_content\BlockContentInterface;
 use Drupal\cohesion_templates\Entity\MasterTemplates;
 use Drupal\cohesion_templates\Entity\ContentTemplates;
 use Drupal\views\ViewExecutable;
-use Drupal\views\Views;
-use Drupal\views\Entity\View;
 use Drupal\Component\PhpStorage\FileStorage;
 
 /**
@@ -20,17 +25,17 @@ function cohesion_templates_help($route_name, RouteMatchInterface $route_match) 
     case 'help.page.cohesion_templates':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('This module defines the template configuration entities for creating DX8 templates.') . '</p>';
+      $output .= '<p>' . t('This module defines the template configuration entities for creating Cohesion templates.') . '</p>';
       $output .= '<p><ul>';
       $output .= '  <li>Master/global template configuration entity and supporting forms.</li>';
       $output .= '  <li>Content template view mode configuration entity and supporting forms.</li>';
       $output .= '  <li>Menu template configuration entity and supporting forms.</li>';
       $output .= '  <li>Views template configuration entity and supporting forms.</li>';
       $output .= '  <li>Content entity template selector field plugin.</li>';
-      $output .= '  <li>Twig extension containing twig functions and filters required for rendering DX8 templates.</li>';
-      $output .= '  <li>DX8 API integration.</li>';
+      $output .= '  <li>Twig extension containing twig functions and filters required for rendering Cohesion templates.</li>';
+      $output .= '  <li>Cohesion API integration.</li>';
       $output .= '</ul></p>';
-      $output .= '<p><a href="https://support.cohesiondx.com/" target="_blank">https://support.cohesiondx.com/</a></p>';
+      $output .= '<p><a href="https://cohesiondocs.acquia.com/" target="_blank">https://cohesiondocs.acquia.com/</a></p>';
       return $output;
 
     default:
@@ -60,13 +65,14 @@ function _cohesion_templates_delete_twig_cache_file($filename) {
 
         if ($cached_filename = $twig_service->getCache()
           ->generateKey($template_path, $templateClass)) {
-          $storage = \Drupal\Core\PhpStorage\PhpStorageFactory::get('twig');
+          $storage = PhpStorageFactory::get('twig');
 
           // Attempt to delete the twig cache file (ignore any output).
           $storage->delete($cached_filename);
         }
       }
-    } catch (\Twig_Error_Loader $e) {
+    }
+    catch (\Twig_Error_Loader $e) {
 
     }
   }
@@ -76,16 +82,15 @@ function _cohesion_templates_delete_twig_cache_file($filename) {
  * @inheritdoc
  *
  * Add cohesion template cache tags if template is used on this entity.
- *
  */
-function cohesion_templates_entity_view(array &$build, EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+function cohesion_templates_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if ($entity instanceof ContentEntityInterface) {
     $candidates = _cohesion_templates_get_template_candidate($entity, $view_mode);
     $candidate_template_ids = $candidates['candidate_template_ids'];
 
-    // Cache tag for the chosen template
+    // Cache tag for the chosen template.
     $build['#cache']['tags'][] = 'cohesion.templates.' . $entity->getEntityTypeId() . '.' . $entity->bundle() . '.' . $view_mode . '.' . $candidates['chosen_template'];
-    // Cache tag for the view mode
+    // Cache tag for the view mode.
     $build['#cache']['tags'][] = 'cohesion.templates.' . $entity->getEntityTypeId() . '.' . $view_mode;
 
     if (count($candidate_template_ids) > 0) {
@@ -127,7 +132,7 @@ function cohesion_templates_preprocess_page(&$variables) {
 }
 
 /**
- * Add DX8 template cache tags to views that use them.
+ * Add Cohesion template cache tags to views that use them.
  *
  * @param \Drupal\views\ViewExecutable $view
  * @param $display_id
@@ -146,7 +151,7 @@ function cohesion_templates_views_pre_view(ViewExecutable $view, $display_id, ar
         $displays[$display_id]['display_options'] = array_merge($displays['default']['display_options'], $displays[$display_id]['display_options']);
       }
 
-      // Get the the DX8 views template ID.
+      // Get the the Cohesion views template ID.
       if (isset($displays[$display_id]['display_options']['style']['options']['views_template'])) {
         $views_template_id = $displays[$view->current_display]['display_options']['style']['options']['views_template'];
 
@@ -154,7 +159,8 @@ function cohesion_templates_views_pre_view(ViewExecutable $view, $display_id, ar
         $view->element['#cache']['tags'][] = 'cohesion.templates.' . $views_template_id;
       }
     }
-  } catch (\Exception $e) {
+  }
+  catch (\Exception $e) {
   }
 
 }
@@ -168,10 +174,10 @@ function cohesion_templates_views_pre_view(ViewExecutable $view, $display_id, ar
  */
 function _cohesion_templates_get_template_candidate(ContentEntityInterface $entity, $view_mode) {
   $bundle = $entity->bundle();
-  // Get the template set as default if no template selector has been added to the bundle
+  // Get the template set as default if no template selector has been added to the bundle.
   $chosen_template = '__default__';
 
-  // For full view models, if entity has a cohesion template selector field get the template value from it
+  // For full view models, if entity has a cohesion template selector field get the template value from it.
   if ($view_mode === 'full') {
     if ($field = cohesion_templates_has_cohesion_template_selector_field($entity)) {
       $chosen_template = $entity->get($field->get('field_name'))->getString();
@@ -192,7 +198,6 @@ function _cohesion_templates_get_template_candidate(ContentEntityInterface $enti
     ->orConditionGroup()
     ->condition('default', TRUE);
 
-
   if ($chosen_template !== FALSE && $chosen_template !== '__default__') {
     $query_condition->condition('id', $chosen_template);
   }
@@ -200,8 +205,10 @@ function _cohesion_templates_get_template_candidate(ContentEntityInterface $enti
   // Execute the query to select the correct template.
   // Non default template first, if applicable, and limit to one template.
   $candidate_template_ids = $candidate_template_query->condition($query_condition)
-    ->sort('default', 'DESC')// Global view-mode templates should be last.
-    ->sort('bundle', 'DESC')// We only need to find the first template, as we know they all exist.
+  // Global view-mode templates should be last.
+    ->sort('default', 'DESC')
+  // We only need to find the first template, as we know they all exist.
+    ->sort('bundle', 'DESC')
     ->execute();
 
   return [
@@ -241,7 +248,6 @@ function cohesion_templates_suggestions(array &$suggestions, ContentEntityInterf
       ->getStorage('cohesion_content_templates');
     $candidate_template = $candidate_template_storage->load($candidate_template_id);
 
-
     // Add suggestions.
     $suggestions[] = $hook . '__cohesion__' . $candidate_template->get('id');
     $suggestions[] = $hook . '__cohesion__' . $candidate_template->get('id') . '__' . \Drupal::service('theme.manager')->getActiveTheme()->getName();
@@ -280,13 +286,12 @@ function cohesion_templates_theme() {
  * Suggest correct Cohesion page template as appropriate.
  *
  * A page template is used when the active node template specifies one.
- *
  */
 function cohesion_templates_theme_suggestions_page_alter(array &$suggestions, array $variables) {
-  // Only apply master templates if this theme is DX8 enabled.
+  // Only apply master templates if this theme is Cohesion enabled.
   if (\Drupal::service('cohesion.utils')->currentThemeUseCohesion()) {
     $master_template = 'page__cohesion__' . _cohesion_templates_get_master_template();
-    if ($master_template !== FALSE && (!isset($_GET['coh_clean_page']) || $_GET['coh_clean_page'] !== 'true')) {
+    if ($master_template !== FALSE && (\Drupal::request()->query->get('coh_clean_page') !== 'true')) {
       $suggestions[] = $master_template;
       $suggestions[] = $master_template . '__' . \Drupal::service('theme.manager')->getActiveTheme()->getName();
     }
@@ -297,12 +302,11 @@ function cohesion_templates_theme_suggestions_page_alter(array &$suggestions, ar
  * Implements hook_module_implements_alter().
  *
  * Make sure cohesion suggestions happens right after core so other modules can
- * override cohesion
- *
+ * override cohesion.
  */
 function cohesion_templates_module_implements_alter(&$implementations, $hook) {
   if ($hook == 'theme_suggestions_page_alter') {
-    // Only apply templates if this theme is DX8 enabled.
+    // Only apply templates if this theme is Cohesion enabled.
     if (\Drupal::service('cohesion.utils')->currentThemeUseCohesion()) {
       if (isset($implementations['cohesion_templates'])) {
         unset($implementations['cohesion_templates']);
@@ -314,12 +318,12 @@ function cohesion_templates_module_implements_alter(&$implementations, $hook) {
 }
 
 /**
- * Get the master template name if the current page is using one
+ * Get the master template name if the current page is using one.
  */
 function _cohesion_templates_get_master_template() {
   $current_theme = \Drupal::service('theme.manager')->getActiveTheme();
   $is_admin = \Drupal::config('system.theme')
-      ->get('admin') == $current_theme->getName();
+    ->get('admin') == $current_theme->getName();
 
   if (!$is_admin) {
     $entities = [];
@@ -331,16 +335,15 @@ function _cohesion_templates_get_master_template() {
       }
       else {
         if (is_string($param) && in_array($param_key, [
-            'view_id',
-            'display_id',
-          ])) {
+          'view_id',
+          'display_id',
+        ])) {
           $router_string .= $param;
         }
       }
     }
 
     $entity = reset($entities);
-
 
     $storage = \Drupal::keyValue('coh_master_templates_route_match');
     $view_master_template = $storage->get($router_string);
@@ -351,20 +354,19 @@ function _cohesion_templates_get_master_template() {
     }
     elseif (count($entities) == 1 && $entity) {
       // We can handle page that has only one ContentEntity in the url
-      // if Master template is needed for url with multiple entities a specific hook_theme_suggestions_page_alter has to be implemented
-
+      // if Master template is needed for url with multiple entities a specific hook_theme_suggestions_page_alter has to be implemented.
       $entity = reset($entities);
 
       $bundle = $entity->bundle();
       $chosen_template = '__default__';
 
-      // If entity has a cohesion template selector field get the template value from it
+      // If entity has a cohesion template selector field get the template value from it.
       if ($field = cohesion_templates_has_cohesion_template_selector_field($entity)) {
         $chosen_template = $entity->get($field->get('field_name'))->getString();
       }
 
       $storage = \Drupal::keyValue('coh_master_templates');
-      // Only full view mode can have a master template
+      // Only full view mode can have a master template.
       $master_template = $storage->get($entity->getEntityTypeId() . '.' . $bundle . '.full.' . $chosen_template);
 
       if ($master_template) {
@@ -374,8 +376,7 @@ function _cohesion_templates_get_master_template() {
 
     }
 
-    // if no master template has been found try to get the default if any
-
+    // If no master template has been found try to get the default if any.
     $candidate_template_ids = \Drupal::service('entity.query')
       ->get('cohesion_master_templates')
       ->condition('default', TRUE)
@@ -397,7 +398,6 @@ function _cohesion_templates_get_master_template() {
 /**
  * @inheritdoc
  * Implements hook_theme_suggestions_HOOK_alter().
- *
  */
 function cohesion_templates_theme_suggestions_node_alter(array &$suggestions, array &$variables) {
   cohesion_templates_suggestions($suggestions, $variables['elements']['#node'], $variables['elements']['#view_mode'], 'node');
@@ -419,7 +419,6 @@ function cohesion_templates_theme_suggestions_media_alter(array &$suggestions, a
   cohesion_templates_suggestions($suggestions, $variables['elements']['#media'], $variables['elements']['#view_mode'], 'media');
 }
 
-
 /**
  * @inheritdoc
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -428,7 +427,7 @@ function cohesion_templates_theme_suggestions_views_view_alter(array &$suggestio
 
   $current_theme = \Drupal::service('theme.manager')->getActiveTheme();
   $is_admin = \Drupal::config('system.theme')
-      ->get('admin') == $current_theme->getName();
+    ->get('admin') == $current_theme->getName();
 
   if (!$is_admin) {
     // Get the view/display as a string.
@@ -437,7 +436,8 @@ function cohesion_templates_theme_suggestions_views_view_alter(array &$suggestio
     try {
       $route_match .= $variables['view']->storage->get('id');
       $route_match .= $variables['view']->current_display;
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       return;
     }
 
@@ -448,7 +448,8 @@ function cohesion_templates_theme_suggestions_views_view_alter(array &$suggestio
       if (array_key_exists('master_template', $variables['view']->style_plugin->options) && ($master_template = $variables['view']->style_plugin->options['master_template'])) {
         $storage->set($route_match, $master_template);
       }
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
 
     }
   }
@@ -475,7 +476,6 @@ function cohesion_templates_theme_suggestions_block_alter(array &$suggestions, a
 /**
  * @inheritdoc
  * Implements hook_cohesion_templates_ENTITY_TYPE_base_hook_alter().
- *
  */
 function cohesion_templates_cohesion_templates_block_content_base_hook_alter(&$base_hook) {
   $base_hook = 'block';
@@ -483,7 +483,6 @@ function cohesion_templates_cohesion_templates_block_content_base_hook_alter(&$b
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
- *
  */
 function cohesion_templates_theme_suggestions_comment_alter(array &$suggestions, array &$variables) {
   cohesion_templates_suggestions($suggestions, $variables['elements']['#comment'], $variables['elements']['#view_mode'], 'comment');
@@ -610,20 +609,18 @@ function cohesion_templates_entity_view_mode_delete(EntityInterface $entity) {
 }
 
 /**
- * Implements hook_entity_bundle_create(().
- *
- * Update content template placeholders when an entity bundle is created.
+ * Implements hook_entity_bundle_create().
  */
 function cohesion_templates_entity_bundle_create($entity_type_id, $bundle) {
+  // Update content template placeholders when an entity bundle is created.
   _cohesion_templates_generate_content_template_entities();
 }
 
 /**
  * Implements hook_entity_bundle_delete().
- *
- * Update content template placeholders when an entity bundle is deleted.
  */
 function cohesion_templates_entity_bundle_delete($entity_type_id, $bundle) {
+  // Update content template placeholders when an entity bundle is deleted.
   _cohesion_templates_generate_content_template_entities();
 }
 
@@ -634,7 +631,7 @@ function cohesion_templates_entity_bundle_delete($entity_type_id, $bundle) {
  * Add the Cohesion template selector field to the advanced sidebar on node
  *   edit.
  */
-function cohesion_templates_form_node_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function cohesion_templates_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $entity = $form_state->getFormObject()->getEntity();
 
   if ($entity->getEntityTypeId() == 'node') {
@@ -661,11 +658,11 @@ function cohesion_templates_form_node_form_alter(&$form, \Drupal\Core\Form\FormS
  *
  * @return bool
  */
-function cohesion_templates_has_cohesion_template_selector_field(Drupal\Core\Entity\EntityInterface $entity) {
+function cohesion_templates_has_cohesion_template_selector_field(EntityInterface $entity) {
   $fields = $entity->getFieldDefinitions();
   foreach ($fields as $name => $field) {
     if ($field->getFieldStorageDefinition()
-        ->getType() == 'cohesion_template_selector') {
+      ->getType() == 'cohesion_template_selector') {
       return $field;
     }
   }

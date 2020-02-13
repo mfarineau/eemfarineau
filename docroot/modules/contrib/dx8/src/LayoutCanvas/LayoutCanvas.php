@@ -3,7 +3,7 @@
 namespace Drupal\cohesion\LayoutCanvas;
 
 /**
- * Class LayoutCanvas
+ * Class LayoutCanvas.
  *
  * @package Drupal\cohesion
  *
@@ -15,51 +15,51 @@ namespace Drupal\cohesion\LayoutCanvas;
 class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
 
   /**
-   * The top elements in the canvas
+   * The top elements in the canvas.
    *
-   * @var $canvasElements \Drupal\cohesion\LayoutCanvas\Element[]
+   * @var canvasElements\Drupal\cohesion\LayoutCanvas\Element[]
    */
   protected $canvasElements = [];
 
   /**
-   * The top elements in the component form
+   * The top elements in the component form.
    *
-   * @var $componentFormElements \Drupal\cohesion\LayoutCanvas\Element[]
+   * @var componentFormElements\Drupal\cohesion\LayoutCanvas\Element[]
    */
   protected $componentFormElements = NULL;
 
   /**
-   * The top elements in the style guide form
+   * The top elements in the style guide form.
    *
-   * @var $componentFormElements \Drupal\cohesion\LayoutCanvas\Element[]
+   * @var componentFormElements\Drupal\cohesion\LayoutCanvas\Element[]
    */
   protected $styleGuideFormElements = NULL;
 
   /**
-   * The angular mapper
+   * The angular mapper.
    *
-   * @var $mapper
+   * @var mapper
    */
   protected $mapper;
 
   /**
-   * The angular previewModel
+   * The angular previewModel.
    *
-   * @var $previewModel
+   * @var previewModel
    */
   protected $previewModel = NULL;
 
   /**
-   * The angular variableFields
+   * The angular variableFields.
    *
-   * @var $variableFields
+   * @var variableFields
    */
   protected $variableFields = NULL;
 
   /**
-   * The angular disabledNodes
+   * The angular disabledNodes.
    *
-   * @var $disabledNodes
+   * @var disabledNodes
    */
   protected $disabledNodes = NULL;
 
@@ -147,7 +147,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Returns all elements in the layout canvas as a flat array
+   * Returns all elements in the layout canvas as a flat array.
    *
    * @return \Drupal\cohesion\LayoutCanvas\Element[]
    */
@@ -163,7 +163,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Return all component from elements as a flat array
+   * Return all component from elements as a flat array.
    *
    * @return \Drupal\cohesion\LayoutCanvas\Element[]
    */
@@ -181,7 +181,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Return all style guide from elements as a flat array
+   * Return all style guide from elements as a flat array.
    *
    * @return \Drupal\cohesion\LayoutCanvas\Element[]
    */
@@ -199,7 +199,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Return whether the object is ready to be sent to the API
+   * Return whether the object is ready to be sent to the API.
    *
    * @return bool
    */
@@ -208,11 +208,12 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
   }
 
   /**
-   * Loop
+   * Loop.
    *
-   * @param string $type all|canvas|component_form|style_guide_form
-   *  Specify which models to be return, Only the canvas or only the component
-   *   form or both
+   * @param string $type
+   *   all|canvas|component_form|style_guide_form
+   *   Specify which models to be return, Only the canvas or only the component
+   *   form or both.
    *
    * @return \Drupal\cohesion\LayoutCanvas\ElementModel[]
    */
@@ -220,7 +221,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
     $models = [];
 
     if ($type == 'all' || $type == 'canvas') {
-      // Loop over the canvas
+      // Loop over the canvas.
       foreach ($this->iterateCanvas() as $element) {
         if ($element->getModel()) {
           $models[$element->getModelUUID()] = $element->getModel();
@@ -229,7 +230,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
     }
 
     if ($type == 'all' || $type == 'component_form') {
-      //Loop over the component form
+      // Loop over the component form.
       foreach ($this->iterateComponentForm() as $element) {
         if ($element->getModel()) {
           $models[$element->getModelUUID()] = $element->getModel();
@@ -238,7 +239,7 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
     }
 
     if ($type == 'all' || $type == 'style_guide_form') {
-      //Loop over the component form
+      // Loop over the component form.
       foreach ($this->iterateStyleGuideForm() as $element) {
         if ($element->getModel()) {
           $models[$element->getModelUUID()] = $element->getModel();
@@ -283,10 +284,10 @@ class LayoutCanvas implements LayoutCanvasElementInterface, \JsonSerializable {
       if (!is_null($this->previewModel)) {
         $canvas['previewModel'] = $this->previewModel;
       }
-      if (!is_null($this->variableFields)){
+      if (!is_null($this->variableFields)) {
         $canvas['variableFields'] = $this->variableFields;
       }
-      if (!is_null($this->disabledNodes)){
+      if (!is_null($this->disabledNodes)) {
         $canvas['disabledNodes'] = $this->disabledNodes;
       }
     }

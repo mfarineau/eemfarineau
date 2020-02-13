@@ -5,7 +5,7 @@ namespace Drupal\cohesion_templates\Plugin\Derivative;
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 
 /**
- * Class CohesionContentTemplateLocalTasks
+ * Class CohesionContentTemplateLocalTasks.
  *
  * Defines dynamic local tasks.
  *
@@ -42,4 +42,3 @@ class CohesionContentTemplateLocalTasks extends DeriverBase {
   }
 
 }
-

@@ -11,6 +11,9 @@ use Drupal\cohesion_style_guide\Plugin\Usage\StyleGuideManagerUsage;
  */
 class StyleGuideManagerUsageUnitTest extends UsagePluginBaseUnitTest {
 
+  /**
+   * {@inheritdoc}
+   */
   public function setUp() {
     parent::setUp();
 
@@ -34,7 +37,7 @@ class StyleGuideManagerUsageUnitTest extends UsagePluginBaseUnitTest {
       [
         'type' => 'coh_style_guide_manager',
         'style_guide_uuid' => '0000-0000-0000-0000',
-      ]
+      ],
     ];
 
     $entities = $this->unit->scanForInstancesOfThisType($fixture, new StyleGuideManager([], 'cohesion_style_guide_manager'));

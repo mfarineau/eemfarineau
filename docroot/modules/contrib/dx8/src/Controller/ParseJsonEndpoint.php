@@ -2,13 +2,14 @@
 
 namespace Drupal\cohesion\Controller;
 
+use GuzzleHttp\Exception\ClientException;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\cohesion\CohesionJsonResponse;
 use Drupal\cohesion\CohesionApiClient;
 
 /**
- * Class ParseJsonEndpoint
+ * Class ParseJsonEndpoint.
  *
  * Makes a request to the API to parse data.
  *
@@ -16,6 +17,9 @@ use Drupal\cohesion\CohesionApiClient;
  */
 class ParseJsonEndpoint extends ControllerBase {
 
+  /**
+   *
+   */
   public function index(Request $request) {
     try {
       $body = $request->getContent();
@@ -30,14 +34,15 @@ class ParseJsonEndpoint extends ControllerBase {
       else {
         $status = 500;
         $result = [
-          'error' => t('Unknown error.'),
+          'error' => $this->t('Unknown error.'),
         ];
       }
 
-    } catch (\GuzzleHttp\Exception\ClientException $e) {
+    }
+    catch (ClientException $e) {
       $status = 500;
       $result = [
-        'error' => t('Connection error.'),
+        'error' => $this->t('Connection error.'),
       ];
     }
 

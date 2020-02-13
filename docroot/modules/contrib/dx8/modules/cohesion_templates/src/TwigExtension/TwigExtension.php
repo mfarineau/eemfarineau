@@ -2,22 +2,19 @@
 
 namespace Drupal\cohesion_templates\TwigExtension;
 
+use Drupal\Core\Link;
+use Drupal\Core\Breadcrumb\Breadcrumb;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\cohesion_elements\Entity\CohesionLayout;
 use Drupal\cohesion_elements\Entity\ComponentContent;
-use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Component\Render\PlainTextOutput;
 use Drupal\Component\Utility\Html;
-use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\UrlHelper;
 use Drupal\Component\Utility\Xss;
-use Drupal\Core\Entity\EntityPublishedInterface;
 use Drupal\Component\Uuid\UuidInterface;
-use Drupal\Core\File\MimeType\ExtensionMimeTypeGuesser;
-use Drupal\Core\Image\ImageFactory;
 use Drupal\Core\Utility\Token;
 use Drupal\Component\Render\HtmlEscapedText;
 use Drupal\Core\Render\Markup;
-use Drupal\file\Entity\File;
+use Twig\Markup as TwigMarkup;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\Core\Theme\Registry;
 use Drupal\Component\Serialization\Json;
@@ -29,7 +26,6 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
-use Drupal\node\Entity\Node;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
 use Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException;
 
@@ -79,7 +75,7 @@ class TwigExtension extends \Twig_Extension {
   protected $streamWrapperManager;
 
   /**
-   * @var MimeTypeGuesserInterface
+   * @var \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface
    */
   protected $extensionMimeTypeGuesser;
 
@@ -93,7 +89,7 @@ class TwigExtension extends \Twig_Extension {
    * @param \Drupal\Component\Uuid\UuidInterface $uuid
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManager $stream_wrapper_manager
-   * @param MimeTypeGuesserInterface $extension_mime_type_guesser
+   * @param \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $extension_mime_type_guesser
    */
   public function __construct(RendererInterface $renderer, Token $token, Registry $themeRegistry, TwigEnvironment $twigEnvironment, UuidInterface $uuid, EntityTypeManagerInterface $entity_type_manager, StreamWrapperManager $stream_wrapper_manager, MimeTypeGuesserInterface $extension_mime_type_guesser) {
     $this->renderer = $renderer;
@@ -348,7 +344,7 @@ class TwigExtension extends \Twig_Extension {
   public function clean($input) {
 
     // Remove leading and trailing whitspace
-    $input = join("\n", array_map("trim", explode("\n", $input)));
+    $input = implode("\n", array_map("trim", explode("\n", $input)));
 
     // Remove newlines
     $input = str_replace("\n", " ", $input);
@@ -388,7 +384,7 @@ class TwigExtension extends \Twig_Extension {
         $data[key($data)] = $_context['item']['content']['#menu_link_content'];
       }
       // default drupal.
-      elseif(isset($_context['item']['original_link'])){
+      elseif (isset($_context['item']['original_link'])) {
         $def = $_context['item']['original_link']->getPluginDefinition();
         $def = explode(':', $def['id']);
 
@@ -425,7 +421,7 @@ class TwigExtension extends \Twig_Extension {
       'clear' => TRUE,
     ]);
 
-    // If layout canvas, decode entities as DX8 component will take care of escaping
+    // If layout canvas, decode entities as component will take care of escaping
     if (!$isTemplate) {
       $token_replacement = Html::decodeEntities($token_replacement);
     }
@@ -451,7 +447,7 @@ class TwigExtension extends \Twig_Extension {
   public function renderComponent($componentId, $isTemplate, $_context, $componentFields, $componentInstanceUuid = NULL, $componentContentId = FALSE) {
     // Render component content if specified
     if ($componentContentId && is_numeric($componentContentId) && !isset($_context['component_content'])) {
-      /** @var ComponentContent $componentContent */
+      /** @var \Drupal\cohesion_elements\Entity\ComponentContent $componentContent */
       $componentContent = ComponentContent::load($componentContentId);
       if ($componentContent && $componentContent->isPublished()) {
         $view_builder = $this->entityTypeManager->getViewBuilder('component_content');
@@ -610,11 +606,13 @@ class TwigExtension extends \Twig_Extension {
                 }
               }
               break;
+
             case 'cohTextarea':
               if (!isset($settings['schema']['escape']) || $settings['schema']['escape'] === TRUE) {
                 $fieldValue = Html::escape($fieldValue);
               }
               break;
+
             case 'cohSelect':
               $fieldValue = strval($fieldValue);
 
@@ -646,8 +644,10 @@ class TwigExtension extends \Twig_Extension {
                 }
               }
               break;
+
             case 'cohWysiwyg':
               break;
+
             default:
               $content = json_decode($fieldValue);
               if ($content !== NULL && (is_object($content) || is_array($content))) {
@@ -723,7 +723,7 @@ class TwigExtension extends \Twig_Extension {
   public function contextPasses($context_values, $condition = 'AND') {
 
     // Sanity check.
-    if (!count($context_values) || !isset($context_values[0]) || !$context_values[0] instanceof \Twig\Markup) {
+    if (!count($context_values) || !isset($context_values[0]) || !$context_values[0] instanceof TwigMarkup) {
       return TRUE;
     }
 
@@ -805,7 +805,7 @@ class TwigExtension extends \Twig_Extension {
         $entity_type = NULL;
         $entity = NULL;
         foreach ($resultrow as $result_value) {
-          if ($result_value instanceof \Drupal\Core\Entity\ContentEntityInterface) {
+          if ($result_value instanceof ContentEntityInterface) {
             $entity = $result_value;
             $entity_type = $result_value->getEntityTypeId();
             break;
@@ -856,7 +856,6 @@ class TwigExtension extends \Twig_Extension {
           //For backward compatibility
           $resultrow['#view_mode'] = $view_modes;
         }
-
 
         if (!in_array($resultrow['#view_mode'], $resultrow['#cache']['keys'])) {
           $resultrow['#cache']['keys'][] = $resultrow['#view_mode'];
@@ -909,7 +908,7 @@ class TwigExtension extends \Twig_Extension {
     }
 
     $file_uri = html_entity_decode(stripcslashes($file_uri));
-    if(!file_valid_uri($file_uri)){
+    if (!file_valid_uri($file_uri)) {
       return $file_uri;
     }
 
@@ -1104,7 +1103,6 @@ class TwigExtension extends \Twig_Extension {
       views_views_pre_render($view);
     }
 
-
     // If pager is active.
     if ($view->display_handler->renderPager() && isset($view_data['settings']['pager']['view_pager']) && property_exists($view, 'pager')) {
 
@@ -1148,7 +1146,6 @@ class TwigExtension extends \Twig_Extension {
       if (isset($view_data['settings']['pager']['infinite']['loadAutomatically'])) {
         $variables['options']['automatically_load_content'] = $view_data['settings']['pager']['infinite']['loadAutomatically'];
       }
-
 
       if (isset($info['preprocess functions'])) {
         foreach ($info['preprocess functions'] as $preprocessor_function) {
@@ -1215,7 +1212,8 @@ class TwigExtension extends \Twig_Extension {
     if ($startLevel > 1) {
       $tree = $this->yieldMenuAtLevel($tree, $startLevel, 1);
 
-      if (!$tree) {   // No items in the trail.
+      // No items in the trail.
+      if (!$tree) {
         $tree = [];
       }
     }
@@ -1346,9 +1344,9 @@ class TwigExtension extends \Twig_Extension {
   public function getBreadCrumb() {
     $breadcrumb = \Drupal::service('breadcrumb')->build(\Drupal::routeMatch());
     $breadcrumbs = [];
-    if (($breadcrumb instanceof \Drupal\Core\Breadcrumb\Breadcrumb) && ($links = $breadcrumb->getLinks())) {
+    if (($breadcrumb instanceof Breadcrumb) && ($links = $breadcrumb->getLinks())) {
       foreach ($links as $link) {
-        if ($link instanceof \Drupal\Core\Link) {
+        if ($link instanceof Link) {
           $breadcrumbs[] = [
             'text' => $link->getText(),
             'url' => $link->getUrl()->toString(),
@@ -1360,9 +1358,11 @@ class TwigExtension extends \Twig_Extension {
   }
 
   /**
-   * @return string url of an entity
+   * @param $entity_info
    *
-   * @throws \Symfony\Component\HttpKernel\Exception\NotAcceptableHttpException
+   * @return \Drupal\Core\GeneratedUrl|string
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
   public function pathRenderer($entity_info) {
     $entity_data = explode('::', $entity_info->__toString());
@@ -1400,6 +1400,7 @@ class TwigExtension extends \Twig_Extension {
             }
           }
           break;
+
         default:
           if (isset($entity_data[1])) {
             $entity_type_id = $entity_data[0];
@@ -1407,6 +1408,10 @@ class TwigExtension extends \Twig_Extension {
             if ($entity_type = \Drupal::service('entity_type.manager')
               ->getStorage($entity_type_id)) {
               if ($entity = $entity_type->load($entity_id)) {
+                $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+                if($entity->hasTranslation($language)){
+                  $entity = $entity->getTranslation($language);
+                }
                 return $entity->url();
               }
             }
@@ -1418,7 +1423,7 @@ class TwigExtension extends \Twig_Extension {
     else {
       // Backward compatibility ( node id )
       $nid = $entity_info->__toString();
-      if ($entity = Node::load($nid)) {
+      if ($entity = $this->entityTypeManager->getStorage('node')->load($nid)) {
         return $entity->url();
       }
     }
@@ -1435,7 +1440,6 @@ class TwigExtension extends \Twig_Extension {
    * @throws \Exception
    */
   public function formatWysiwyg($wysiwyg, $text_format, $token_text) {
-
     if ($wysiwyg != "" && $text_format instanceof \Twig_Markup) {
 
       $wysiwyg_text = str_replace([
@@ -1453,7 +1457,6 @@ class TwigExtension extends \Twig_Extension {
         '#filter_types_to_skip' => [],
         '#langcode' => $language,
       ];
-
 
       return $this->renderer->render($build);
     }
@@ -1507,7 +1510,6 @@ class TwigExtension extends \Twig_Extension {
         $view_mode = 'default';
       }
 
-
       if (!empty($entity_type) && !empty($view_mode) && !empty($entity_id)) {
         $entity = $this->entityTypeManager->getStorage($entity_type)
           ->load($entity_id);
@@ -1546,4 +1548,5 @@ class TwigExtension extends \Twig_Extension {
   public function escapeURL($url) {
     return UrlHelper::stripDangerousProtocols($url);
   }
+
 }

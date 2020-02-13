@@ -10,7 +10,7 @@ use Drupal\Core\Link;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class ContentTemplatesListBuilder
+ * Class ContentTemplatesListBuilder.
  *
  * Provides a listing of Cohesion content templates entities.
  *
@@ -109,7 +109,7 @@ class ContentTemplatesListBuilder extends CohesionListBuilder {
           $valid_entity_bundle = TRUE;
         }
         else {
-          $bundle_title = '<span class="entity-meta__last-saved">' . $this->t('Missing bundle') . ' (Machine name: <span class="text-lowercase">' . $title . '</span>)</span>';
+          $bundle_title = '<span class="entity-meta__last-saved">Missing bundle (Machine name: <span class="text-lowercase">' . $title . '</span>)</span>';
           $valid_entity_bundle = FALSE;
         }
       }
@@ -130,7 +130,7 @@ class ContentTemplatesListBuilder extends CohesionListBuilder {
       // Add button to add custom node full content templates.
       if ($title != '__any__') {
         foreach ($template_group as $entity) {
-          // If it has a full view mode then add a link to add a tempalte
+          // If it has a full view mode then add a link to add a tempalte.
           $add_link = Link::createFromRoute($this->t('+ Add full content template'), 'entity.cohesion_content_templates.add_form', [
             'content_entity_type' => $entity->get('entity_type'),
             'bundle' => $entity->get('bundle'),
@@ -261,7 +261,7 @@ class ContentTemplatesListBuilder extends CohesionListBuilder {
   public function getDefaultOperations(EntityInterface $entity) {
     $operations = parent::getDefaultOperations($entity);
 
-    // Remove duplicate and delete actions on non full content template
+    // Remove duplicate and delete actions on non full content template.
     if ($entity->get('view_mode') !== 'full') {
       $operations['delete']['title'] = t('Reset');
       unset($operations['duplicate']);

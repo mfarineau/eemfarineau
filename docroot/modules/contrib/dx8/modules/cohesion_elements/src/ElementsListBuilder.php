@@ -13,7 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class ElementsListBuilder
+ * Class ElementsListBuilder.
  *
  * Provides a listing of Cohesion components and helpers.
  *
@@ -29,7 +29,7 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
   protected $formBuilder;
 
   /**
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface;
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
    */
   protected $entityTypeManager;
 
@@ -67,7 +67,7 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
   public function buildHeader() {
     $header = parent::buildHeader();
 
-    //Override type title
+    // Override type title.
     $header['type']['data'] = $this->t('Category');
 
     $header['weight'] = [
@@ -126,14 +126,14 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
 
         $entities = $this->entityTypeManager->getStorage($this->entityType->id())->loadMultiple($query->execute());
 
-        // Build the accordions
+        // Build the accordions.
         $form[$this->entityType->id()][$category->id()]['accordion'] = [
           '#type' => 'details',
           '#open' => FALSE,
           '#title' => $category->label() . ' (' . $query->count()->execute() . ')',
         ];
 
-        // Build the accordion group tables
+        // Build the accordion group tables.
         $this->buildTable($form[$this->entityType->id()][$category->id()]['accordion'], $category, $entities);
       }
     }
@@ -190,7 +190,7 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
       ],
     ];
 
-    // Build rows
+    // Build rows.
     foreach ($entities as $entitiy) {
       $common_row = $this->buildRow($entitiy);
 
@@ -210,7 +210,6 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
         '#type' => 'markup',
         '#markup' => $common_row['type'],
       ];
-
 
       $form_data['table'][$id]['selectable'] = $common_row['selectable'];
 
@@ -237,7 +236,6 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
     }
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -245,7 +243,8 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
     $sort_data = $form_state->getValue('table');
     try {
       $entities = $this->entityTypeManager->getStorage($this->entityType->id())->loadMultiple(array_keys($sort_data));
-    } catch (\Exception $ex) {
+    }
+    catch (\Exception $ex) {
       $entities = [];
     }
 
@@ -257,7 +256,8 @@ class ElementsListBuilder extends CohesionListBuilder implements FormInterface {
           $config = \Drupal::configFactory()->getEditable($entity->getConfigDependencyName());
           $config->set('weight', $weight);
           $config->save(TRUE);
-        } catch (\Exception $ex) {
+        }
+        catch (\Exception $ex) {
         }
 
         $weight++;
