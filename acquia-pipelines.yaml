@@ -17,9 +17,15 @@ events:
             - composer update
             - git status
 
+
+post-deploy:
+    steps:
+    # Deploy the build artifact to an on-demand environment,
+    # and sync the specified databases.
     - deploy:
         script:
             - pipelines-deploy
+            - pipelines-sync-dbs concentric
 
 # When a GitHub pull request is merged, this deletes the coresponding ODE.
 pr-merged:
