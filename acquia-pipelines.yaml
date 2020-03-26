@@ -19,11 +19,9 @@ events:
 
 
 post-deploy:
-    steps:
-    # Deploy the build artifact to an on-demand environment,
-    # and sync the specified databases.
+  steps:
     - deploy:
-        script:
+            script:
             - pipelines-deploy
             - pipelines-sync-dbs concentric
 
