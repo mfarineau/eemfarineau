@@ -14,10 +14,36 @@ events:
       # If you have build instructions, put them here. They are not required.
       - build_site:
           script:
+            - echo 'enabling SSH KEY'
+            - export PIPELINE_SSH_KEY=~/.ssh/ssh-key-1
+
+            - echo 'setting SSH key in composer'
+            - composer config -g github-oauth.github.com ssh-key-1
+
+            - echo 'composer install'
             - composer install
+
+            - echo 'unset key'
+            - unset PIPELINE_SSH_KEY
 
 post-deploy:
   steps:
     - deploy:
             script:
             - pipelines-deploy
+
+pr-merged:
+  steps:
+     - deploy:
+          script:
+             - pipelines-deploy
+
+pr-closed:
+     steps:
+      - deploy:
+           script:
+                - pipelines-deploy
+
+ssh-keys:
+  ssh-key-1:
+    secure: 2acNQxy7HzOhdjMcZWsafFVgQ4MUyoB0z06q/jOI+Gag1eZU8xrjW0Xrnr0M/RiKvmzzhZeOR8pqj09rtAA8iCscX3CzjDKkweSWAt5eMa4KxkDFOwiGLE56bG4LI3nPAp5uMHHIU1sE9DC8kcenl9rdQIrc+2hvK256yo+CawdX7g2bqqp/eDP5kDPHIf4A+/4qVEXqCtt8YuPbxZW0TKDlJ7kJUQ1RpK4TXXsJJYnqhBOoMszc8+rP/7an+Lv3bUY9kCSw4da313DFUvEKFaWURjaaKpGTc8lDeXQhNrZtQeHQMclIWJUn/igvaBNe5/5dug3Xzay7TYegmhINewGXGM8hSvfpuZP721EvEbm3HNtjB7uje8BWqtKNamNRMcOIumkNEHWJCD1HXVwQ7+x/way1qMFguviu/Gwf78Dc4CnVaeQKFXfv7pTj19BzRDUZ4itY9zKp1J3w/2BFHj86zB8cj3iy81Ek4ni7C2GI0J8kbwawCkOJ/deGb1oRpf6B7Fu0jccyPtgUs4dh9n7GjGuxf5w8UYPrnT1/8KBYB/QofC0+zOhoDV/XyrianUwLFn6OfMKVSgVJy6BnY4IMdCa6dMm8CI4EWvrlNIgdnU53jvSDKewRur3T58JwtPfwDdrWvvuXeyTJ6QyaCXmKRREb94VXVgmEsV6pHw1q+Q=LYoXVwutDbX4twp3y79s8uXFA4LOoaxo6b/XqT1rXG1tyASxznyJXaaF8NlXk7cuRyYMVpsoH3Vx7FdF9JGIbfQUusodRyomWvsKeT7FCfd/dfdMjfE6s5PQ7pchuFdZtX93FfClNKCGHdvbS20olsNVdxJOc8WZOTjXlZg2EX8=
