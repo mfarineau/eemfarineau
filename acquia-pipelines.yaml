@@ -12,38 +12,25 @@ events:
   build:
     steps:
       # If you have build instructions, put them here. They are not required.
-      - build_site:
-          script:
-            - echo 'enabling SSH KEY'
-            - export PIPELINE_SSH_KEY=~/.ssh/ssh-key-1
+    - build_site:
+        script:
+            - composer update
+            - git status
 
-            - echo 'setting SSH key in composer'
-            - composer config -g github-oauth.github.com ssh-key-1
-
-            - echo 'composer install'
-            - composer install
-
-            - echo 'unset key'
-            - unset PIPELINE_SSH_KEY
-
-post-deploy:
-  steps:
     - deploy:
-            script:
+        script:
             - pipelines-deploy
 
+# When a GitHub pull request is merged, this deletes the coresponding ODE.
 pr-merged:
-  steps:
-     - deploy:
-          script:
-             - pipelines-deploy
+    steps:
+    - deploy:
+        script:
+            - pipelines-deploy
 
+# When a GitHub pull request is closed, this deletes the coresponding ODE.
 pr-closed:
-     steps:
-      - deploy:
-           script:
-                - pipelines-deploy
-
-ssh-keys:
-  ssh-key-1:
-    secure: 2acRGXJ3yv3n9o+mZY9EW3xnWz/8jDsYlFGS1EcULxG6dXlXwSs+JFDRtXWlo9BmRJzBLLZrdMaa+TyY5W/ZDvREjpzazkmkVVGcp8Mu5O9EJgDI8oC7vewbfb1aLie2st6M789C8+VKSQ1VcIjSW93O/80yphHFVM9+pRIMPNAn6lHA3eQodhx3aetn/3huPdZC/AMstJ4Jr7jBghsXLs5+PrrDwaXogKK5vVqx8yJt/7UsM6xpj3jwtMzAJzUKOuT5ztMulbb9dyJ6rga16Q0xjL4fCBMFp3N7xbRErOwqpd2JBAZRWv86RQZOTO6KrB4C5iQCT1/z4h5QAVNEcgvc9Nbuy6qNyfwyQy4+pghfyWX7dd6XL0JZ5+o10o+oT1jaw6Ab9WBWY+TNIhCsKdQOO/Qa1d0Ni45W31A+E0u2GhrWl51xhk/fx015luG0vWw3zKM/DXe8aznxhah35sW4eUoClCXRhP0aoSKbnK5yxBnV7WETQGNCdPhS0cxy6sNd3GqJTwoFg+DhijQpc8OyFpqF9YWJfXX1sQf84v7zdTmucUVfGkF4PH+ciBRbxNVQwiMYFR0WKvV3j/hgSbxKZYpxKreURgjBmxtKRZOEo/beboSY7nhuzmHFeT3Lr6OKHMjXAmioBjXWBSFkRUhwexV24xs8yAE3VJ6biLGmQ4=EzsF7zSywRgO3pHsIM9qGGCdm1DQLvIl8gsSI7ujF5mJps+IpKE9hzqK/6GlvtFZZpCsNnnPeox7AU+a4CmpBRa4NH8FMOL0QNa7dgXW+rC93qA+q7ZgEKMOoqhARtc4TwWK4mEtBfSu6ZCKjHHTYtWuccG1DCWg/jVbcDhFUxE=
+    steps:
+    - deploy:
+        script:
+            - pipelines-deploy
