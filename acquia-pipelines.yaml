@@ -5,6 +5,7 @@ cde-databases:
   - concentric
 
 services:
+  - mysql
   - php:
       version: 7.1
 
@@ -14,9 +15,8 @@ events:
       # If you have build instructions, put them here. They are not required.
     - build_site:
         script:
-            - composer update
-            - git status
-
+              - composer validate --no-check-all --ansi
+              - composer install --ansi
 
 post-deploy:
   steps:
